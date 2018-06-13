@@ -1,7 +1,6 @@
 window.onload = start;
 
 function start() {
-    const dataset = getShelters("/dataset");
 }
 
 function getShelters(dataset) {
@@ -15,11 +14,22 @@ function getShelters(dataset) {
     getJSON.send(null);
 }
 
+function initMap() {
+    const dataset = getShelters("/dataset");
+}
+
+let shelterCount = 0;
 function writeShelters(shelters) {
+    var mapProp= {
+        center:new google.maps.LatLng(51.508742,-0.120850),
+        zoom:5,
+    };
+    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
     shelters.features.forEach(shelter => {
+        shelterCount++;
         
         // shelter coordinates
-        const cordinates = shelter.geometry.coordinates;
+        const coordinates = shelter.geometry.coordinates;
 
         // shelter info
         const info = shelter.properties;
@@ -33,24 +43,30 @@ function writeShelters(shelters) {
         card.className = "card";
 
         // card image overlay
-        const cardOverlay = document.createElement("div");
+        /*const cardOverlay = document.createElement("div");
         cardOverlay.className = "view overlay";
 
         // card img
-        const cardImg = document.createElement("img");
+        /*const cardImg = document.createElement("img");
         cardImg.className = "card-img-top";
         cardImg.src = "https://mdbootstrap.com/img/Photos/Others/food.jpg";
-        cardImg.setAttribute("alt", "Some alt text");
+        cardImg.setAttribute("alt", "Some alt text");*/
+
+        // shelter location map
+        const locationMap = document.createElement("div");
+        locationMap.style.width = "100%";
+        locationMap.style.height = "300px";
+        locationMap.id = "map" + shelterCount;
 
         // card img mask
         const mask = document.createElement("div");
         mask.className = "masl rgba-white-slight";
 
         // append card image to card
-        cardOverlay.appendChild(cardImg);
-        cardOverlay.appendChild(mask);
-        card.appendChild(cardOverlay);
-
+        //cardOverlay.appendChild(locationMap);
+        //cardOverlay.appendChild(mask);
+        card.appendChild(locationMap);
+        
         // card button
         const btn = document.createElement("a");
         btn.className = "btn-floating btn-action ml-auto mr-4 mdb-color lighten-3";
@@ -135,6 +151,22 @@ function writeShelters(shelters) {
 
         document.querySelector("#sheltersRow").appendChild(cardCont);
 
-        console.log(info);
+        if (shelterCount < 10) {
+            setTimeout(function(){
+                createMap(locationMap, coordinates[1], coordinates[0]);
+            }, 1000);
+        }
+        //console.log(info);
     });
+}
+
+function createMap(ele, lat, lng) {
+    console.log(lat, lng)
+    console.log(lng, lat);
+    var mapProp = {
+        center: new google.maps.LatLng(lat, lng),
+        zoom: 14,
+    };
+
+    var map = new google.maps.Map(ele, mapProp);
 }

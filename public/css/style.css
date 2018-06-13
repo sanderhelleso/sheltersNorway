@@ -2,3 +2,9 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+canvas {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
