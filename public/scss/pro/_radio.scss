@@ -1,0 +1,84 @@
+// Radio buttons
+[type="radio"] {
+  @extend %hide-radio-checkbox;
+  + label {
+    @extend %base-radio-checkbox-label;
+    transition: .28s ease;
+    &:before, &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin: 4px;
+      width: 16px;
+      height: 16px;
+      z-index: 0;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 2px;
+      transition: .28s ease;
+    }
+  }
+
+  &:not(:checked) {
+    + label:before, + label:after {
+      border-color: $radio-empty-color;
+    }
+    + label:after {
+      z-index: -1;
+      transform: scale(0);
+    }
+  }
+
+  &:checked {
+    + label:before {
+      border-color: transparent;
+    }
+    + label:after {
+      border-color: $radio-fill-color;
+      background-color: $radio-fill-color;
+      z-index: 0;
+      transform: scale(1.02);
+    }
+  }
+
+  &:disabled {
+
+    + label {
+      color: $input-disabled-color;
+      &:before {
+        background-color: transparent;
+        border-color: $input-disabled-color;
+      }
+    }
+
+    &:not(:checked) + label:before {
+      border-color: $input-disabled-color;
+    }
+
+    &:checked + label:after {
+      background-color: $input-disabled-color;
+      border-color: $input-disabled-solid-color;
+    }
+
+  }
+
+  &.with-gap {
+
+    &:checked {
+      + label:before {
+        border-color: $radio-fill-color;
+      }
+      + label:after {
+        transform: scale(.5);
+      }
+      &:disabled {
+        + label:before {
+          border-color: $input-disabled-color;
+        }
+      }
+    }
+
+  }
+
+}

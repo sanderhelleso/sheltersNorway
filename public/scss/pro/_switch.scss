@@ -1,0 +1,54 @@
+// Switch
+.switch label {
+  cursor: pointer;
+  input[type=checkbox] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    &:checked + .lever {
+      background-color: map-get($switch-colors, "checked-lever-bg");
+    }
+    &:checked + .lever:after {
+      background-color: map-get($switch-colors, "bg");
+      left: 24px;
+    }
+    &:checked:not(:disabled) ~ .lever:active:after {
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .4), 0 0 0 15px transparentize(map-get($switch-colors, "bg"), .9);
+    }
+    &:not(:disabled) ~ .lever:active:after {
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .4), 0 0 0 15px rgba(0, 0, 0, .08);
+    }
+    &:disabled + .lever {
+      cursor: default;
+    }
+    &:disabled + .lever:after, &:disabled:checked + .lever:after {
+      background-color: $input-disabled-solid-color;
+    }
+  }
+  .lever {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 15px;
+    background-color: map-get($switch-colors, "unchecked-lever-bg");
+    border-radius: 15px;
+    margin-right: 10px;
+    transition: background 0.3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+    &:after {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      width: 21px;
+      height: 21px;
+      background-color: map-get($switch-colors, "unchecked-bg");
+      border-radius: 21px;
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .4);
+      left: -5px;
+      top: -3px;
+      transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease;
+    }
+  }
+}

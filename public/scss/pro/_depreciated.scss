@@ -1,0 +1,148 @@
+// These settings will be only for one version
+
+// Button Collapse Without Navbar
+.side-nav .double-navbar .bc-min {
+  padding: 5px 10px;
+  .button-collapse {
+    padding-left: 0px;
+  }
+}
+
+// When icon doesn't need padding
+.no-padding {
+  .fa {
+    padding: 0;
+  }
+}
+
+// Quick look modal
+.ql-modal,
+.product-panel {
+  .modal-dialog {
+    max-width: none;
+    width: auto;
+    margin: 2rem;
+  }
+  .modal-header {
+    text-align: center;
+  }
+  .price {
+    .badge {
+      background-color: rgba(244, 67, 54, 0.7);
+      font-size: 1.4rem;
+      display: inline-block;
+      margin-left: 1rem;
+    }
+    p {
+      display: inline-block;
+      font-size: 1.3rem;
+      .price-before {
+        color: $black-base;
+        text-decoration: line-through;
+        margin-left: 0.5rem;
+      }
+      .price-after {
+        font-size: 1.7rem;
+        color: $green-base;
+      }
+    }
+  }
+  .media img {
+    max-width: 60px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .ql-modal {
+    .modal-dialog {
+      margin: 0;
+    }
+    padding-left: 0;
+  }
+}
+
+// Parallax
+// .jarallax {
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   min-height: 700px;
+// }
+
+// E-commerce
+.pricing-card {
+  .heading {
+    h1 {
+      font-size: 4rem;
+      font-weight:400;
+    }
+  }
+  // Card overlay
+  &.card-overlay {
+    display: block;
+    color: $white-base;
+    p {
+      color: $white-base;
+    }
+    .price {
+      padding-top: 0;
+    }
+  }
+}
+.naked-card {
+  h5 {
+    margin-top: 1.2rem;
+  }
+  .price {
+    padding-top: 0rem;
+  }
+  li p {
+    color: $grey-darken-1;
+    strong {
+      color: $grey-darken-2;
+    }
+  }
+}
+
+.no-radius {
+  border-radius: 0!important;
+}
+
+// Blog section
+.section-blog-fw {
+  .view {
+    img {
+      @extend .img-fluid;
+      border-radius:2px;
+    }
+  }
+  .jumbotron {
+    text-align: center;
+  }
+  h2 {
+    @extend .h2-responsive;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    a {
+      color: #424242;
+      transition :0.2s;
+      &:hover {
+        color: #616161;
+        transition :0.2s;
+      }
+    }
+  }
+  .excerpt,
+  .post-text {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: justify;
+    @media (max-width: $medium-screen) {
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+  }
+  hr {
+    display: block;
+  }
+}

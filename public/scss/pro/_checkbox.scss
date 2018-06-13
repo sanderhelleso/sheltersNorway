@@ -1,0 +1,150 @@
+// Checkbox
+[type="checkbox"] {
+  @extend %hide-radio-checkbox;
+  + label {
+    @extend %base-radio-checkbox-label;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 17px;
+      height: 17px;
+      z-index: 0;
+      border: 1.5px solid #8a8a8a;
+      border-radius: 1px;
+      margin-top: 2px;
+      transition: .2s;
+    }
+  }
+
+  &:checked {
+    + label:before {
+      top: -4px;
+      left: -3px;
+      width: 12px;
+      height: 22px;
+      border-style: solid;
+      border-width: 2px;
+      border-color: transparent $radio-fill-color $radio-fill-color transparent;
+      transform: rotate(40deg);
+      transform-origin: 100% 100%;
+    }
+  }
+
+  &:indeterminate {
+    + label:before {
+      left: -10px;
+      top: -11px;
+      width: 10px;
+      height: 22px;
+      border: none;
+      border-right: 2px solid $radio-fill-color;
+      transform: rotate(90deg);
+      transform-origin: 100% 100%;
+    }
+  }
+
+  &:disabled {
+    &:checked + label:before {
+      border-color: transparent $input-disabled-color $input-disabled-color transparent;
+    }
+    &:not(:checked) + label:before {
+      border: none;
+      margin-left: 2px;
+      margin-top: 2px;
+      background-color: $input-disabled-color;
+    }
+    &:indeterminate + label:before {
+      border-right: 2px solid $input-disabled-color;
+      margin-left: 0;
+      margin-top: 0;
+      background-color: transparent;
+    }
+  }
+
+  &[class*="filled-in"] {
+
+    + label:after, + label:before {
+      content: "";
+      left: 0;
+      position: absolute;
+      /* .1s delay is for check animation */
+      transition: border .25s, background-color .25s, width .20s .1s, height .20s .1s, top .20s .1s, left .20s .1s;
+      z-index: 1;
+      border-style: solid;
+      border-width: 2px;
+    }
+    + label:after {
+      border-radius: 2px;
+      height: 20px;
+      width: 20px;
+    }
+    + label:before {
+      transform: rotateZ(37deg);
+      transform-origin: 100% 100%; // ? 20% 40%
+    }
+
+    &:not(:checked) {
+      + label:before {
+        width: 0;
+        height: 0;
+        border-style: 3px;
+        border-color: transparent;
+        left: 6px;
+        top: 10px;
+      }
+      + label:after {
+        background-color: transparent;
+        border-color: $radio-empty-color;
+        top: 0;
+        z-index: 0;
+      }
+    }
+
+    &:checked {
+      + label:before {
+        top: 0;
+        left: 1px;
+        width: 8px;
+        height: 13px;
+        border-color: transparent $input-bg-color $input-bg-color transparent;
+      }
+      + label:after {
+        top: 0;
+        border-color: $secondary-color;
+        background-color: $secondary-color;
+        z-index: 0;
+      }
+    }
+
+    &:disabled {
+      &:not(:checked) {
+        + label:before {
+          background-color: transparent;
+          border-color: $input-disabled-solid-color;
+        }
+        + label:after {
+          border-color: transparent;
+          background-color: $input-disabled-solid-color;
+        }
+      }
+      &:checked {
+        + label:before {
+          background-color: transparent;
+        }
+        + label:after {
+          background-color: $input-disabled-solid-color;
+          border-color: $input-disabled-solid-color;
+        }
+      }
+    }
+  }
+
+  &.filled-in-danger {
+    &:checked + label:after {
+      background-color: $red-base;
+      border-color: $red-base;
+    }
+  }
+}

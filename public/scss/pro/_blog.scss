@@ -1,0 +1,20 @@
+// Blog
+.personal-sm {
+  a {
+    .fa {
+      transition-duration: $personal-sm-transition-duration;
+      &:hover {
+        transform: $personal-sm-hover-transform;
+      }
+    }
+  }
+}
+.comments-list,
+.reply-form {
+  .avatar {
+    max-width: $avatar-img-max-width;
+  }
+  .comment-date {
+    color: $blog-comment-date-text-color;
+  }
+}

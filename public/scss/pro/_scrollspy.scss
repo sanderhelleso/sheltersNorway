@@ -1,0 +1,115 @@
+// Scrollspy
+.nav-pills {
+  &.default-pills {
+    .nav-item {
+      a {
+        text-align:left;
+        color: #666;
+        border-radius:0;
+        &:hover {
+          background-color: transparent;
+          color: $mdb-color-base;
+          font-weight: 500;
+          border-left: 1px solid $mdb-color-base;
+        }
+        &.active {
+          background-color: transparent;
+          color: $mdb-color-base;
+          border-left: 2px solid $mdb-color-base;
+          font-weight: 500;
+          box-shadow:none;
+          &:hover,
+          &:active,
+          &:focus {
+            background-color: transparent;
+            color: $mdb-color-base;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+.nav-pills .nav-item+.nav-item {
+  margin-left: 0;
+}
+
+@media only screen and (max-width: 991px) {
+  .sticky,
+  .sticky-placeholder {
+    display: none;
+  }
+}
+
+#scrollspy {
+  width: 100%;
+}
+@media only screen and (max-width: $medium-screen) {
+  .col-md-4 .sticky, .col-lg-4 .sticky, .col-xl-4 .sticky {
+    width: 200px;
+  }
+}
+
+@media only screen and (min-width: $medium-screen) {
+  .col-md-4 .sticky  .col-lg-4 .sticky, .col-xl-4 .sticky {
+    width: 400px;
+  }
+}
+
+
+@media only screen and (min-width: $large-screen) {
+  .col-md-4 .sticky {
+    width: 300px;
+  }
+}
+
+@media only screen and (min-width: $sidenav-breakpoint) {
+  .col-md-4 .sticky {
+    width: 350px;
+  }
+}
+
+// Dotted scrollspy
+
+.dotted-scrollspy {
+  display:block;
+  position: fixed;
+  top:50%;
+  right:0;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,.55);
+  border-radius:2px 0 0 2px;
+  li {
+    display:block;
+    padding:0 16px;
+    &:first-child {
+      padding-top:10px;
+    }
+    &:last-child {
+      padding-bottom: 10px;
+    }
+    a {
+      padding:0.5rem;
+      span {
+        display:block;
+        background-color:rgba(255,255,255,.54);
+        width:8px;
+        height:8px;
+        border-radius:50%;
+      }
+      &.active {
+        span {
+          background:#fff;
+        }
+      }
+    }
+  }
+}
+
+.scrollspy-example {
+  overflow-y: scroll;
+  position: relative;
+  height: 200px;
+  padding: 1rem;
+}

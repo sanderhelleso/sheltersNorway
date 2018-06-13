@@ -1,0 +1,90 @@
+// Miscellenous
+// Advanced tables
+.table {
+  a {
+    margin-left: 1rem;
+  }
+  fieldset {
+    margin-bottom: 0;
+    label {
+      height: 8px;
+    }
+  }
+}
+
+// Product table
+.product-table {
+  img {
+    max-height: $product-table-img-max-height;
+    min-width: $product-table-img-min-width;
+  }
+  td {
+    vertical-align: middle;
+  }
+}
+
+// hide default radio / checkbox
+%hide-radio-checkbox {
+  position: absolute;
+  left: -9999px;
+  visibility: hidden;
+}
+
+%base-radio-checkbox-label {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+  font-size: 1rem;
+}
+
+.streak {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 250px;
+  &.streak-md {
+    height: 400px;
+    @media (max-width: 736px) {
+      height: 300px;
+    }
+  }
+  &.streak-lg {
+    height: 650px;
+    @media (max-width: 450px) {
+      height: 900px;
+    }
+  }
+  &.streak-long {
+    height: 200px;
+    @media (max-width: 450px) {
+      height: 620px;
+    }
+  }
+  &.streak-long-2 {
+    height: 400px;
+    @media (max-width: 450px) {
+      height: 700px;
+    }
+  }
+  &.streak-photo {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    @media (min-width: 1366px) {
+      background-attachment: fixed;
+    }
+  }
+  &.no-flex {
+    padding-top: 3.125rem;
+    padding-bottom: 3.125rem;
+    height: auto;
+  }
+}
+
+// Gradients Premium
+@each $name, $val in $gradients-premium {
+  @include make-gradient($name, $val);
+}

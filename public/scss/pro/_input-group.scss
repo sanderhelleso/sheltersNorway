@@ -1,0 +1,13 @@
+// Input group
+.input-group {
+  .input-group-text {
+    [type="checkbox"] + label {
+      padding-left: $input-group-text-checkbox-pl;
+      height: $input-group-text-height;
+    }
+    [type="radio"] + label {
+      padding-left: $input-group-text-radio-pl;
+      height: $input-group-text-height;
+    }
+  }
+}
