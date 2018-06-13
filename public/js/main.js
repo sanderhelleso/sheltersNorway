@@ -14,17 +14,22 @@ function getShelters(dataset) {
     getJSON.send(null);
 }
 
+let mainMap;
 function initMap() {
+
+    /*var mapProp= {
+        center:new google.maps.LatLng(51.508742,-0.120850),
+        zoom:5,
+    };
+
+    var mainMap = new google.maps.Map(document.getElementById("googleMap"),mapProp);*/
+
+
     const dataset = getShelters("/dataset");
 }
 
 let shelterCount = 0;
 function writeShelters(shelters) {
-    var mapProp= {
-        center:new google.maps.LatLng(51.508742,-0.120850),
-        zoom:5,
-    };
-    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
     shelters.features.forEach(shelter => {
         shelterCount++;
         
@@ -152,21 +157,22 @@ function writeShelters(shelters) {
         document.querySelector("#sheltersRow").appendChild(cardCont);
 
         if (shelterCount < 10) {
-            setTimeout(function(){
-                createMap(locationMap, coordinates[1], coordinates[0]);
-            }, 1000);
+             createMap(locationMap, coordinates[1], coordinates[0]);
         }
         //console.log(info);
     });
 }
 
 function createMap(ele, lat, lng) {
-    console.log(lat, lng)
-    console.log(lng, lat);
-    var mapProp = {
+    const mapProp = {
         center: new google.maps.LatLng(lat, lng),
         zoom: 14,
     };
 
-    var map = new google.maps.Map(ele, mapProp);
+    const map = new google.maps.Map(ele, mapProp);
+
+    const marker = new google.maps.Marker({
+        position: {lat: lat, lng: lng},
+        map: map
+    });
 }
