@@ -92,16 +92,35 @@ function writeShelters(shelters) {
         const cardList = document.createElement("ul");
         cardList.className = "list-unstyled list-inline font-small";
 
-        // list elements
-        const listEle = document.createElement("li");
-        listEle.className = "list-inline-item pr-2 white-text";
-        listEle.innerHTML = info.plasser;
-        const listIcon = document.createElement("i");
-        listIcon.className = "fa fa-clock-o pr-1";
-        listIcon.style.float = "left";
-        listEle.appendChild(listIcon);
+        // spots
+        const spots = document.createElement("li");
+        spots.className = "list-inline-item pr-2 white-text";
+        spots.innerHTML = info.plasser;
+        const spotsIcon = document.createElement("i");
+        spotsIcon.className = "fa fa-group pr-1";
+        spotsIcon.style.float = "left";
+        spots.appendChild(spotsIcon);
 
-        cardList.appendChild(listEle);
+        // areal
+        const areal = document.createElement("li");
+        areal.className = "list-inline-item pr-2 white-text";
+        if (info.areal == 0) {
+            areal.innerHTML = "N/A <span class='kvm'> km2</span>";
+        }
+
+        else {
+            areal.innerHTML = info.areal + "<span class='kvm'> km2</span>";
+        }
+
+        const arealIcon = document.createElement("i");
+        arealIcon.className = "fa fa-institution pr-1";
+        arealIcon.style.float = "left";
+        areal.appendChild(arealIcon);
+
+
+
+        cardList.appendChild(spots);
+        cardList.appendChild(areal);
         cardFooter.appendChild(cardList);
         card.appendChild(cardFooter);
         cardCont.appendChild(card);
