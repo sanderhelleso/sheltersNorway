@@ -1,0 +1,11 @@
+{
+  "name": "sheltersnorway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Sander Hellesø",
+  "license": "ISC"
+}

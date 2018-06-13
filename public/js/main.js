@@ -1,5 +1,20 @@
 window.onload = start;
 
 function start() {
-    console.log(123);
+    const dataset = getShelters("/dataset");
+}
+
+function getShelters(dataset) {
+    const getJSON = new XMLHttpRequest();
+    getJSON.onreadystatechange = function() {
+        if (getJSON.readyState == 4 && getJSON.status == 200) {
+           writeShelters(getJSON.responseText);
+        }
+    }
+    getJSON.open("GET", dataset, true); 
+    getJSON.send(null);
+}
+
+function writeShelters(shelters) {
+    console.log(shelters)
 }
