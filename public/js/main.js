@@ -95,7 +95,7 @@ function writeShelters(shelters) {
         // spots
         const spots = document.createElement("li");
         spots.className = "list-inline-item pr-2 white-text";
-        spots.innerHTML = info.plasser;
+        spots.innerHTML = info.plasser + "<span class='spots'> plasser</span>";
         const spotsIcon = document.createElement("i");
         spotsIcon.className = "fa fa-group pr-1";
         spotsIcon.style.float = "left";
@@ -117,10 +117,18 @@ function writeShelters(shelters) {
         arealIcon.style.float = "left";
         areal.appendChild(arealIcon);
 
-
+        // building year
+        const year = document.createElement("li");
+        year.className = "list-inline-item pr-2 white-text";
+        year.innerHTML = info.byggear + "<span class='year'> byggeår</span>";
+        const yearIcon = document.createElement("i");
+        yearIcon.className = "fa fa-birthday-cake pr-1";
+        yearIcon.style.float = "left";
+        year.appendChild(yearIcon);
 
         cardList.appendChild(spots);
         cardList.appendChild(areal);
+        cardList.appendChild(year);
         cardFooter.appendChild(cardList);
         card.appendChild(cardFooter);
         cardCont.appendChild(card);
