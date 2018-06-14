@@ -9,7 +9,6 @@ function getShelters(dataset) {
     getJSON.onreadystatechange = function() {
         if (getJSON.readyState == 4 && getJSON.status == 200) {
             shelters = JSON.parse(getJSON.responseText);
-            console.log(shelters)
         }
     }
     getJSON.open("GET", dataset, true); 
@@ -33,9 +32,7 @@ function initMap() {
 let totalPpl = 0;
 let shelterCount = 0;
 let shelters = [];
-function writeShelters(shelters) {
-    shelters.features.forEach(shelter => {
-        shelterCount++;
+function writeShelters(shelter) {
         
         // shelter coordinates
         const coordinates = shelter.geometry.coordinates;
@@ -52,16 +49,6 @@ function writeShelters(shelters) {
         // card
         const card = document.createElement("div");
         card.className = "card";
-
-        // card image overlay
-        /*const cardOverlay = document.createElement("div");
-        cardOverlay.className = "view overlay";
-
-        // card img
-        /*const cardImg = document.createElement("img");
-        cardImg.className = "card-img-top";
-        cardImg.src = "https://mdbootstrap.com/img/Photos/Others/food.jpg";
-        cardImg.setAttribute("alt", "Some alt text");*/
 
         // shelter location map
         const locationMap = document.createElement("div");
@@ -166,7 +153,6 @@ function writeShelters(shelters) {
              createMap(locationMap, coordinates[1], coordinates[0]);
         }
         //console.log(info);
-    });
 }
 
 function createMap(ele, lat, lng) {
@@ -210,4 +196,14 @@ function checkSearch(value, run) {
 let searchValue;
 function search() {
     console.log(searchValue);
+
+    shelters.features.forEach(shelter => {
+        // shelter info
+        const info = shelter.properties;
+        searchValue = searchValue.toLowerCase();
+        if (info.adresse.includes(searchValue) || info.kommune.toLowerCase().includes(searchValue) || info.distriktsnavn.includes(searchValue)) {
+            console.log(shelter);
+            writeShelters(shelter);
+        }
+    });
 }
