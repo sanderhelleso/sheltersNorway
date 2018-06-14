@@ -7,6 +7,9 @@ header,
   height: 100%;
 }
 
+body {
+}
+
 @media (max-width: 740px) {
   html,
   body,
@@ -48,13 +51,80 @@ h5 {
   width: 80px;
 }
 
+#norway {
+    margin-top: 20px;
+    font-size: 80px;
+    color: #ff1744;
+}
+
+#headerCont a {
+    margin-top: 50px;
+    width: 200px;
+    transition: all 0.3s;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+#headerCont a:hover {
+    color: #ff1744 !important;
+    border: 2px solid #ff1744 !important;
+    transform: scale(1.1);
+}
+
 .card {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-canvas {
-    height: 100%;
+.card-body {
+    
+}
+
+.card-body hr {
+    
+}
+
+#searchCont {
+    display: none;
+    margin-top: 50px;
+}
+
+#search {
     width: 100%;
-    overflow: auto;
+    font-size: 55px;
+    border: none;
+    background-color: transparent;
+    color: #ff1744;
+    text-transform: uppercase;
+    width: 75%;
+    margin-left: 10%;
+    margin-right: 0;
+    margin-bottom: 0;
+    border-bottom: 3px solid #ff1744;
+}
+
+#search::placeholder {
+    padding-left: 10px;
+}
+
+#search:focus {
+    outline: none;
+    box-shadow: none!important;
+}
+
+#search,
+[contenteditable] {
+  caret-color: #ff1744 !important;
+}
+
+#runSearch {
+    background-color: transparent;
+    border:none;
+    font-size: 45px;
+    color: #ff1744;
+    opacity: 0.5;
+}
+
+#runSearch:hover {
+    cursor: pointer;
 }

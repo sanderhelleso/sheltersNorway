@@ -1,13 +1,15 @@
 window.onload = start;
 
 function start() {
+    document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
 }
 
 function getShelters(dataset) {
     const getJSON = new XMLHttpRequest();
     getJSON.onreadystatechange = function() {
         if (getJSON.readyState == 4 && getJSON.status == 200) {
-           writeShelters(JSON.parse(getJSON.responseText));
+            shelters = JSON.parse(getJSON.responseText);
+            console.log(shelters)
         }
     }
     getJSON.open("GET", dataset, true); 
@@ -28,7 +30,9 @@ function initMap() {
     const dataset = getShelters("/dataset");
 }
 
+let totalPpl = 0;
 let shelterCount = 0;
+let shelters = [];
 function writeShelters(shelters) {
     shelters.features.forEach(shelter => {
         shelterCount++;
@@ -38,6 +42,8 @@ function writeShelters(shelters) {
 
         // shelter info
         const info = shelter.properties;
+        totalPpl += parseInt(info.plasser);
+        console.log(totalPpl);
 
         // card container
         const cardCont = document.createElement("div");
@@ -74,7 +80,7 @@ function writeShelters(shelters) {
         
         // card button
         const btn = document.createElement("a");
-        btn.className = "btn-floating btn-action ml-auto mr-4 mdb-color lighten-3";
+        btn.className = "btn-floating btn-action ml-auto mr-4 red accent-3";
         const btnIcon = document.createElement("i");
         btnIcon.className = "fa fa-chevron-right pl-1";
         btn.appendChild(btnIcon);
@@ -107,7 +113,7 @@ function writeShelters(shelters) {
 
         // card footer
         const cardFooter = document.createElement("div");
-        cardFooter.className = "rounded-bottom mdb-color lighten-3 text-center pt-3";
+        cardFooter.className = "rounded-bottom  red accent-3 text-center pt-3";
 
         // footer list
         const cardList = document.createElement("ul");
@@ -175,4 +181,33 @@ function createMap(ele, lat, lng) {
         position: {lat: lat, lng: lng},
         map: map
     });
+}
+
+function initSearch() {
+    const searchCont = document.querySelector("#searchCont");
+    searchCont.style.display = "block";
+
+    const runSearch = document.querySelector("#runSearch");
+    const search = document.querySelector("#search");
+    search.focus();
+    search.addEventListener("input", () => checkSearch(search.value, runSearch));
+}
+
+function checkSearch(value, run) {
+
+    if (value.length > 1) {
+        run.style.opacity = "1";
+        run.addEventListener("click", search);
+        searchValue = value;
+    }
+
+    else {
+        run.style.opacity = "0.5";
+        run.removeEventListener("click", search);
+    }
+}
+
+let searchValue;
+function search() {
+    console.log(searchValue);
 }
