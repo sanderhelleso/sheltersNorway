@@ -298,19 +298,23 @@ function checkSearch(value, run) {
     }
 }
 
-/******** SEARCH *********/
-let searchValue;
-function search() {
+function resetValues() {
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
-
-    // reset values
     totalPpl = 0;
     shelterCount = 0;
     scroll = false;
 
     const shelterRow = document.querySelector("#sheltersRow");
     shelterRow.querySelectorAll("div").forEach(div => div.remove());
+}
+
+/******** SEARCH *********/
+let searchValue;
+function search() {
+
+    // clear and resets values
+    resetValues();
 
     // create and display card for each shelter match the search
     shelters.features.forEach(shelter => {
@@ -383,6 +387,45 @@ function getUserLocation() {
 }
 
 function showLocation(position) {
-    console.log("Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude);
+    resetValues();
+
+    const lat = position.coords.latitude; 
+    const lng = position.coords.longitude;
+
+    let mindif = 99999;
+    let closestShelter;
+
+    let nearestArr = [];
+    shelters.features.forEach(shelter => {
+        let shelterCoords = shelter.geometry.coordinates;
+        const dif = PythagorasEquirectangular(lat, lng, shelterCoords[1], shelterCoords[0]);
+        if (dif < mindif) {
+            closestShelter = shelter;
+            mindif = dif;
+            console.log(closestShelter);
+            nearestArr.push(closestShelter);
+        }
+    });
+
+    nearestArr.reverse();
+    nearestArr.forEach(ele => {
+        writeShelters(ele);
+    });
+
+    // Convert Degress to Radians
+    function Deg2Rad(deg) {
+        return deg * Math.PI / 180;
+    }
+  
+    function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+        lat1 = Deg2Rad(lat1);
+        lat2 = Deg2Rad(lat2);
+        lon1 = Deg2Rad(lon1);
+        lon2 = Deg2Rad(lon2);
+        var R = 6371; // km
+        var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+        var y = (lat2 - lat1);
+        var d = Math.sqrt(x * x + y * y) * R;
+        return d;
+    }
 }
