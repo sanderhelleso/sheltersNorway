@@ -1,9 +1,11 @@
 window.onload = start;
 
+// initalize search on load
 function start() {
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
 }
 
+// get data from JSON file
 function getShelters(dataset) {
     const getJSON = new XMLHttpRequest();
     getJSON.onreadystatechange = function() {
@@ -144,44 +146,59 @@ function writeShelters(shelter) {
         }
 }
 
+// create map for shelter card
 function createMap(ele, lat, lng) {
+    // map options
     const mapProp = {
         center: new google.maps.LatLng(lat, lng),
         zoom: 14,
     };
 
+    // initialize new map
     const map = new google.maps.Map(ele, mapProp);
 
+    // map marker
     const marker = new google.maps.Marker({
         position: {lat: lat, lng: lng},
         map: map
     });
 }
 
+// initalize search and display
 function initSearch() {
+    // search container
     const searchCont = document.querySelector("#searchCont");
     searchCont.style.display = "block";
 
+    // search run button
     const runSearch = document.querySelector("#runSearch");
+
+    // search input
     const search = document.querySelector("#search");
+
+    // focus search and run function on input
     search.focus();
     search.addEventListener("input", () => checkSearch(search.value, runSearch));
 }
 
+// check search value
 function checkSearch(value, run) {
 
+    // add event if matching
     if (value.length > 1) {
         run.style.opacity = "1";
         run.addEventListener("click", search);
         searchValue = value;
     }
 
+    // else remove event
     else {
         run.style.opacity = "0.5";
         run.removeEventListener("click", search);
     }
 }
 
+/******** SEARCH *********/
 let searchValue;
 function search() {
     console.log(searchValue);
@@ -191,23 +208,26 @@ function search() {
     shelterCount = 0;
     document.querySelector("#sheltersRow").querySelectorAll("div").forEach(div => div.remove());
 
+    // create and display card for each shelter match the search
     shelters.features.forEach(shelter => {
-        // shelter info
         const info = shelter.properties;
-        console.log(info.distriktsnavn);
 
+        // make search lower case
         searchValue = searchValue.toLowerCase();
+
+        // check for address
         if (info.adresse.toLowerCase() === searchValue) {
             writeShelters(shelter);
         }
         
+        // check for municipality
         else if (info.kommune.toLowerCase() === searchValue) {
             writeShelters(shelter);
         }
 
+        // check for districtname
         else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
             writeShelters(shelter);
-            console.log(123);
         }
     });
 }
