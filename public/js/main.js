@@ -266,7 +266,7 @@ function initSearch() {
 
     // focus search and run function on input
     search.focus();
-    search.addEventListener("input", () => checkSearch(search.value, runSearch));
+    search.addEventListener("keyup", () => checkSearch(search.value, runSearch));
 
     // init canceling of search
     cancelSearch(searchCont);
@@ -274,11 +274,19 @@ function initSearch() {
 
 // check search value
 function checkSearch(value, run) {
-
     // add event if matching
     if (value.length > 1) {
         run.style.opacity = "1";
+
+        // run event
         run.addEventListener("click", search);
+
+        // enables enter key
+        if (this.event.keyCode === 13) {
+            run.click();
+        }
+
+
         searchValue = value;
     }
 
@@ -294,7 +302,6 @@ let searchValue;
 function search() {
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
-    console.log(searchValue);
 
     // reset values
     totalPpl = 0;
