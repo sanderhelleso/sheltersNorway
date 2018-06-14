@@ -4,6 +4,7 @@ window.onload = start;
 function start() {
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
     document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
+    document.querySelector("#seeAll").addEventListener("click", () => seeAll());
 }
 
 // get data from JSON file
@@ -165,7 +166,7 @@ function writeShelters(shelter) {
 
             setTimeout(function(){
                 document.querySelector(".loadingScreen").style.display = "none";
-                document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn"
+                document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
 
                 //document.querySelector("#sheltersRow").style.height = "100vh";
                 initPagination();
@@ -344,9 +345,8 @@ function cancelSearch(cont) {
     document.querySelector("#cancelSearch").addEventListener("click", () => cont.style.display = "none");
 }
 
-let lastPaginate;
 function paginateNavigate() {
-    document.querySelectorAll(".active").forEach(ele => ele.className = "page-item pr-1 pl-1 paginationItem");
+    document.querySelector(".pagination").querySelectorAll(".active").forEach(ele => ele.className = "page-item pr-1 pl-1 paginationItem");
     this.parentElement.className = "page-item active pr-1 pl-1 paginationItem";
     const index = parseInt(this.innerHTML);
 
@@ -428,4 +428,11 @@ function showLocation(position) {
         var d = Math.sqrt(x * x + y * y) * R;
         return d;
     }
+}
+
+function seeAll() {
+    resetValues();
+    shelters.features.forEach(shelter => {
+        writeShelters(shelter);
+    });
 }

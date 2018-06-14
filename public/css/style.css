@@ -173,3 +173,7 @@ div.loadingScreen {
     top: 50%;
     left: 48.8%;
   }
+
+.example ul {
+    max-width: 100px;
+}
