@@ -24,8 +24,9 @@ function initMap() {
 let totalPpl = 0;
 let shelterCount = 0;
 let shelters = [];
+let scroll = false;
 function writeShelters(shelter) {
-        
+        shelterCount++;
         // shelter coordinates
         const coordinates = shelter.geometry.coordinates;
 
@@ -141,9 +142,56 @@ function writeShelters(shelter) {
 
         document.querySelector("#sheltersRow").appendChild(cardCont);
 
-        if (shelterCount < 10) {
-             createMap(locationMap, coordinates[1], coordinates[0]);
+        // create map 
+        createMap(locationMap, coordinates[1], coordinates[0]);
+
+        // display the data for user
+        const totalSpots = document.querySelector("#shelterSpots");
+        const totalShelters = document.querySelector("#shelterTotal");
+
+
+        if (!scroll) {
+            setTimeout(function(){
+                document.querySelector(".loadingScreen").style.display = "none";
+
+                //document.querySelector("#sheltersRow").style.height = "100vh";
+                document.querySelector("#scrollShelters").click();
+                animateValue(totalSpots, 0, totalPpl, 2000);
+                animateValue(totalShelters, 0, shelterCount, 2000);
+            }, 3000);
+            scroll = true;
         }
+}
+
+function animateValue(ele, start, end, duration) {
+    // assumes integer values for start and end
+
+    const range = end - start;
+    // no timer shorter than 50ms (not really visible any way)
+    const minTimer = 50;
+    // calc step time to show all interediate values
+    let stepTime = Math.abs(Math.floor(duration / range));
+
+    // never go below minTimer
+    stepTime = Math.max(stepTime, minTimer);
+
+    // get current time and calculate desired end time
+    var startTime = new Date().getTime();
+    var endTime = startTime + duration;
+    var timer;
+
+    function run() {
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        var value = Math.round(end - (remaining * range));
+        ele.innerHTML = value;
+        if (value == end) {
+            clearInterval(timer);
+        }
+    }
+
+    var timer = setInterval(run, stepTime);
+    run();
 }
 
 // create map for shelter card
@@ -179,6 +227,9 @@ function initSearch() {
     // focus search and run function on input
     search.focus();
     search.addEventListener("input", () => checkSearch(search.value, runSearch));
+
+    // init canceling of search
+    cancelSearch(searchCont);
 }
 
 // check search value
@@ -201,12 +252,16 @@ function checkSearch(value, run) {
 /******** SEARCH *********/
 let searchValue;
 function search() {
+    document.querySelector(".loadingScreen").style.display = "block";
     console.log(searchValue);
 
     // reset values
     totalPpl = 0;
     shelterCount = 0;
-    document.querySelector("#sheltersRow").querySelectorAll("div").forEach(div => div.remove());
+    scroll = false;
+
+    const shelterRow = document.querySelector("#sheltersRow");
+    shelterRow.querySelectorAll("div").forEach(div => div.remove());
 
     // create and display card for each shelter match the search
     shelters.features.forEach(shelter => {
@@ -230,4 +285,8 @@ function search() {
             writeShelters(shelter);
         }
     });
+}
+
+function cancelSearch(cont) {
+    document.querySelector("#cancelSearch").addEventListener("click", () => cont.style.display = "none");
 }
