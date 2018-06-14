@@ -3,6 +3,7 @@ window.onload = start;
 // initalize search on load
 function start() {
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
+    document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
 }
 
 // get data from JSON file
@@ -369,4 +370,19 @@ function paginateNavigate() {
             card.style.display = "block";
         }
     });
+}
+
+function getUserLocation() {
+    if (navigator.geolocation) {
+        const location = navigator.geolocation.getCurrentPosition(showLocation);
+    }
+
+    else {
+        console.log("qweqweqwe");
+    }
+}
+
+function showLocation(position) {
+    console.log("Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude);
 }
