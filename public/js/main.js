@@ -39,7 +39,7 @@ function writeShelters(shelter) {
 
         // card container
         const cardCont = document.createElement("div");
-        cardCont.className = "col-4";
+        cardCont.className = "col-4 shelterCard animated fadeIn";
         cardCont.id = "shelter-" + shelterCount;
 
         // card
@@ -143,6 +143,10 @@ function writeShelters(shelter) {
         card.appendChild(cardFooter);
         cardCont.appendChild(card);
 
+        if (shelterCount > 10) {
+            cardCont.style.display = "none";
+        }
+
         document.querySelector("#sheltersRow").appendChild(cardCont);
 
         // create map 
@@ -151,23 +155,6 @@ function writeShelters(shelter) {
         // display the data for user
         const totalSpots = document.querySelector("#shelterSpots");
         const totalShelters = document.querySelector("#shelterTotal");
-
-        pagination++;
-        // pagination
-        if (pagination === 20) {
-            paginationCurr++;
-            const paginationItem = document.createElement("li");
-            paginationItem.className = "page-item";
-            const paginationLink = document.createElement("a");
-            paginationLink.className = "page-link";
-            paginationLink.innerHTML = paginationCurr;
-
-            paginationItem.appendChild(paginationLink);
-
-            document.querySelector(".pagination").insertBefore(paginationItem, document.querySelector(".next"));
-            pagination = 0;
-        }
-
 
         if (!scroll) {
             setTimeout(function(){
@@ -180,11 +167,36 @@ function writeShelters(shelter) {
                 document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn"
 
                 //document.querySelector("#sheltersRow").style.height = "100vh";
-
+                initPagination();
                 animateValue(totalSpots, 0, totalPpl, 1000);
                 animateValue(totalShelters, 0, shelterCount, 1000);
             }, 3500);
             scroll = true;
+        }
+
+        function initPagination() {
+            const amount = Math.round(shelterCount / 10) + 1;
+            for (let i = 0; i < amount; i++) {
+                const paginationItem = document.createElement("li");
+                if (i === 0) {
+                    paginationItem.className = "page-item active pr-1 pl-1";
+
+                }
+
+                else {
+                    paginationItem.className = "page-item pr-1 pl-1";
+
+                }
+
+                const paginationLink = document.createElement("a");
+                paginationLink.className = "page-link";
+                paginationLink.innerHTML = i + 1;
+                paginationLink.addEventListener("click", paginateNavigate);
+
+                paginationItem.appendChild(paginationLink);
+
+                document.querySelector(".pagination").insertBefore(paginationItem, document.querySelector(".next"));
+            }
         }
 }
 
@@ -314,4 +326,38 @@ function search() {
 
 function cancelSearch(cont) {
     document.querySelector("#cancelSearch").addEventListener("click", () => cont.style.display = "none");
+}
+
+let lastPaginate;
+function paginateNavigate() {
+    document.querySelectorAll(".active").forEach(ele => ele.className = "page-item pr-1 pl-1");
+    this.parentElement.className = "page-item active pr-1 pl-1";
+    const index = parseInt(this.innerHTML);
+
+    const cards = document.querySelectorAll(".shelterCard");
+
+    let fromRange;
+    let toRange;
+    console.log(index);
+    if (index === 1) {
+        fromRange = index - 1;
+        toRange = index * 10;
+    }
+
+    else {
+        fromRange = (index * 10) - 10;
+        toRange = fromRange + 11;
+    }
+
+    cards.forEach(card => {
+        // hide card
+        card.style.display = "none";
+
+        // display if within index range
+        const cardId = parseInt(card.id.split("-")[1]);
+        if (cardId > fromRange && cardId < toRange) {
+            card.style.display = "block";
+        }
+    });
+    console.log(index);
 }
