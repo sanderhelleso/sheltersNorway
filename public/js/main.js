@@ -25,6 +25,8 @@ let totalPpl = 0;
 let shelterCount = 0;
 let shelters = [];
 let scroll = false;
+let pagination = 0;
+let paginationCurr = 0;
 function writeShelters(shelter) {
         shelterCount++;
         // shelter coordinates
@@ -38,6 +40,7 @@ function writeShelters(shelter) {
         // card container
         const cardCont = document.createElement("div");
         cardCont.className = "col-4";
+        cardCont.id = "shelter-" + shelterCount;
 
         // card
         const card = document.createElement("div");
@@ -149,16 +152,38 @@ function writeShelters(shelter) {
         const totalSpots = document.querySelector("#shelterSpots");
         const totalShelters = document.querySelector("#shelterTotal");
 
+        pagination++;
+        // pagination
+        if (pagination === 20) {
+            paginationCurr++;
+            const paginationItem = document.createElement("li");
+            paginationItem.className = "page-item";
+            const paginationLink = document.createElement("a");
+            paginationLink.className = "page-link";
+            paginationLink.innerHTML = paginationCurr;
+
+            paginationItem.appendChild(paginationLink);
+
+            document.querySelector(".pagination").insertBefore(paginationItem, document.querySelector(".next"));
+            pagination = 0;
+        }
+
 
         if (!scroll) {
             setTimeout(function(){
+                document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
+                document.querySelector("#scrollShelters").click();
+            }, 3000);
+
+            setTimeout(function(){
                 document.querySelector(".loadingScreen").style.display = "none";
+                document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn"
 
                 //document.querySelector("#sheltersRow").style.height = "100vh";
-                document.querySelector("#scrollShelters").click();
-                animateValue(totalSpots, 0, totalPpl, 2000);
-                animateValue(totalShelters, 0, shelterCount, 2000);
-            }, 3000);
+
+                animateValue(totalSpots, 0, totalPpl, 1000);
+                animateValue(totalShelters, 0, shelterCount, 1000);
+            }, 3500);
             scroll = true;
         }
 }
