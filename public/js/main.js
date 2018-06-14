@@ -15,17 +15,7 @@ function getShelters(dataset) {
     getJSON.send(null);
 }
 
-let mainMap;
 function initMap() {
-
-    /*var mapProp= {
-        center:new google.maps.LatLng(51.508742,-0.120850),
-        zoom:5,
-    };
-
-    var mainMap = new google.maps.Map(document.getElementById("googleMap"),mapProp);*/
-
-
     const dataset = getShelters("/dataset");
 }
 
@@ -152,7 +142,6 @@ function writeShelters(shelter) {
         if (shelterCount < 10) {
              createMap(locationMap, coordinates[1], coordinates[0]);
         }
-        //console.log(info);
 }
 
 function createMap(ele, lat, lng) {
@@ -197,13 +186,28 @@ let searchValue;
 function search() {
     console.log(searchValue);
 
+    // reset values
+    totalPpl = 0;
+    shelterCount = 0;
+    document.querySelector("#sheltersRow").querySelectorAll("div").forEach(div => div.remove());
+
     shelters.features.forEach(shelter => {
         // shelter info
         const info = shelter.properties;
+        console.log(info.distriktsnavn);
+
         searchValue = searchValue.toLowerCase();
-        if (info.adresse.includes(searchValue) || info.kommune.toLowerCase().includes(searchValue) || info.distriktsnavn.includes(searchValue)) {
-            console.log(shelter);
+        if (info.adresse.toLowerCase() === searchValue) {
             writeShelters(shelter);
+        }
+        
+        else if (info.kommune.toLowerCase() === searchValue) {
+            writeShelters(shelter);
+        }
+
+        else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
+            writeShelters(shelter);
+            console.log(123);
         }
     });
 }
