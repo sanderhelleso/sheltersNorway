@@ -179,23 +179,26 @@ function writeShelters(shelter) {
             for (let i = 0; i < amount; i++) {
                 const paginationItem = document.createElement("li");
                 if (i === 0) {
-                    paginationItem.className = "page-item active pr-1 pl-1";
+                    paginationItem.className = "page-item active pr-1 pl-1 paginationItem";
 
                 }
 
                 else {
-                    paginationItem.className = "page-item pr-1 pl-1";
+                    paginationItem.className = "page-item pr-1 pl-1 paginationItem";
 
                 }
 
                 const paginationLink = document.createElement("a");
-                paginationLink.className = "page-link";
+                paginationLink.className = "page-link paginationLink";
                 paginationLink.innerHTML = i + 1;
                 paginationLink.addEventListener("click", paginateNavigate);
 
                 paginationItem.appendChild(paginationLink);
 
-                document.querySelector(".pagination").insertBefore(paginationItem, document.querySelector(".next"));
+                document.querySelector(".pagination").appendChild(paginationItem);
+                if (paginationLink.innerHTML == 1) {
+                    paginationLink.click();
+                }
             }
         }
 }
@@ -289,6 +292,7 @@ function checkSearch(value, run) {
 /******** SEARCH *********/
 let searchValue;
 function search() {
+    document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
     console.log(searchValue);
 
@@ -330,23 +334,22 @@ function cancelSearch(cont) {
 
 let lastPaginate;
 function paginateNavigate() {
-    document.querySelectorAll(".active").forEach(ele => ele.className = "page-item pr-1 pl-1");
-    this.parentElement.className = "page-item active pr-1 pl-1";
+    document.querySelectorAll(".active").forEach(ele => ele.className = "page-item pr-1 pl-1 paginationItem");
+    this.parentElement.className = "page-item active pr-1 pl-1 paginationItem";
     const index = parseInt(this.innerHTML);
 
     const cards = document.querySelectorAll(".shelterCard");
 
     let fromRange;
     let toRange;
-    console.log(index);
     if (index === 1) {
         fromRange = index - 1;
-        toRange = index * 10;
+        toRange = (index * 10);
     }
 
     else {
-        fromRange = (index * 10) - 10;
-        toRange = fromRange + 11;
+        fromRange = (index * 10) - 11;
+        toRange = fromRange + 10;
     }
 
     cards.forEach(card => {
@@ -359,5 +362,4 @@ function paginateNavigate() {
             card.style.display = "block";
         }
     });
-    console.log(index);
 }
