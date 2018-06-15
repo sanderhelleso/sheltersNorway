@@ -69,6 +69,7 @@ function writeShelters(shelter) {
         const btnIcon = document.createElement("i");
         btnIcon.className = "fa fa-chevron-right pl-1";
         btn.appendChild(btnIcon);
+        btn.addEventListener("click", () => expandCard(cardCont))
 
         // append button to card
         card.appendChild(btn);
@@ -435,4 +436,8 @@ function seeAll() {
     shelters.features.forEach(shelter => {
         writeShelters(shelter);
     });
+}
+
+function expandCard(card) {
+    console.log(card);
 }
