@@ -26,6 +26,7 @@ function initMap() {
 let totalPpl = 0;
 let shelterCount = 0;
 let shelters = [];
+let sheltersData = [];
 let scroll = false;
 let pagination = 0;
 let paginationCurr = 0;
@@ -36,6 +37,7 @@ function writeShelters(shelter) {
 
         // shelter info
         const info = shelter.properties;
+        sheltersData.push({id: shelterCount, data: info});
         totalPpl += parseInt(info.plasser);
         console.log(totalPpl);
 
@@ -424,10 +426,10 @@ function showLocation(position) {
         lat2 = Deg2Rad(lat2);
         lon1 = Deg2Rad(lon1);
         lon2 = Deg2Rad(lon2);
-        var R = 6371; // km
-        var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
-        var y = (lat2 - lat1);
-        var d = Math.sqrt(x * x + y * y) * R;
+        const R = 6371; // km
+        const x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+        const y = (lat2 - lat1);
+        const d = Math.sqrt(x * x + y * y) * R;
         return d;
     }
 }
@@ -440,12 +442,26 @@ function seeAll() {
 }
 
 function expandCard(card) {
-    console.log(card.value);
 
     const mapEle = document.querySelector("#modalMap");
     const lat = parseFloat(card.value.split("-")[0]);
     const lng = parseFloat(card.value.split("-")[1])
-    console.log(lat);
+    console.log(sheltersData);
+
+    const shelterID = parseInt(card.id.split("-")[1]) - 1;
+    const shelterData = sheltersData[shelterID].data;
+
+    // assign data to modal elements
+    document.querySelector("#modalAdresse").innerHTML = shelterData.adresse;
+    document.querySelector("#modalAreal").innerHTML = shelterData.areal + " km2";
+    document.querySelector("#modalKommunenr").innerHTML = shelterData.kommunenr;
+    document.querySelector("#modalGnrBnr").innerHTML = "gnr. " + shelterData.gnr + ", bnr. " + shelterData.bnr;
+    document.querySelector("#modalKommune").innerHTML = shelterData.kommune;
+    document.querySelector("#modalDistriktsnavn").innerHTML = shelterData.distriktsnavn;
+    document.querySelector("#modalKategori").innerHTML = shelterData.kategori;
+    document.querySelector("#modalPlasser").innerHTML = shelterData.plasser;
+    document.querySelector("#modalRomstype").innerHTML = shelterData.romtype;
+
     createMap(mapEle, lat, lng);
     $('#expandCard').modal('show');
 }
