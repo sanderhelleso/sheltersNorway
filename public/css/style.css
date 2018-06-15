@@ -178,3 +178,17 @@ div.loadingScreen {
 .example ul {
     max-width: 100px;
 }
+
+#expandCard .modal-dialog {
+    border-radius: 0px !important;
+}
+
+#expandCard .modal-body {
+    min-height: 90.5vh;
+    padding-top: 0;
+}
+
+#expandCard .modal-body #modalMap {
+    width: 100%;
+    height: 400px;
+}

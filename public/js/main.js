@@ -41,8 +41,9 @@ function writeShelters(shelter) {
 
         // card container
         const cardCont = document.createElement("div");
-        cardCont.className = "col-4 shelterCard animated fadeIn";
+        cardCont.className = "col-4 shelterCard animated fadeIn ";
         cardCont.id = "shelter-" + shelterCount;
+        cardCont.value = coordinates[1] + "-" + coordinates[0];
 
         // card
         const card = document.createElement("div");
@@ -439,5 +440,12 @@ function seeAll() {
 }
 
 function expandCard(card) {
-    console.log(card);
+    console.log(card.value);
+
+    const mapEle = document.querySelector("#modalMap");
+    const lat = parseFloat(card.value.split("-")[0]);
+    const lng = parseFloat(card.value.split("-")[1])
+    console.log(lat);
+    createMap(mapEle, lat, lng);
+    $('#expandCard').modal('show');
 }
