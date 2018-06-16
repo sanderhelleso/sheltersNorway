@@ -309,6 +309,7 @@ function resetValues() {
     totalPpl = 0;
     shelterCount = 0;
     scroll = false;
+    sheltersData = [];
 
     const shelterRow = document.querySelector("#sheltersRow");
     shelterRow.querySelectorAll("div").forEach(div => div.remove());
@@ -446,7 +447,6 @@ function expandCard(card) {
     const mapEle = document.querySelector("#modalMap");
     const lat = parseFloat(card.value.split("-")[0]);
     const lng = parseFloat(card.value.split("-")[1])
-    console.log(sheltersData);
 
     const shelterID = parseInt(card.id.split("-")[1]) - 1;
     const shelterData = sheltersData[shelterID].data;
@@ -461,6 +461,12 @@ function expandCard(card) {
     document.querySelector("#modalKategori").innerHTML = shelterData.kategori;
     document.querySelector("#modalPlasser").innerHTML = shelterData.plasser;
     document.querySelector("#modalRomstype").innerHTML = shelterData.romtype;
+
+    // hide body scrollbar
+    document.body.style.overflow = "hidden";
+
+    // init close modal event
+    document.querySelector("#closeModal").addEventListener("click", () => document.body.style.overflow = "auto");
 
     createMap(mapEle, lat, lng);
     $('#expandCard').modal('show');
