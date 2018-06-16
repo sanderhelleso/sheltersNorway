@@ -30,7 +30,7 @@ let sheltersData = [];
 let scroll = false;
 let pagination = 0;
 let paginationCurr = 0;
-function writeShelters(shelter) {
+function writeShelters(shelter, closest) {
         shelterCount++;
         // shelter coordinates
         const coordinates = shelter.geometry.coordinates;
@@ -43,7 +43,7 @@ function writeShelters(shelter) {
 
         // card container
         const cardCont = document.createElement("div");
-        cardCont.className = "col-4 shelterCard animated fadeIn ";
+        cardCont.className = "col-sm-12 col-md-6 col-lg-4 shelterCard animated fadeIn";
         cardCont.id = "shelter-" + shelterCount;
         cardCont.value = coordinates[1] + "-" + coordinates[0];
 
@@ -68,7 +68,7 @@ function writeShelters(shelter) {
         
         // card button
         const btn = document.createElement("a");
-        btn.className = "btn-floating btn-action ml-auto mr-4 red accent-3";
+        btn.className = "btn-floating btn-action ml-auto mr-4 pink accent-3";
         const btnIcon = document.createElement("i");
         btnIcon.className = "fa fa-chevron-right pl-1";
         btn.appendChild(btnIcon);
@@ -102,7 +102,7 @@ function writeShelters(shelter) {
 
         // card footer
         const cardFooter = document.createElement("div");
-        cardFooter.className = "rounded-bottom  red accent-3 text-center pt-3";
+        cardFooter.className = "rounded-bottom pink accent-3 text-center pt-3";
 
         // footer list
         const cardList = document.createElement("ul");
@@ -153,6 +153,10 @@ function writeShelters(shelter) {
             cardCont.style.display = "none";
         }
 
+        if (closest) {
+            cardCont.className = "col-8 offset-2 shelterCard animated fadeIn";
+        }
+
         document.querySelector("#sheltersRow").appendChild(cardCont);
 
         // create map 
@@ -171,8 +175,7 @@ function writeShelters(shelter) {
             setTimeout(function(){
                 document.querySelector(".loadingScreen").style.display = "none";
                 document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
-
-                //document.querySelector("#sheltersRow").style.height = "100vh";
+                document.querySelector("#sheltersRow").style.height = "100vh";
                 initPagination();
                 animateValue(totalSpots, 0, totalPpl, 1000);
                 animateValue(totalShelters, 0, shelterCount, 1000);
@@ -181,29 +184,31 @@ function writeShelters(shelter) {
         }
 
         function initPagination() {
-            const amount = Math.round(shelterCount / 10) + 1;
-            for (let i = 0; i < amount; i++) {
-                const paginationItem = document.createElement("li");
-                if (i === 0) {
-                    paginationItem.className = "page-item active pr-1 pl-1 paginationItem";
+            if (shelterCount > 9) {
+                const amount = Math.round(shelterCount / 10) + 1;
+                for (let i = 0; i < amount; i++) {
+                    const paginationItem = document.createElement("li");
+                    if (i === 0) {
+                        paginationItem.className = "page-item active pr-1 pl-1 paginationItem";
 
-                }
+                    }
 
-                else {
-                    paginationItem.className = "page-item pr-1 pl-1 paginationItem";
+                    else {
+                        paginationItem.className = "page-item pr-1 pl-1 paginationItem";
 
-                }
+                    }
 
-                const paginationLink = document.createElement("a");
-                paginationLink.className = "page-link paginationLink";
-                paginationLink.innerHTML = i + 1;
-                paginationLink.addEventListener("click", paginateNavigate);
+                    const paginationLink = document.createElement("a");
+                    paginationLink.className = "page-link paginationLink";
+                    paginationLink.innerHTML = i + 1;
+                    paginationLink.addEventListener("click", paginateNavigate);
 
-                paginationItem.appendChild(paginationLink);
+                    paginationItem.appendChild(paginationLink);
 
-                document.querySelector(".pagination").appendChild(paginationItem);
-                if (paginationLink.innerHTML == 1) {
-                    paginationLink.click();
+                    document.querySelector(".pagination").appendChild(paginationItem);
+                    if (paginationLink.innerHTML == 1) {
+                        paginationLink.click();
+                    }
                 }
             }
         }
@@ -344,6 +349,8 @@ function search() {
             writeShelters(shelter);
         }
     });
+
+    document.querySelector("#resultFor").innerHTML = "Resultat for '" + searchValue.toUpperCase() + "'";
 }
 
 function cancelSearch(cont) {
@@ -399,8 +406,6 @@ function showLocation(position) {
 
     let mindif = 99999;
     let closestShelter;
-
-    let nearestArr = [];
     shelters.features.forEach(shelter => {
         let shelterCoords = shelter.geometry.coordinates;
         const dif = PythagorasEquirectangular(lat, lng, shelterCoords[1], shelterCoords[0]);
@@ -408,14 +413,11 @@ function showLocation(position) {
             closestShelter = shelter;
             mindif = dif;
             console.log(closestShelter);
-            nearestArr.push(closestShelter);
         }
     });
 
-    nearestArr.reverse();
-    nearestArr.forEach(ele => {
-        writeShelters(ele);
-    });
+    writeShelters(closestShelter, true);
+
 
     // Convert Degress to Radians
     function Deg2Rad(deg) {
