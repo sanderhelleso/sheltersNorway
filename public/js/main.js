@@ -176,6 +176,7 @@ function writeShelters(shelter, closest) {
                 document.querySelector(".loadingScreen").style.display = "none";
                 document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
                 document.querySelector("#sheltersRow").style.height = "100vh";
+                document.querySelector("#shelterInfo").style.display = "flex";
                 initPagination();
                 animateValue(totalSpots, 0, totalPpl, 1000);
                 animateValue(totalShelters, 0, shelterCount, 1000);
@@ -311,6 +312,7 @@ function checkSearch(value, run) {
 function resetValues() {
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
+    document.querySelector("#shelterInfo").style.display = "none";
     totalPpl = 0;
     shelterCount = 0;
     scroll = false;
@@ -318,6 +320,19 @@ function resetValues() {
 
     const shelterRow = document.querySelector("#sheltersRow");
     shelterRow.querySelectorAll("div").forEach(div => div.remove());
+
+    if (!scroll) {
+        setTimeout(function(){
+            document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
+            document.querySelector("#scrollShelters").click();
+        }, 3000);
+
+        setTimeout(function(){
+            document.querySelector(".loadingScreen").style.display = "none";
+            document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
+            document.querySelector("#sheltersRow").style.height = "100vh";
+        }, 3500);
+    }
 }
 
 /******** SEARCH *********/
