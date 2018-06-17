@@ -5,6 +5,7 @@ function start() {
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
     document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
     document.querySelector("#seeAll").addEventListener("click", () => seeAll());
+    document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
 }
 
 // get data from JSON file
@@ -63,13 +64,8 @@ function writeShelters(shelter, closest) {
         locationMap.style.height = "300px";
         locationMap.id = "map" + shelterCount;
 
-        // card img mask
         const mask = document.createElement("div");
         mask.className = "masl rgba-white-slight";
-
-        // append card image to card
-        //cardOverlay.appendChild(locationMap);
-        //cardOverlay.appendChild(mask);
         card.appendChild(locationMap);
         
         // card button

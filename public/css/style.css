@@ -214,9 +214,24 @@ div.loadingScreen {
     color: #757575 !important;
 }
 
-#info {
-}
-
 #sendInShelterCont {
     padding-bottom: 10vh !important;
+}
+
+#modalSendShelter .modal-header {
+    background-color: #f50057;
+}
+
+#modalSendShelter .modal-body i {
+    color: #f50057 !important;
+}
+
+#sendInfoShelter {
+    background-color: #f50057;
+    color: white;
+}
+
+#cancelSendInfoShelter {
+    color: #f50057 !important;
+    border: 2px solid #f50057;
 }
