@@ -201,7 +201,7 @@ div.loadingScreen {
     display: none;
 }
 
-#toForm {
+#toForm, #sendShelterBtn {
     color: white !important;
     background-color:  #f50057 !important;
 }
@@ -215,5 +215,8 @@ div.loadingScreen {
 }
 
 #info {
-    min-height: 62.5vh;
+}
+
+#sendInShelterCont {
+    padding-bottom: 10vh !important;
 }
