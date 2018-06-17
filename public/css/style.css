@@ -200,3 +200,12 @@ div.loadingScreen {
 #shelterInfo {
     display: none;
 }
+
+#toForm {
+    color: white !important;
+    background-color:  #f50057 !important;
+}
+
+#noResults {
+    display: none;
+}

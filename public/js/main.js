@@ -215,7 +215,7 @@ function writeShelters(shelter, closest) {
         }
 }
 
-function loading() {
+function loading(noFound) {
     setTimeout(function(){
         document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
         document.querySelector("#scrollShelters").click();
@@ -227,6 +227,14 @@ function loading() {
 
         if (!isClosest) {
             document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + document.querySelector("#search").value.toUpperCase();
+        }
+
+        if (noFound) {
+            document.querySelector("#noResults").style.display = "block";
+        }
+
+        else {
+            document.querySelector("#noResults").style.display = "none";
         }
     }, 3500);
 }
@@ -372,7 +380,7 @@ function search() {
             // stop loading if no results are found
             count++;
             if (count === shelters.features.length) {
-                loading();
+                loading(true);
             }
         }
     });
