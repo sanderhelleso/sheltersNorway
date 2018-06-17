@@ -274,10 +274,11 @@ function animateValue(ele, start, end, duration) {
 }
 
 // create map for shelter card
-function createMap(ele, lat, lng) {
+function createMap(ele, lat, lng, expand) {
     // map options
+    const coords = new google.maps.LatLng(lat, lng);
     const mapProp = {
-        center: new google.maps.LatLng(lat, lng),
+        center: coords,
         zoom: 14,
     };
 
@@ -289,6 +290,10 @@ function createMap(ele, lat, lng) {
         position: {lat: lat, lng: lng},
         map: map
     });
+
+    if (expand) {
+        document.querySelector("#modalImg").src = "https://maps.googleapis.com/maps/api/streetview?size=1000x1000&location=" + lat + "," + lng + "&heading=90&pitch=-0.76&key=AIzaSyA_jiuMdTONboV9E0sHZ5U5-js9zwyd4GU";
+    }
 }
 
 // initalize search and display
@@ -494,10 +499,11 @@ function expandCard(card) {
     document.querySelector("#modalKommunenr").innerHTML = shelterData.kommunenr;
     document.querySelector("#modalGnrBnr").innerHTML = "gnr. " + shelterData.gnr + ", bnr. " + shelterData.bnr;
     document.querySelector("#modalKommune").innerHTML = shelterData.kommune;
-    document.querySelector("#modalDistriktsnavn").innerHTML = shelterData.distriktsnavn;
+    document.querySelector("#modalDistriktsnavn").innerHTML = shelterData.distriktsnavn.split("SFD")[0];
     document.querySelector("#modalKategori").innerHTML = shelterData.kategori;
     document.querySelector("#modalPlasser").innerHTML = shelterData.plasser;
     document.querySelector("#modalRomstype").innerHTML = shelterData.romtype;
+    document.querySelector("#modalImg").setAttribute("alt", "Streetview av " + shelterData.adresse);
 
     // hide body scrollbar
     document.body.style.overflow = "hidden";
@@ -505,6 +511,6 @@ function expandCard(card) {
     // init close modal event
     document.querySelector("#closeModal").addEventListener("click", () => document.body.style.overflow = "auto");
 
-    createMap(mapEle, lat, lng);
+    createMap(mapEle, lat, lng, true);
     $('#expandCard').modal('show');
 }
