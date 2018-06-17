@@ -48,7 +48,7 @@
         <!-- Section heading -->
         <h2 class="h1-responsive font-weight-bold my-5">Få en oversikt over tilgjengelige tilfluktsrom</h2>
         <!-- Section description -->
-        <p class="lead grey-text w-responsive mx-auto mb-5">Oversikt over 366 offentlige tilfluktsrom, spredt over hele Norge.</p>
+        <p class="lead grey-text w-responsive mx-auto mb-5">Oversikt over 316 offentlige tilfluktsrom, spredt over hele Norge.</p>
 
         <!-- Grid row -->
         <div class="row">
@@ -292,12 +292,11 @@
     <!-- Modal: modalPoll -->
     <div class="modal fade right" id="modalSendShelter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
     data-backdrop="true">
-    <div class="modal-dialog modal-notify modal-info" role="document">
+    <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
         <div class="modal-content">
         <!--Header-->
         <div class="modal-header">
-            <p class="heading lead">Feedback request
-            </p>
+            <p class="heading lead">Skjema for tilfluktsrom</p>
 
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="white-text">×</span>
@@ -308,90 +307,179 @@
         <div class="modal-body">
             <div class="text-center">
             <i class="fa fa-file-text-o fa-4x mb-3 animated rotateIn"></i>
-            <p>
-                <strong>Your opinion matters</strong>
-            </p>
-            <p>Have some ideas how to improve our product?
-                <strong></strong>Give us your feedback.</strong>
+            <p><strong>Vet du om et tilfluktsrom?<strong></strong><br>Fyll ut skjema og vi vil legge det til</strong>
             </p>
             </div>
 
-            <hr>
+            <hr class="mb-5 mt-4">
 
-            <!-- Radio -->
-            <p class="text-center">
-            <strong>Your rating</strong>
-            </p>
-            
-            <div class="md-form">
-                <input placeholder="Nordre gate 1" type="text" id="adresse" class="form-control">
-                <label for="adresse">Adresse</label>
-            </div>
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="Ola Nordmann" type="text" id="senderName" class="form-control">
+                        <label for="senderName">Ditt navn</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
 
-            <div class="md-form">
-                <input placeholder="401" type="text" id="gardsnummer" class="form-control">
-                <label for="Gardsnummer">Gårdsnummer</label>
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="Nordre gate 1" type="text" id="adresse" class="form-control">
+                        <label for="adresse">Adresse</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
             </div>
+            <!-- Grid row -->
 
-            <div class="md-form">
-                <input placeholder="368" type="text" id="bruksnummer" class="form-control">
-                <label for="Bruksnummer">Bruksnummer</label>
-            </div>
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="401" type="text" id="gardsnummer" class="form-control">
+                        <label for="Gardsnummer">Gårdsnummer</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
 
-            <div class="md-form">
-                <input placeholder="1601" type="text" id="kommunenummer" class="form-control">
-                <label for="kommunenunner">Kommunenummer</label>
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="368" type="text" id="bruksnummer" class="form-control">
+                        <label for="Bruksnummer">Bruksnummer</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
             </div>
+            <!-- Grid row -->
 
-            <div class="md-form">
-                <input placeholder="511" type="text" id="areal" class="form-control">
-                <label for="areal">Areal</label>
-            </div>
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="1601" type="text" id="kommunenummer" class="form-control">
+                        <label for="kommunenunner">Kommunenummer</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
 
-            <div class="md-form">
-                <input placeholder="1984" type="text" id="byggear" class="form-control">
-                <label for="byggear">Byggeår</label>
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="511" type="text" id="areal" class="form-control">
+                        <label for="areal">Areal</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
             </div>
+            <!-- Grid row -->
 
-            <div class="md-form">
-                <input placeholder="76-ROM A" type="text" id="kategori" class="form-control">
-                <label for="kategori">Kategori</label>
-            </div>
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="1984" type="text" id="byggear" class="form-control">
+                        <label for="byggear">Byggeår</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
 
-            <div class="md-form">
-                <input placeholder="Trondheim" type="text" id="kommune" class="form-control">
-                <label for="kommune">Kommune</label>
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="76-ROM A" type="text" id="kategori" class="form-control">
+                        <label for="kategori">Kategori</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
             </div>
+            <!-- Grid row -->
 
-            <div class="md-form">
-                <input placeholder="Sør-Trønderlag" type="text" id="distriktsnavn" class="form-control">
-                <label for="distriktsnavn">Distriktsnavn</label>
-            </div>
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="Trondheim" type="text" id="kommune" class="form-control">
+                        <label for="kommune">Kommune</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
 
-            <div class="md-form">
-                <input placeholder="630" type="text" id="plasser" class="form-control">
-                <label for="plasser">Plasser</label>
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="Sør-Trønderlag" type="text" id="distriktsnavn" class="form-control">
+                        <label for="distriktsnavn">Distriktsnavn</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
             </div>
+            <!-- Grid row -->
 
-            <div class="md-form">
-                <input placeholder="Offentlig" type="text" id="romtype" class="form-control">
-                <label for="romtype">Romtype</label>
-            </div>
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="630" type="text" id="plasser" class="form-control">
+                        <label for="plasser">Plasser</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
 
-            <div class="md-form">
-                <input placeholder="Offentlig" type="text" id="romtype" class="form-control">
-                <label for="romtype">Romtype</label>
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="Offentlig" type="text" id="romtype" class="form-control">
+                        <label for="romtype">Romtype</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
             </div>
+            <!-- Grid row -->
 
-            <div class="md-form">
-                <input placeholder="10.398021412945194" type="text" id="latitude" class="form-control">
-                <label for="latitude">Latitude</label>
-            </div>
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="10.398021412945194" type="text" id="latitude" class="form-control">
+                        <label for="latitude">Latitude</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
 
-            <div class="md-form">
-                <input placeholder="63.431074231659643" type="text" id="longitude" class="form-control">
-                <label for="longitude">Longitude</label>
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form mt-0">
+                        <input placeholder="63.431074231659643" type="text" id="longitude" class="form-control">
+                        <label for="longitude">Longitude</label>
+                    </div>
+                </div>
+                <!-- Grid column -->
             </div>
+            <!-- Grid row -->
 
         </div>
 

@@ -25,6 +25,7 @@ function initMap() {
     const dataset = getShelters("/dataset");
 }
 
+// globals
 let totalPpl = 0;
 let shelterCount = 0;
 let shelters = [];
@@ -33,8 +34,11 @@ let scroll = false;
 let pagination = 0;
 let paginationCurr = 0;
 let isClosest;
+
+// write a shelter card
 function writeShelters(shelter, closest) {
 
+        // check for mode
         if (closest) {
             isClosest = closest;
         }
@@ -165,7 +169,7 @@ function writeShelters(shelter, closest) {
         const totalSpots = document.querySelector("#shelterSpots");
         const totalShelters = document.querySelector("#shelterTotal");
         
-
+        // fade out loading
         if (!scroll) {
             loading();
             setTimeout(function(){
@@ -181,6 +185,7 @@ function writeShelters(shelter, closest) {
             scroll = true;
         }
 
+        // create pagination
         function initPagination() {
             if (shelterCount > 9) {
                 const amount = Math.round(shelterCount / 10) + 1;
@@ -212,6 +217,7 @@ function writeShelters(shelter, closest) {
         }
 }
 
+// loading screen
 function loading(noFound) {
     setTimeout(function(){
         document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";

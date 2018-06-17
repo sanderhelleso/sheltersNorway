@@ -235,3 +235,12 @@ div.loadingScreen {
     color: #f50057 !important;
     border: 2px solid #f50057;
 }
+
+#modalSendShelter input[type=text]:focus:not([readonly]) + label {
+    color: #f50057; 
+}
+
+#modalSendShelter input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f50057;
+    box-shadow: 0 1px 0 0 #f50057; 
+}
