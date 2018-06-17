@@ -154,7 +154,12 @@ function writeShelters(shelter, closest) {
         }
 
         if (closest) {
-            cardCont.className = "col-8 offset-2 shelterCard animated fadeIn";
+            cardCont.className = "col shelterCard animated fadeIn";
+            document.querySelector("#resultFor").innerHTML = "Nærmeste tilfluktsrom fra deg er <br><span class='mt-5 h4-responsive font-weight-bold text-center'>" + info.adresse + "</span>";
+        }
+
+        else {
+            document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + document.querySelector("#search").value.toUpperCase();
         }
 
         document.querySelector("#sheltersRow").appendChild(cardCont);
@@ -167,16 +172,8 @@ function writeShelters(shelter, closest) {
         const totalShelters = document.querySelector("#shelterTotal");
 
         if (!scroll) {
+            loading();
             setTimeout(function(){
-                document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
-                document.querySelector("#scrollShelters").click();
-            }, 3000);
-
-            setTimeout(function(){
-                document.querySelector(".loadingScreen").style.display = "none";
-                document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
-                document.querySelector("#sheltersRow").style.height = "100vh";
-                document.querySelector("#shelterInfo").style.display = "flex";
                 initPagination();
                 animateValue(totalSpots, 0, totalPpl, 1000);
                 animateValue(totalShelters, 0, shelterCount, 1000);
@@ -213,6 +210,20 @@ function writeShelters(shelter, closest) {
                 }
             }
         }
+}
+
+function loading() {
+    setTimeout(function(){
+        document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
+        document.querySelector("#scrollShelters").click();
+    }, 3000);
+
+    setTimeout(function(){
+        document.querySelector(".loadingScreen").style.display = "none";
+        document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
+        document.querySelector("#sheltersRow").style.height = "100vh";
+        document.querySelector("#shelterInfo").style.display = "flex";
+    }, 3500);
 }
 
 function animateValue(ele, start, end, duration) {
@@ -298,7 +309,6 @@ function checkSearch(value, run) {
             run.click();
         }
 
-
         searchValue = value;
     }
 
@@ -320,19 +330,6 @@ function resetValues() {
 
     const shelterRow = document.querySelector("#sheltersRow");
     shelterRow.querySelectorAll("div").forEach(div => div.remove());
-
-    if (!scroll) {
-        setTimeout(function(){
-            document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
-            document.querySelector("#scrollShelters").click();
-        }, 3000);
-
-        setTimeout(function(){
-            document.querySelector(".loadingScreen").style.display = "none";
-            document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
-            document.querySelector("#sheltersRow").style.height = "100vh";
-        }, 3500);
-    }
 }
 
 /******** SEARCH *********/
@@ -342,12 +339,13 @@ function search() {
     // clear and resets values
     resetValues();
 
+    // make search lower case
+    searchValue = searchValue.toLowerCase();
+
     // create and display card for each shelter match the search
+    let count = 0;
     shelters.features.forEach(shelter => {
         const info = shelter.properties;
-
-        // make search lower case
-        searchValue = searchValue.toLowerCase();
 
         // check for address
         if (info.adresse.toLowerCase() === searchValue) {
@@ -363,9 +361,14 @@ function search() {
         else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
             writeShelters(shelter);
         }
-    });
 
-    document.querySelector("#resultFor").innerHTML = "Resultat for '" + searchValue.toUpperCase() + "'";
+        else {
+            count++;
+            if (count === shelters.features.length) {
+                loading();
+            }
+        }
+    });
 }
 
 function cancelSearch(cont) {
@@ -405,6 +408,7 @@ function paginateNavigate() {
 
 function getUserLocation() {
     if (navigator.geolocation) {
+        resetValues();
         const location = navigator.geolocation.getCurrentPosition(showLocation);
     }
 
@@ -414,8 +418,6 @@ function getUserLocation() {
 }
 
 function showLocation(position) {
-    resetValues();
-
     const lat = position.coords.latitude; 
     const lng = position.coords.longitude;
 
