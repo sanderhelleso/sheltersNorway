@@ -209,3 +209,11 @@ div.loadingScreen {
 #noResults {
     display: none;
 }
+
+#footerLinks a {
+    color: #757575 !important;
+}
+
+#info {
+    min-height: 62.5vh;
+}
