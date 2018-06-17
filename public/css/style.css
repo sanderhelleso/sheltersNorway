@@ -196,3 +196,7 @@ div.loadingScreen {
 #expandCard .modal-body i {
     color:  #f50057 !important;
 }
+
+#shelterInfo {
+    display: none;
+}
