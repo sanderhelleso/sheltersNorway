@@ -6,6 +6,7 @@ function start() {
     document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
     document.querySelector("#seeAll").addEventListener("click", () => seeAll());
     document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
+    document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
 }
 
 // get data from JSON file
