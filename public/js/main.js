@@ -34,6 +34,7 @@ let scroll = false;
 let pagination = 0;
 let paginationCurr = 0;
 let isClosest;
+let speed = 3500;
 
 // write a shelter card
 function writeShelters(shelter, closest) {
@@ -169,12 +170,26 @@ function writeShelters(shelter, closest) {
         // display the data for user
         const totalSpots = document.querySelector("#shelterSpots");
         const totalShelters = document.querySelector("#shelterTotal");
+
+        // check network speed
+        if (navigator.connection.downlink > 0.6) {
+            speed = 3500; // fast / normal
+        }
+
+        else {
+            speed = 4500; // slow
+        }
         
+        console.log(navigator.connection.downlink);
         // fade out loading
         if (!scroll) {
             loading();
             setTimeout(function(){
+
+                // create pagination
                 initPagination();
+
+                // start countup animations
                 animateValue(totalSpots, 0, totalPpl, 1000);
                 animateValue(totalShelters, 0, shelterCount, 1000);
 
@@ -183,8 +198,8 @@ function writeShelters(shelter, closest) {
                 }
                 document.querySelector("#shelterInfo").style.display = "flex";
                 document.body.style.overflow = "auto"
-            }, 3500);
-            scroll = true;
+            }, speed);
+            scroll = true; // set scroll to true
         }
 
         // create pagination
@@ -224,7 +239,7 @@ function loading(noFound) {
     setTimeout(function(){
         document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
         document.querySelector("#scrollShelters").click();
-    }, 3000);
+    }, speed - 250);
 
     setTimeout(function(){
         document.querySelector(".loadingScreen").style.display = "none";
@@ -241,7 +256,7 @@ function loading(noFound) {
         else {
             document.querySelector("#noResults").style.display = "none";
         }
-    }, 3500);
+    }, speed);
 }
 
 function animateValue(ele, start, end, duration) {
