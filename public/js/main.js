@@ -38,11 +38,6 @@ let isClosest;
 // write a shelter card
 function writeShelters(shelter, closest) {
 
-        // check for mode
-        if (closest) {
-            isClosest = closest;
-        }
-
         shelterCount++;
         // shelter coordinates
         const coordinates = shelter.geometry.coordinates;
@@ -59,7 +54,9 @@ function writeShelters(shelter, closest) {
         cardCont.id = "shelter-" + shelterCount;
         cardCont.value = coordinates[1] + "-" + coordinates[0];
 
-        if (closest) {
+         // check for mode
+         if (closest) {
+            isClosest = closest;
             cardCont.className = "col-12 shelterCard animated fadeIn";
         }
 
@@ -185,6 +182,7 @@ function writeShelters(shelter, closest) {
                     document.querySelector("#resultFor").innerHTML = "Nærmeste tilfluktsrom fra deg er <br><span class='mt-5 h4-responsive font-weight-bold text-center'>" + info.adresse + "</span>";
                 }
                 document.querySelector("#shelterInfo").style.display = "flex";
+                document.body.style.overflow = "auto"
             }, 3500);
             scroll = true;
         }
@@ -363,7 +361,9 @@ function checkSearch(value, run) {
     }
 }
 
+// reset all values and start loading screen, run until content & maps are loaded
 function resetValues() {
+    document.body.style.overflow = "hidden";
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
     document.querySelector("#shelterInfo").style.display = "none";
@@ -484,7 +484,7 @@ function showLocation(position) {
     writeShelters(closestShelter, true);
 
 
-    // Convert Degress to Radians
+    // convert degress to radians
     function Deg2Rad(deg) {
         return deg * Math.PI / 180;
     }
