@@ -292,8 +292,27 @@ function createMap(ele, lat, lng, expand) {
     });
 
     if (expand) {
-        document.querySelector("#modalImg").src = "https://maps.googleapis.com/maps/api/streetview?size=1000x1000&location=" + lat + "," + lng + "&heading=90&pitch=-0.76&key=AIzaSyA_jiuMdTONboV9E0sHZ5U5-js9zwyd4GU";
+        // streetview query
+        const url = "https://maps.googleapis.com/maps/api/streetview?size=1000x1000&location=" + lat + "," + lng + "&heading=90&pitch=-0.76&key=AIzaSyA_jiuMdTONboV9E0sHZ5U5-js9zwyd4GU";
+        
+        // no img found
+        if (httpGet(url) <= 8743) {
+            document.querySelector("#modalImg").src = "img/noImage.png";
+        }
+
+        // display streetview
+        else {
+            document.querySelector("#modalImg").src = url;
+        }
     }
+}
+
+// false for synchronous request / get streetview response
+function httpGet(url) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false);
+    xmlHttp.send(null);
+    return xmlHttp.response.length;
 }
 
 // initalize search and display
