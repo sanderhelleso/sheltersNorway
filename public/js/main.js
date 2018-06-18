@@ -89,7 +89,9 @@ let speed = 3500;
 // write a shelter card
 function writeShelters(shelter, closest, seeAll) {
 
+        // increase cont
         shelterCount++;
+
         // shelter coordinates
         const coordinates = shelter.geometry.coordinates;
 
@@ -423,8 +425,16 @@ function checkSearch(value, run) {
     }
 }
 
+function randomIntFromInterval(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
 // reset all values and start loading screen, run until content & maps are loaded
 function resetValues() {
+    // set random img
+    document.querySelector(".loadingScreen").style.background = "linear-gradient(rgba(20,20,20, .8), rgba(20,20,20, .8)),url('/img/loading/loading" + randomIntFromInterval(1, 3) + ".jpg')";
+
+
     document.body.style.overflow = "hidden";
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
