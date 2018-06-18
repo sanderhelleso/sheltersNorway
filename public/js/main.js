@@ -59,6 +59,10 @@ function writeShelters(shelter, closest) {
         cardCont.id = "shelter-" + shelterCount;
         cardCont.value = coordinates[1] + "-" + coordinates[0];
 
+        if (closest) {
+            cardCont.className = "col-12 shelterCard animated fadeIn";
+        }
+
         // card
         const card = document.createElement("div");
         card.className = "card";
@@ -385,32 +389,34 @@ function search() {
 
     // create and display card for each shelter match the search
     let count = 0;
-    shelters.features.forEach(shelter => {
-        const info = shelter.properties;
-
-        // check for address
-        if (info.adresse.toLowerCase() === searchValue) {
-            writeShelters(shelter);
-        }
-        
-        // check for municipality
-        else if (info.kommune.toLowerCase() === searchValue) {
-            writeShelters(shelter);
-        }
-
-        // check for districtname
-        else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
-            writeShelters(shelter);
-        }
-
-        else {
-            // stop loading if no results are found
-            count++;
-            if (count === shelters.features.length) {
-                loading(true);
+    setTimeout(function(){ // timeout for loading screen
+        shelters.features.forEach(shelter => {
+            const info = shelter.properties;
+    
+            // check for address
+            if (info.adresse.toLowerCase() === searchValue) {
+                writeShelters(shelter);
             }
-        }
-    });
+            
+            // check for municipality
+            else if (info.kommune.toLowerCase() === searchValue) {
+                writeShelters(shelter);
+            }
+    
+            // check for districtname
+            else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
+                writeShelters(shelter);
+            }
+    
+            else {
+                // stop loading if no results are found
+                count++;
+                if (count === shelters.features.length) {
+                    loading(true);
+                }
+            }
+        });
+    }, 250);
 }
 
 function cancelSearch(cont) {
@@ -496,13 +502,18 @@ function showLocation(position) {
     }
 }
 
+// see all shelters
 function seeAll() {
     resetValues();
-    shelters.features.forEach(shelter => {
-        writeShelters(shelter);
-    });
+
+    setTimeout(function(){ // timeout for loading screen
+        shelters.features.forEach(shelter => {
+            writeShelters(shelter);
+        });
+    }, 250);
 }
 
+// display modal with card data
 function expandCard(card) {
 
     const mapEle = document.querySelector("#modalMap");
@@ -530,6 +541,7 @@ function expandCard(card) {
     // init close modal event
     document.querySelector("#closeModal").addEventListener("click", () => document.body.style.overflow = "auto");
 
+    // create map and display
     createMap(mapEle, lat, lng, true);
     $('#expandCard').modal('show');
 }
