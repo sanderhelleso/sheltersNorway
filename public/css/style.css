@@ -7,6 +7,10 @@ header,
   height: 100%;
 }
 
+.rgba-strong-black {
+    transition: all 0.1s;
+}
+
 body {
     overflow-x: hidden;
 }

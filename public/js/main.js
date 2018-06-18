@@ -7,6 +7,27 @@ function start() {
     document.querySelector("#seeAll").addEventListener("click", () => seeAll());
     document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
     document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
+
+    // get rect of page
+    getRect(document.querySelector(".view"));
+}
+
+function getRect(ele) {
+    let rect;
+    window.addEventListener("scroll", () => {
+        rect = ele.getBoundingClientRect();
+        let curPos = (Math.abs(rect.top) / 1000) + 0.05;
+        let mask = document.querySelector(".rgba-black-strong");
+        if (curPos >= 0.675) {
+            mask.style.backgroundColor = "rgba(0,0,0," + curPos + ")";
+        }
+
+        else {
+            mask.style.backgroundColor = "rgba(0,0,0, 0.7)";
+        }
+
+        console.log(curPos);
+    });
 }
 
 // get data from JSON file
@@ -37,7 +58,7 @@ let isClosest;
 let speed = 3500;
 
 // write a shelter card
-function writeShelters(shelter, closest) {
+function writeShelters(shelter, closest, seeAll) {
 
         shelterCount++;
         // shelter coordinates
@@ -171,33 +192,63 @@ function writeShelters(shelter, closest) {
         const totalSpots = document.querySelector("#shelterSpots");
         const totalShelters = document.querySelector("#shelterTotal");
 
-        // check network speed
-        if (navigator.connection.downlink > 0.6) {
-            speed = 3500; // fast / normal
+        // detect IE8 and above, and Edge
+        if (document.documentMode || /Edge/.test(navigator.userAgent)) {
+            speed = 4000;
         }
 
+        // check network speed
         else {
-            speed = 4500; // slow
+            if (navigator.connection.downlink > 0.6) {
+                speed = 4000; // fast / normal
+            }
+    
+            else {
+                speed = 4500; // slow
+            }
+        }
+
+        if (isClosest) {
+            speed = 1500;
         }
         
-        console.log(navigator.connection.downlink);
         // fade out loading
         if (!scroll) {
-            loading();
+
+            if (seeAll) {
+                setTimeout(function(){
+                    loading();
+                }, 1500);
+            }
+
+            else {
+                loading();
+            }
             setTimeout(function(){
 
                 // create pagination
                 initPagination();
 
                 // start countup animations
-                animateValue(totalSpots, 0, totalPpl, 1000);
-                animateValue(totalShelters, 0, shelterCount, 1000);
+
+                if (seeAll) {
+                    setTimeout(function(){
+                        animateValue(totalSpots, 0, totalPpl, 6000);
+                        animateValue(totalShelters, 0, shelterCount, 6000);
+                    }, 500);
+                }
+
+                else {
+                    setTimeout(function(){
+                        animateValue(totalSpots, 0, totalPpl, 1000);
+                        animateValue(totalShelters, 0, shelterCount, 1000);
+                    }, 500);
+                }
 
                 if (isClosest) {
                     document.querySelector("#resultFor").innerHTML = "Nærmeste tilfluktsrom fra deg er <br><span class='mt-5 h4-responsive font-weight-bold text-center'>" + info.adresse + "</span>";
                 }
                 document.querySelector("#shelterInfo").style.display = "flex";
-                document.body.style.overflow = "auto"
             }, speed);
             scroll = true; // set scroll to true
         }
@@ -237,13 +288,16 @@ function writeShelters(shelter, closest) {
 // loading screen
 function loading(noFound) {
     setTimeout(function(){
-        document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOut";
+        document.body.style.overflow = "auto"
         document.querySelector("#scrollShelters").click();
-    }, speed - 250);
+        document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOutUp";
+        setTimeout(function(){
+            document.querySelector(".loadingScreen").style.display = "none";
+            document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
+        }, 2000);
+    }, speed);
 
     setTimeout(function(){
-        document.querySelector(".loadingScreen").style.display = "none";
-        document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
 
         if (!isClosest) {
             document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + document.querySelector("#search").value.toUpperCase();
@@ -251,6 +305,7 @@ function loading(noFound) {
 
         if (noFound) {
             document.querySelector("#noResults").style.display = "block";
+            document.body.style.overflow = "auto"
         }
 
         else {
@@ -382,6 +437,7 @@ function resetValues() {
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
     document.querySelector("#shelterInfo").style.display = "none";
+    document.querySelector("#resultFor").innerHTML = "";
     totalPpl = 0;
     shelterCount = 0;
     scroll = false;
@@ -523,7 +579,7 @@ function seeAll() {
 
     setTimeout(function(){ // timeout for loading screen
         shelters.features.forEach(shelter => {
-            writeShelters(shelter);
+            writeShelters(shelter, false, true);
         });
     }, 250);
 }
