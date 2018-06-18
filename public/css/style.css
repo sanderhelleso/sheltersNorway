@@ -253,3 +253,65 @@ div.loadingScreen {
 #resultFor {
     display: none;
 }
+
+#paginationCol {
+    overflow: auto;
+}
+
+/* width */
+#paginationCol::-webkit-scrollbar {
+    height: 10px;
+}
+
+/* Track */
+#paginationCol::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+#paginationCol::-webkit-scrollbar-thumb {
+    background: #f50057; 
+    opacity: 0.5;
+}
+
+/* Handle on hover */
+#paginationCol::-webkit-scrollbar-thumb:hover {
+    background: #f50057;
+    opacity: 1;
+}
+
+.pagination.pg-red .page-item.active .page-link, .pagination.pg-red .page-item.active .page-link:hover {
+    background-color: #f50057 !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (max-width: 600px) {
+    #footerLinks {
+        margin-left: 0 !important;
+    }
+
+    #headerCont h1 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+
+    #headerCont h1 {
+        font-size: 16px;
+    }
+
+    #norway {
+        font-size: 45px;
+    }
+
+    #headerCont {
+        margin-top: 200vh;
+        min-height: 300vh;
+    }
+
+    .introBtn {
+        margin-top: 0 !important;
+        margin-bottom: 30px;
+    }
+}

@@ -4,6 +4,11 @@ window.onload = start;
 let isIE;
 function start() {
 
+    if (!checkIfMobile()) {
+        //wow animation init
+        new WOW().init();
+    }
+
     // get rect of page
     getRect(document.querySelector(".view"));
 
@@ -24,6 +29,12 @@ function start() {
     document.querySelector("#seeAll").addEventListener("click", () => seeAll());
     document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
     document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
+}
+
+function checkIfMobile() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        return true;
+    }
 }
 
 function getRect(ele) {
@@ -303,12 +314,13 @@ function loading(noFound) {
 
     setTimeout(function(){
 
-        if (!isClosest) {
-            document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + document.querySelector("#search").value.toUpperCase();
+        if (seeAllShelters) {
+            document.querySelector("#resultFor").innerHTML = "Viser alle <span class='mt-5 h4-responsive font-weight-bold text-center'>registrerte</span> tilfluktsrom";
+            return;
         }
 
-        else if (seeAllShelters) {
-            document.querySelector("#resultFor").innerHTML = "Alle registrerte tilfluktsrom";
+        if (!isClosest) {
+            document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + document.querySelector("#search").value.toUpperCase();
         }
 
         if (noFound) {
