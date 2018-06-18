@@ -197,6 +197,11 @@ div.loadingScreen {
     color:  #f50057 !important;
 }
 
+#expandCard #closeModal {
+    background-color: #f50057 !important;
+    color: white !important;
+}
+
 #shelterInfo {
     display: none;
 }
