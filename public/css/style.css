@@ -285,6 +285,22 @@ div.loadingScreen {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+@media only screen and (max-width: 1100px) {
+    #shelterInfo h3 {
+        text-align: center !important;
+    }
+
+    #paginationCol {
+        margin-bottom: 30px;
+    }
+
+    #modalImgCont {
+        margin-right: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 60px;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     #footerLinks {
         margin-left: 0 !important;
@@ -292,6 +308,35 @@ div.loadingScreen {
 
     #headerCont h1 {
         font-size: 30px;
+    } 
+}
+
+@media only screen and (max-width: 515px) {
+    #search {
+        font-size: 30px;
+    }
+
+    #runSearch {
+        font-size: 30px;
+    }
+    
+}
+
+@media only screen and (max-width: 425px) {
+    #resultFor {
+        font-size: 25px;
+    }
+
+    #resultFor span {
+        font-size: 30px;
+    }
+
+    #search {
+        font-size: 20px;
+    }
+
+    #runSearch {
+        font-size: 20px;
     }
 }
 

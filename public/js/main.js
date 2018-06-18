@@ -4,6 +4,7 @@ window.onload = start;
 let isIE;
 function start() {
 
+    // run animations on page if not mobile
     if (!checkIfMobile()) {
         //wow animation init
         new WOW().init();
@@ -31,12 +32,14 @@ function start() {
     document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
 }
 
+// check if device is mobile
 function checkIfMobile() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         return true;
     }
 }
 
+// get top rect of page
 function getRect(ele) {
     let rect;
     window.addEventListener("scroll", () => {
@@ -71,7 +74,7 @@ function initMap() {
     const dataset = getShelters("/dataset");
 }
 
-// globals
+// GLOBALS
 let totalPpl = 0;
 let shelterCount = 0;
 let shelters = [];
