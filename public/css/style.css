@@ -78,11 +78,7 @@ h5 {
 }
 
 .card-body {
-    
-}
-
-.card-body hr {
-    
+    min-height: 150px;
 }
 
 #searchCont {
