@@ -249,3 +249,7 @@ div.loadingScreen {
     border-bottom: 1px solid #f50057;
     box-shadow: 0 1px 0 0 #f50057; 
 }
+
+#resultFor {
+    display: none;
+}

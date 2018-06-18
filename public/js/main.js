@@ -12,6 +12,7 @@ function start() {
         isIE = true;
         document.querySelector("#nearestLocation").style.opacity = "0.3";
         document.querySelector("#nearestLocation").classList.remove("introBtn");
+        document.querySelector("#nearestLocation").addEventListener("click", () => toastr["info"]("Denne funksjoner er ikke tilgjenlig hos nettleserene <strong>Internet Explorer</strong> eller <strong>Microsoft Edge</strong>"));
     }
 
     else {
@@ -68,6 +69,7 @@ let scroll = false;
 let pagination = 0;
 let paginationCurr = 0;
 let isClosest;
+let seeAllShelters;
 let speed = 3500;
 
 // write a shelter card
@@ -243,20 +245,8 @@ function writeShelters(shelter, closest, seeAll) {
                 initPagination();
 
                 // start countup animations
-
-                if (seeAll) {
-                    setTimeout(function(){
-                        animateValue(totalSpots, 0, totalPpl, 6000);
-                        animateValue(totalShelters, 0, shelterCount, 6000);
-                    }, 500);
-                }
-
-                else {
-                    setTimeout(function(){
-                        animateValue(totalSpots, 0, totalPpl, 1000);
-                        animateValue(totalShelters, 0, shelterCount, 1000);
-                    }, 500);
-                }
+                document.querySelector("#shelterSpots").innerHTML = totalPpl;
+                document.querySelector("#shelterTotal").innerHTML = shelterCount;
 
                 if (isClosest) {
                     document.querySelector("#resultFor").innerHTML = "Nærmeste tilfluktsrom fra deg er <br><span class='mt-5 h4-responsive font-weight-bold text-center'>" + info.adresse + "</span>";
@@ -300,6 +290,7 @@ function writeShelters(shelter, closest, seeAll) {
 
 // loading screen
 function loading(noFound) {
+    document.querySelector("#resultFor").style.display = "block";
     setTimeout(function(){
         document.body.style.overflow = "auto"
         document.querySelector("#scrollShelters").click();
@@ -316,6 +307,10 @@ function loading(noFound) {
             document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + document.querySelector("#search").value.toUpperCase();
         }
 
+        else if (seeAllShelters) {
+            document.querySelector("#resultFor").innerHTML = "Alle registrerte tilfluktsrom";
+        }
+
         if (noFound) {
             document.querySelector("#noResults").style.display = "block";
             document.body.style.overflow = "auto"
@@ -325,37 +320,6 @@ function loading(noFound) {
             document.querySelector("#noResults").style.display = "none";
         }
     }, speed);
-}
-
-function animateValue(ele, start, end, duration) {
-    // assumes integer values for start and end
-
-    const range = end - start;
-    // no timer shorter than 50ms (not really visible any way)
-    const minTimer = 50;
-    // calc step time to show all interediate values
-    let stepTime = Math.abs(Math.floor(duration / range));
-
-    // never go below minTimer
-    stepTime = Math.max(stepTime, minTimer);
-
-    // get current time and calculate desired end time
-    var startTime = new Date().getTime();
-    var endTime = startTime + duration;
-    var timer;
-
-    function run() {
-        var now = new Date().getTime();
-        var remaining = Math.max((endTime - now) / duration, 0);
-        var value = Math.round(end - (remaining * range));
-        ele.innerHTML = value;
-        if (value == end) {
-            clearInterval(timer);
-        }
-    }
-
-    var timer = setInterval(run, stepTime);
-    run();
 }
 
 // create map for shelter card
@@ -451,10 +415,13 @@ function resetValues() {
     document.querySelector(".loadingScreen").style.display = "block";
     document.querySelector("#shelterInfo").style.display = "none";
     document.querySelector("#resultFor").innerHTML = "";
+    document.querySelector("#shelterSpots").innerHTML = "";
+    document.querySelector("#shelterTotal").innerHTML = "";
     totalPpl = 0;
     shelterCount = 0;
     scroll = false;
     isClosest = false;
+    seeAllShelters = false;
     sheltersData = [];
 
     const shelterRow = document.querySelector("#sheltersRow");
@@ -589,6 +556,7 @@ function showLocation(position) {
 // see all shelters
 function seeAll() {
     resetValues();
+    seeAllShelters = true;
 
     setTimeout(function(){ // timeout for loading screen
         shelters.features.forEach(shelter => {
