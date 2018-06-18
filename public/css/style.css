@@ -70,7 +70,7 @@ h5 {
     margin-left: 1%;
 }
 
-#headerCont a:hover {
+#headerCont .introBtn:hover {
     color: #f50057 !important;
     border: 2px solid #f50057 !important;
     transform: scale(1.1);

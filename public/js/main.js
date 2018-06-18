@@ -1,15 +1,28 @@
 window.onload = start;
 
 // initalize search on load
+let isIE;
 function start() {
-    document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
-    document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
-    document.querySelector("#seeAll").addEventListener("click", () => seeAll());
-    document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
-    document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
 
     // get rect of page
     getRect(document.querySelector(".view"));
+
+    // check browser
+    if (document.documentMode || /Edge/.test(navigator.userAgent)) {
+        isIE = true;
+        document.querySelector("#nearestLocation").style.opacity = "0.3";
+        document.querySelector("#nearestLocation").classList.remove("introBtn");
+    }
+
+    else {
+        document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
+    }
+
+    // EVENTS
+    document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
+    document.querySelector("#seeAll").addEventListener("click", () => seeAll());
+    document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
+    document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
 }
 
 function getRect(ele) {
@@ -193,7 +206,7 @@ function writeShelters(shelter, closest, seeAll) {
         const totalShelters = document.querySelector("#shelterTotal");
 
         // detect IE8 and above, and Edge
-        if (document.documentMode || /Edge/.test(navigator.userAgent)) {
+        if (isIE) {
             speed = 4000;
         }
 
