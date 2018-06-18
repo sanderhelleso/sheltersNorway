@@ -1,5 +1,4 @@
 /* Required for full background image */
-
 html,
 body,
 header,
@@ -13,15 +12,6 @@ header,
 
 body {
     overflow-x: hidden;
-}
-
-@media (max-width: 740px) {
-  html,
-  body,
-  header,
-  .view {
-    height: 100vh;
-  }
 }
 
 .top-nav-collapse {
@@ -301,6 +291,15 @@ div.loadingScreen {
     }
 }
 
+@media (max-width: 740px) {
+    html,
+    body,
+    header,
+    .view {
+      height: 100vh;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     #footerLinks {
         margin-left: 0 !important;
@@ -359,4 +358,8 @@ div.loadingScreen {
         margin-top: 0 !important;
         margin-bottom: 30px;
     }
+}
+
+html.touch *:hover {
+    pointer-events: none !important;
 }
