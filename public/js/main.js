@@ -1,12 +1,31 @@
+/**
+ * @author Sander Hellesø
+ */
+
+// GLOBALS
+let isIE;
+let totalPpl = 0;
+let shelterCount = 0;
+let shelters = [];
+let sheltersData = [];
+let scroll = false;
+let pagination = 0;
+let paginationCurr = 0;
+let isClosest;
+let seeAllShelters;
+let speed = 3500;
+
 // start app on load
 window.onload = start;
 
 // initalize search on load
-let isIE;
 function start() {
 
     // get rect of page
     getRect(document.querySelector(".view"));
+
+    // initalise share buttons
+    share();
 
     // check browser
     if (document.documentMode || /Edge/.test(navigator.userAgent)) {
@@ -74,18 +93,6 @@ function getShelters(dataset) {
 function initMap() {
     const dataset = getShelters("/dataset");
 }
-
-// GLOBALS
-let totalPpl = 0;
-let shelterCount = 0;
-let shelters = [];
-let sheltersData = [];
-let scroll = false;
-let pagination = 0;
-let paginationCurr = 0;
-let isClosest;
-let seeAllShelters;
-let speed = 3500;
 
 // write a shelter card
 function writeShelters(shelter, closest, seeAll) {
@@ -653,4 +660,22 @@ function removeHash () {
         document.body.scrollTop = scrollV;
         document.body.scrollLeft = scrollH;
     }
+}
+
+// share page function
+function share() {
+	const facebook = document.getElementById("shareFacebook");
+	facebook.href = "http://www.facebook.com/sharer.php?u=" +  window.location.href;
+
+	const linkedin = document.getElementById("shareLinkedin");
+	linkedin.href = "http://www.linkedin.com/shareArticle?mini=true&amp;url=" +  window.location.href;
+
+	const twitter = document.getElementById("shareTwitter");
+	twitter.href = "https://twitter.com/share?url=" +  window.location.href;
+
+	const google = document.getElementById("shareGoogle");
+	google.href = "https://plus.google.com/share?url=" +  window.location.href;
+
+	const mail = document.getElementById("shareEmail");
+	mail.href = "mailto:?Subject=" +  window.location.href;
 }

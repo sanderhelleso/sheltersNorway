@@ -49,7 +49,7 @@
     <section id="info" class="text-center my-5 container wow fadeIn" data-wow-delay="0.2s">
         <hr class="py-2 pb-4">
         <!-- Section heading -->
-        <h2 class="h1-responsive font-weight-bold my-5">Få en oversikt over tilgjengelige tilfluktsrom</h2>
+        <h2 class="h1-responsive font-weight-bold my-5 dark-grey-text">Få en oversikt over tilgjengelige tilfluktsrom</h2>
         <!-- Section description -->
         <p class="lead grey-text w-responsive mx-auto mb-5">Oversikt over 316 offentlige tilfluktsrom, spredt over hele Norge.</p>
 
@@ -60,7 +60,7 @@
             <div class="col-md-4">
 
                 <i class="fa fa-map-marker fa-3x red-text"></i>
-                <h5 class="font-weight-bold my-4">Google Maps</h5>
+                <h5 class="font-weight-bold my-4 dark-grey-text">Google Maps</h5>
                 <p class="grey-text mb-md-0 mb-5">Viser nøyaktig lokasjon av tilfluktsrom ved bruk av kordinater og Google Maps.
                 </p>
 
@@ -71,7 +71,7 @@
             <div class="col-md-4">
 
                 <i class="fa fa-info fa-3x cyan-text"></i>
-                <h5 class="font-weight-bold my-4">Informasjon</h5>
+                <h5 class="font-weight-bold my-4 dark-grey-text">Informasjon</h5>
                 <p class="grey-text mb-md-0 mb-5">Se nyttig informasjon som antall plasser, areal, byggeår, sted og mer.
                 </p>
 
@@ -82,7 +82,7 @@
             <div class="col-md-4">
 
                 <i class="fa fa-check fa-3x orange-text"></i>
-                <h5 class="font-weight-bold my-4">Oppdatert</h5>
+                <h5 class="font-weight-bold my-4 dark-grey-text">Oppdatert</h5>
                 <p class="grey-text mb-0">Data er oppdatert til dags dato og blir jevnlig oppdatert ved endring av tilfluktsrom.
                 </p>
 
@@ -96,7 +96,7 @@
     <section id="sendInShelterCont" class="pb-5 pt-5 wow fadeIn" data-wow-delay="0.2s">
         <div class="container">
             <hr class="pb-5">
-            <h2 class="text-center mt-5 mb-5">Vet du om tilfluktsrom som ikke er registrert?</h2>
+            <h2 class="text-center dark-grey-text mt-5 mb-5">Vet du om tilfluktsrom som ikke er registrert?</h2>
             <div class="row justify-content-center">
                 <button id="sendShelterBtn" type="button" class="btn waves-effect">Hjelp oss å vise det</button>
             </div>
@@ -499,43 +499,46 @@
         </div>
     </div>
     <!-- Modal: modalPoll -->
-    
+
     <!--Grid row-->
-    <div class="row my-5 wow fadeIn" data-wow-delay="0.2s">
+    <div class="container">
+        <hr>
+        <div class="row my-5 wow fadeIn" data-wow-delay="0.2s">
 
-        <!--Grid column-->
-        <div class="col-md-12 text-center">
+            <!--Grid column-->
+            <div id="sharePage" class="col-md-12 text-center">
 
-            <h4 class="text-center font-weight-bold dark-grey-text mt-3 mb-3">
-                <strong>Del denne siden: </strong>
-            </h4>
+                <h4 class="text-center font-weight-bold dark-grey-text mt-3 mb-3">
+                    <strong>Del denne siden</strong>
+                </h4>
 
-            <a id="shareFacebook" target="_blank">
-                <button type="button" class="btn btn-fb btn-sm">
-                    <i class="fa fa-facebook left"></i> Facebook</button>
-            </a>
-            <!--Twitter-->
-            <a id="shareTwitter" target="_blank">
-                <button type="button" class="btn btn-tw btn-sm">
-                    <i class="fa fa-twitter left"></i> Twitter</button>
-            </a>
-            <!--Google +-->
-            <a id="shareLinkedin" target="_blank">
-                <button type="button" class="btn btn-li btn-sm">
-                    <i class="fa fa-linkedin left"></i> Linkedin</button>
-            </a>
-            <a id="shareGoogle" target="_blank">
-                <button type="button" class="btn btn-gplus btn-sm">
-                    <i class="fa fa-google-plus pr-1"></i> Google +</button>
-            </a>
-            <a id="shareEmail">
-                <button type="button" class="btn btn-email btn-sm">
-                    <i class="fa fa-envelope pr-1"></i> E-post</button>
-            </a>
+                <a id="shareFacebook" target="_blank">
+                    <button type="button" class="btn btn-fb btn-sm">
+                        <i class="fa fa-facebook left"></i> Facebook</button>
+                </a>
+                <!--Twitter-->
+                <a id="shareTwitter" target="_blank">
+                    <button type="button" class="btn btn-tw btn-sm">
+                        <i class="fa fa-twitter left"></i> Twitter</button>
+                </a>
+                <!--Google +-->
+                <a id="shareLinkedin" target="_blank">
+                    <button type="button" class="btn btn-li btn-sm">
+                        <i class="fa fa-linkedin left"></i> Linkedin</button>
+                </a>
+                <a id="shareGoogle" target="_blank">
+                    <button type="button" class="btn btn-gplus btn-sm">
+                        <i class="fa fa-google-plus pr-1"></i> Google +</button>
+                </a>
+                <a id="shareEmail">
+                    <button type="button" class="btn btn-email btn-sm">
+                        <i class="fa fa-envelope pr-1"></i> E-post</button>
+                </a>
+
+            </div>
+            <!--Grid column-->
 
         </div>
-        <!--Grid column-->
-
+        <!--Grid row-->
     </div>
-    <!--Grid row-->
 </body>

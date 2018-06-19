@@ -211,7 +211,7 @@ div.loadingScreen {
 }
 
 #sendInShelterCont {
-    padding-bottom: 10vh !important;
+    padding-bottom: 7.5vh !important;
 }
 
 #modalSendShelter .modal-header {
@@ -373,4 +373,8 @@ html.touch *:hover {
 #footerLinks a i:hover {
     color: #f50057;
     opacity: 0.8;
+}
+
+#sharePage button {
+    width: 120px;
 }
