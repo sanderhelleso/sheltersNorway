@@ -275,17 +275,15 @@ function writeShelters(shelter, closest, seeAll) {
         // create pagination
         function initPagination() {
             if (shelterCount > 9) {
-                const amount = Math.round(shelterCount / 10) + 1;
+                const amount = Math.round((shelterCount + 5) / 10);
                 for (let i = 0; i < amount; i++) {
                     const paginationItem = document.createElement("li");
                     if (i === 0) {
                         paginationItem.className = "page-item active pr-1 pl-1 paginationItem";
-
                     }
 
                     else {
                         paginationItem.className = "page-item pr-1 pl-1 paginationItem";
-
                     }
 
                     const paginationLink = document.createElement("a");
