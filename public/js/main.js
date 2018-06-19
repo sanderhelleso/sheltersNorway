@@ -662,20 +662,20 @@ function removeHash () {
     }
 }
 
-// share page function
+// share page functions
 function share() {
-	const facebook = document.getElementById("shareFacebook");
+	const facebook = document.querySelector("#shareFacebook");
 	facebook.href = "http://www.facebook.com/sharer.php?u=" +  window.location.href;
 
-	const linkedin = document.getElementById("shareLinkedin");
+	const linkedin = document.querySelector("#shareLinkedin");
 	linkedin.href = "http://www.linkedin.com/shareArticle?mini=true&amp;url=" +  window.location.href;
 
-	const twitter = document.getElementById("shareTwitter");
+	const twitter = document.querySelector("#shareTwitter");
 	twitter.href = "https://twitter.com/share?url=" +  window.location.href;
 
-	const google = document.getElementById("shareGoogle");
+	const google = document.querySelector("#shareGoogle");
 	google.href = "https://plus.google.com/share?url=" +  window.location.href;
 
-	const mail = document.getElementById("shareEmail");
+	const mail = document.querySelector("#shareEmail");
 	mail.href = "mailto:?Subject=" +  window.location.href;
 }
