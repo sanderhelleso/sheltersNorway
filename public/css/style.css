@@ -63,7 +63,7 @@ h5 {
 #headerCont .introBtn:hover {
     color: #f50057 !important;
     border: 2px solid #f50057 !important;
-    transform: scale(1.1);
+    font-weight: 400;
 }
 
 .card {

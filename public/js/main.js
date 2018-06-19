@@ -4,12 +4,6 @@ window.onload = start;
 let isIE;
 function start() {
 
-    // run animations on page if not mobile
-    if (!checkIfMobile()) {
-        //wow animation init
-        new WOW().init();
-    }
-
     // get rect of page
     getRect(document.querySelector(".view"));
 
@@ -23,6 +17,12 @@ function start() {
 
     else {
         document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
+
+        // run animations on page if not mobile
+        if (!checkIfMobile()) {
+            //wow animation init
+            new WOW().init();
+        }
     }
 
     // EVENTS
@@ -268,6 +268,9 @@ function writeShelters(shelter, closest, seeAll) {
                     document.querySelector("#resultFor").innerHTML = "Nærmeste tilfluktsrom fra deg er <br><span class='mt-5 h4-responsive font-weight-bold text-center'>" + info.adresse + "</span>";
                 }
                 document.querySelector("#shelterInfo").style.display = "flex";
+
+                // enable buttons again
+                document.querySelectorAll(".introBtn").forEach(btn => btn.classList.remove("disabled"));
             }, speed);
             scroll = true; // set scroll to true
         }
@@ -433,6 +436,8 @@ function resetValues() {
     // set random img
     document.querySelector(".loadingScreen").style.background = "linear-gradient(rgba(20,20,20, .8), rgba(20,20,20, .8)),url('/img/loading/loading" + randomIntFromInterval(1, 3) + ".jpg')";
 
+    // disable buttons to avoid spam clicking
+    document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));
 
     document.body.style.overflow = "hidden";
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
@@ -494,10 +499,13 @@ function search() {
     }, 250);
 }
 
+// cancel and remove searchbar
 function cancelSearch(cont) {
     document.querySelector("#cancelSearch").addEventListener("click", () => cont.style.display = "none");
 }
 
+
+// initalize pagination
 function paginateNavigate() {
     document.querySelector(".pagination").querySelectorAll(".active").forEach(ele => ele.className = "page-item pr-1 pl-1 paginationItem");
     this.parentElement.className = "page-item active pr-1 pl-1 paginationItem";
