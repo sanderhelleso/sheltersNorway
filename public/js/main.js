@@ -1,3 +1,6 @@
+// ES6
+'use strict'
+
 window.onload = start;
 
 // initalize search on load
@@ -268,9 +271,6 @@ function writeShelters(shelter, closest, seeAll) {
                     document.querySelector("#resultFor").innerHTML = "Nærmeste tilfluktsrom fra deg er <br><span class='mt-5 h4-responsive font-weight-bold text-center'>" + info.adresse + "</span>";
                 }
                 document.querySelector("#shelterInfo").style.display = "flex";
-
-                // enable buttons again
-                document.querySelectorAll(".introBtn").forEach(btn => btn.classList.remove("disabled"));
             }, speed);
             scroll = true; // set scroll to true
         }
@@ -316,6 +316,9 @@ function loading(noFound) {
         setTimeout(function(){
             document.querySelector(".loadingScreen").style.display = "none";
             document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
+
+            // enable buttons again
+            document.querySelectorAll(".introBtn").forEach(btn => btn.classList.remove("disabled"));
         }, 2000);
     }, speed);
 
@@ -433,8 +436,6 @@ function randomIntFromInterval(min,max) {
 
 // reset all values and start loading screen, run until content & maps are loaded
 function resetValues() {
-    // set random img
-    document.querySelector(".loadingScreen").style.background = "linear-gradient(rgba(20,20,20, .8), rgba(20,20,20, .8)),url('/img/loading/loading" + randomIntFromInterval(1, 3) + ".jpg')";
 
     // disable buttons to avoid spam clicking
     document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));

@@ -367,4 +367,10 @@ html.touch *:hover {
 
 .spinner-red-only {
     border-color: #f50057 !important;
+    transform: scale(5);
+}
+
+#footerLinks a i:hover {
+    color: #f50057;
+    opacity: 0.8;
 }

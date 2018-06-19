@@ -1,3 +1,6 @@
+// ES6
+'use strict'
+
 const express = require("express");
 const http = require("http");
 const bodyParser = require("body-parser");
@@ -22,6 +25,7 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
+// send dataset to client
 app.get("/dataset", (req, res) => {
     fs.readFile("./dataset/shelters.json", "utf8", function (err, data) {
         if (err) throw err;
