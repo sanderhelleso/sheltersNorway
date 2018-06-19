@@ -1,6 +1,4 @@
-// ES6
-'use strict'
-
+// start app on load
 window.onload = start;
 
 // initalize search on load
@@ -330,7 +328,7 @@ function loading(noFound) {
         }
 
         if (!isClosest) {
-            document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + document.querySelector("#search").value.toUpperCase();
+            document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + searchValue.toUpperCase();
         }
 
         if (noFound) {
@@ -417,6 +415,7 @@ function checkSearch(value, run) {
 
         // enables enter key
         if (this.event.keyCode === 13) {
+            
             run.click();
         }
 
@@ -447,6 +446,8 @@ function resetValues() {
     document.querySelector("#resultFor").innerHTML = "";
     document.querySelector("#shelterSpots").innerHTML = "";
     document.querySelector("#shelterTotal").innerHTML = "";
+    document.querySelector("#search").value = "";
+
     totalPpl = 0;
     shelterCount = 0;
     scroll = false;
