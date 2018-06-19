@@ -311,6 +311,7 @@ function loading(noFound) {
         document.body.style.overflow = "auto"
         document.querySelector("#scrollShelters").click();
         document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOutUp";
+        removeHash();
         setTimeout(function(){
             document.querySelector(".loadingScreen").style.display = "none";
             document.querySelector(".loadingScreen").className = "loadingScreen animated fadeIn";
@@ -621,4 +622,27 @@ function expandCard(card) {
     // create map and display
     createMap(mapEle, lat, lng, true);
     $('#expandCard').modal('show');
+}
+
+// remove URL-hash for deep-linking
+function removeHash () { 
+    let scrollV;
+    let scrollH;
+    const loc = window.location;
+    if ("pushState" in history) {
+        history.pushState("", document.title, loc.pathname + loc.search);
+    }
+
+    else {
+        // prevent scrolling by storing the page's current scroll offset
+        scrollV = document.body.scrollTop;
+        scrollH = document.body.scrollLeft;
+
+        // set hash to nothing
+        loc.hash = "";
+
+        // restore the scroll offset
+        document.body.scrollTop = scrollV;
+        document.body.scrollLeft = scrollH;
+    }
 }
