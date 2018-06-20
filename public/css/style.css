@@ -361,6 +361,14 @@ html.touch *:hover {
     padding-left: 20px;
 }
 
+footer a img {
+    max-height: 20px;
+    width: 20px;
+    margin-left: 1px;
+    margin-right: 1px;
+    transition: all 0.3s;
+}
+
 @media only screen and (max-width: 1100px) {
     #shelterInfo h3 {
         text-align: center !important;
