@@ -242,6 +242,10 @@ div.loadingScreen {
     color: white;
 }
 
+#modalSendShelter .lead {
+    font-weight: 400;
+}
+
 #cancelSendInfoShelter {
     color: #f50057 !important;
     border: 2px solid #f50057;
@@ -254,6 +258,14 @@ div.loadingScreen {
 #modalSendShelter input[type=text]:focus:not([readonly]) {
     border-bottom: 1px solid #f50057;
     box-shadow: 0 1px 0 0 #f50057; 
+}
+
+#modalSendShelter label {
+    font-weight: 600;
+}
+
+#modalSendShelter input {
+    color: #000000 !important;
 }
 
 .formOk label {

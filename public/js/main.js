@@ -27,6 +27,9 @@ function start() {
     // get rect of page
     getRect(document.querySelector(".view"));
 
+    // initalize form keyup
+    formInit();
+
     // initalize share buttons
     share();
 
@@ -702,19 +705,45 @@ function share() {
 	mail.href = "mailto:?Subject=" +  window.location.href;
 }
 
+// initalize keyup form check for UX
+let inputs;
+function formInit() {
+    inputs = document.querySelectorAll(".modal-body")[1].querySelectorAll("input");
+    inputs.forEach(input => {
+        input.addEventListener("keyup", isValid);
+    });
+
+    function isValid() {
+        if (this.value.length > 0) {
+            this.className = "form-control formOk";
+        }
+
+        else {
+            this.className = "form-control";
+        }
+    }
+}
+
 // form check
-function formCheck(e) {
+function formCheck() {
     let count = 0;
-    const inputs = document.querySelectorAll(".modal-body")[1].querySelectorAll("input");
+    let userValues = [];
+    inputs = document.querySelectorAll(".modal-body")[1].querySelectorAll("input");
     inputs.forEach(input => {
 
         // display errors and prevent default behavior
         if (input.value === "") {
             input.className = "form-control invalid animated shake";
-            toastr["error"]("Vennligst fyll ut manglende felt");
-            e.preventDefault();
+
+            // only display one toast
+            if (document.querySelectorAll(".toast").length === 0) {
+                toastr["error"]("Vennligst fyll ut manglende felt");
+            }
+
+            // focus first invalid input
             setTimeout(function(){
                 input.className = "form-control invalid";
+                document.querySelectorAll(".invalid")[0].focus();
             }, 1000);
         }
 
@@ -722,11 +751,15 @@ function formCheck(e) {
         else {
             count++;
             input.className = "form-control formOk";
+
+            // push to array
+            userValues.push(input.value);
         }
 
         // eveything is good
         if (count === inputs.length) {
-            toastr["success"]("SQUAWK");
+            console.log(userValues);
+            toastr["success"]("Huurayy");
         }
     });
 }
