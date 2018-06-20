@@ -765,7 +765,7 @@ function formCheck() {
 
 // send shelter form
 function sendForm(arr) {
-    
+
     // create iframe
     const frame = document.createElement("iframe");
     frame.id = "iframe";
@@ -773,9 +773,18 @@ function sendForm(arr) {
     frame.style.display = "none";
     document.body.appendChild(frame);
 
-    // assign data, submit form and show message
+    // assign data / submit form
     document.querySelector("#shelterArr").value = arr;
     event.preventDefault();
     document.querySelector("#shelterForm").submit();
-    toastr["success"]("Huurayy");
+
+    // reset values / show message / exit modal
+    setTimeout(function(){
+        toastr["success"]("Takk for hjelpen! Informasjonen vil bli gått gjennom før den legges til");
+        inputs.forEach(input => {
+            input.value = "";
+            input.className = "form-control";
+            document.querySelector("#cancelSendInfoShelter").click();
+        });
+    }, 500);
 }
