@@ -763,7 +763,9 @@ function formCheck() {
     });
 }
 
+// send shelter form
 function sendForm(arr) {
+    
     // create iframe
     const frame = document.createElement("iframe");
     frame.id = "iframe";
@@ -771,7 +773,7 @@ function sendForm(arr) {
     frame.style.display = "none";
     document.body.appendChild(frame);
 
-    console.log(arr);
+    // assign data, submit form and show message
     document.querySelector("#shelterArr").value = arr;
     event.preventDefault();
     document.querySelector("#shelterForm").submit();
