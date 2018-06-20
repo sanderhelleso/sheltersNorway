@@ -753,7 +753,7 @@ function formCheck() {
             input.className = "form-control formOk";
 
             // push to array
-            userValues.push(input.value);
+            userValues.push([input.parentElement.childNodes[3].innerHTML + ": " + input.value]);
         }
 
         // eveything is good
@@ -782,9 +782,10 @@ function sendForm(arr) {
     setTimeout(function(){
         toastr["success"]("Takk for hjelpen! Informasjonen vil bli gått gjennom før den legges til");
         inputs.forEach(input => {
+            frame.remove();
             input.value = "";
             input.className = "form-control";
             document.querySelector("#cancelSendInfoShelter").click();
         });
-    }, 500);
+    }, 1000);
 }
