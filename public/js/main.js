@@ -18,13 +18,16 @@ let speed = 3500;
 // start app on load
 window.onload = start;
 
+// scroll top on page load if not IE
+$('html,body').scrollTop(0);
+
 // initalize search on load
 function start() {
 
     // get rect of page
     getRect(document.querySelector(".view"));
 
-    // initalise share buttons
+    // initalize share buttons
     share();
 
     // check browser
@@ -40,6 +43,7 @@ function start() {
 
         // run animations on page if not mobile
         if (!checkIfMobile()) {
+
             //wow animation init
             new WOW().init();
         }
@@ -48,6 +52,7 @@ function start() {
     // EVENTS
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
     document.querySelector("#seeAll").addEventListener("click", () => seeAll());
+    document.querySelector("#sendInfoShelter").addEventListener("click", () => formCheck());
     document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
     document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
 }
@@ -263,6 +268,7 @@ function writeShelters(shelter, closest, seeAll) {
             else {
                 loading();
             }
+            
             setTimeout(function(){
 
                 // create pagination
@@ -312,11 +318,22 @@ function writeShelters(shelter, closest, seeAll) {
 
 // loading screen
 function loading(noFound) {
+    if (!noFound) {
+        // update loading screen message
+        document.querySelector("#loadingMsg").innerHTML = "Henter kartdata...";
+    }
+
+    else {
+        document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
+    }
+
     document.querySelector("#resultFor").style.display = "block";
     setTimeout(function(){
         document.body.style.overflow = "auto"
         document.querySelector("#scrollShelters").click();
         document.querySelector(".loadingScreen").className = "loadingScreen animated fadeOutUp";
+
+        // remove url-hash
         removeHash();
         setTimeout(function(){
             document.querySelector(".loadingScreen").style.display = "none";
@@ -335,7 +352,7 @@ function loading(noFound) {
         }
 
         if (!isClosest) {
-            document.querySelector("#resultFor").innerHTML = "Resultat for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + searchValue.toUpperCase();
+            document.querySelector("#resultFor").innerHTML = "Søketreff for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + searchValue.toUpperCase();
         }
 
         if (noFound) {
@@ -414,6 +431,7 @@ function initSearch() {
 // check search value
 function checkSearch(value, run) {
     // add event if matching
+    document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
     if (value.length > 1) {
         run.style.opacity = "1";
 
@@ -454,6 +472,7 @@ function resetValues() {
     document.querySelector("#shelterSpots").innerHTML = "";
     document.querySelector("#shelterTotal").innerHTML = "";
     document.querySelector("#search").value = "";
+    document.querySelector("#loadingMsg").innerHTML = "";
 
     totalPpl = 0;
     shelterCount = 0;
@@ -469,6 +488,8 @@ function resetValues() {
 /******** SEARCH *********/
 let searchValue;
 function search() {
+
+    document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
 
     // clear and resets values
     resetValues();
@@ -597,6 +618,7 @@ function showLocation(position) {
 // see all shelters
 function seeAll() {
     resetValues();
+    document.querySelector("#loadingMsg").innerHTML = "Henter tilfluktsrom...";
     seeAllShelters = true;
 
     setTimeout(function(){ // timeout for loading screen
@@ -678,4 +700,33 @@ function share() {
 
 	const mail = document.querySelector("#shareEmail");
 	mail.href = "mailto:?Subject=" +  window.location.href;
+}
+
+// form check
+function formCheck(e) {
+    let count = 0;
+    const inputs = document.querySelectorAll(".modal-body")[1].querySelectorAll("input");
+    inputs.forEach(input => {
+
+        // display errors and prevent default behavior
+        if (input.value === "") {
+            input.className = "form-control invalid animated shake";
+            toastr["error"]("Vennligst fyll ut manglende felt");
+            e.preventDefault();
+            setTimeout(function(){
+                input.className = "form-control invalid";
+            }, 1000);
+        }
+
+        // input is OK
+        else {
+            count++;
+            input.className = "form-control formOk";
+        }
+
+        // eveything is good
+        if (count === inputs.length) {
+            toastr["success"]("SQUAWK");
+        }
+    });
 }
