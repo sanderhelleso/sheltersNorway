@@ -40,7 +40,7 @@ app.post("/form", (req, res) => {
     });
 
     // contact data
-    let name = formData[0];
+    let name = formData[0].split(": ")[1];
     let from = process.env.EMAIL_HOST;
     let to = process.env.EMAIL_HOST;
     let subject = "Innsendelse av tilfluktsrom";

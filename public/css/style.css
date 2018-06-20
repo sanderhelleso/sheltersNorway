@@ -29,25 +29,6 @@ body {
     overflow-x: hidden;
 }
 
-.top-nav-collapse {
-  background-color: #78909c !important;
-}
-
-.navbar:not(.top-nav-collapse) {
-  background: transparent !important;
-}
-
-@media (max-width: 768px) {
-  .navbar:not(.top-nav-collapse) {
-    background: #78909c !important;
-  }
-}
-@media (min-width: 800px) and (max-width: 850px) {
-  .navbar:not(.top-nav-collapse) {
-    background: #78909c !important;
-  }
-}
-
 h1 {
   letter-spacing: 8px;
 }
@@ -173,13 +154,7 @@ div.loadingScreen {
     left:       0; 
     position:   fixed;
     display: none;
-  }
-
-  #loader {
-    position: fixed;
-    top: 50%;
-    left: 48.5%;
-  }
+}
 
 .example ul {
     max-width: 100px;
@@ -328,6 +303,14 @@ html.touch *:hover {
     pointer-events: none !important;
 }
 
+#loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -40px;
+    margin-left: -40px;
+  }
+
 .spinner-red-only {
     border-color: #f50057 !important;
     transform: scale(5);
@@ -396,7 +379,11 @@ footer a img {
 
 @media only screen and (max-width: 600px) {
     #footerLinks {
-        margin-left: 0 !important;
+        margin-left: 5% !important;
+    }
+
+    #loadingMsg {
+        font-size: 25px;
     }
 
     #headerCont h1 {
