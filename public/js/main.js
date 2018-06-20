@@ -758,8 +758,22 @@ function formCheck() {
 
         // eveything is good
         if (count === inputs.length) {
-            console.log(userValues);
-            toastr["success"]("Huurayy");
+            sendForm(userValues);
         }
     });
+}
+
+function sendForm(arr) {
+    // create iframe
+    const frame = document.createElement("iframe");
+    frame.id = "iframe";
+    frame.setAttribute("name", "hidden");
+    frame.style.display = "none";
+    document.body.appendChild(frame);
+
+    console.log(arr);
+    document.querySelector("#shelterArr").value = arr;
+    event.preventDefault();
+    document.querySelector("#shelterForm").submit();
+    toastr["success"]("Huurayy");
 }

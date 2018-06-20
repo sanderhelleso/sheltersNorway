@@ -25,6 +25,10 @@ app.get("/", (req, res) => {
 	res.render("index");
 });
 
+app.post("/form", (req, res) => {
+    console.log(req.body.shelterData);
+});
+
 // send dataset to client
 app.get("/dataset", (req, res) => {
     fs.readFile("./dataset/shelters.json", "utf8", function (err, data) {

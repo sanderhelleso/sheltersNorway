@@ -277,6 +277,14 @@ div.loadingScreen {
     box-shadow: 0 1px 0 0 #00C851 !important; 
 }
 
+iframe {
+    display: none;
+}
+
+#shelterArr {
+    display: none;
+}
+
 #resultFor {
     display: none;
 }
