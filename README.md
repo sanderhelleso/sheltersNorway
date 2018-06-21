@@ -1,6 +1,6 @@
 # sheltersNorway
 
-<h3>https://offentligetilfluktsrom.no/</h3>
+<h1>https://offentligetilfluktsrom.no/</h1>
 <p>Webpage that display public bombshelters located in Norway. Each shelter contains data about location, picture, google maps chart, name, available spots, year and much more</p>
 
 ## Includes
@@ -26,4 +26,4 @@
 <p>Original dataset is delivered by DSB <a href="https://data.norge.no/data/direktoratet-samfunnssikkerhet-og-beredskap/offentlige-tilfluktsrom-i-norge" Source</a></p>
   
 ## Copyright
-Domain and application is copyrighted by <a href="semanta.no">semanta.no</a>
+<p>Domain and application is copyrighted by <a href="semanta.no">semanta.no</a></p>
