@@ -335,7 +335,7 @@ html.touch *:hover {
     opacity: 0.5;
     margin: 0 auto;
     text-align: center;
-    margin-top: 25%;
+    margin-top: 100px;
     text-shadow: 2px 2px 4px #000000;
     font-size: 40px;
     text-transform: uppercase;

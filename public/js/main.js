@@ -236,22 +236,7 @@ function writeShelters(shelter, closest, seeAll) {
         // display the data for user
         const totalSpots = document.querySelector("#shelterSpots");
         const totalShelters = document.querySelector("#shelterTotal");
-
-        // detect IE8 and above, and Edge
-        if (isIE) {
-            speed = 4000;
-        }
-
-        // check network speed
-        else {
-            if (navigator.connection.downlink > 0.6) {
-                speed = 4000; // fast / normal
-            }
-    
-            else {
-                speed = 4500; // slow
-            }
-        }
+        speed = 4000; // fast / normal
 
         if (isClosest) {
             speed = 1500;
@@ -430,6 +415,15 @@ function initSearch() {
     // focus search and run function on input
     search.focus();
     search.addEventListener("keyup", () => checkSearch(search.value, runSearch));
+    search.addEventListener("keypress", () => enterSearch(search.value, runSearch));
+
+    // enables enter key
+    $("#search").keypress(function(e) {
+        if (e.keyCode === 13 && search.value.length > 1) {
+            runSearch.addEventListener("click", search);
+            runSearch.click();
+         }
+     });
 
     // init canceling of search
     cancelSearch(searchCont);
@@ -444,13 +438,6 @@ function checkSearch(value, run) {
 
         // run event
         run.addEventListener("click", search);
-
-        // enables enter key
-        if (this.event.keyCode === 13) {
-            
-            run.click();
-        }
-
         searchValue = value;
     }
 
@@ -460,6 +447,8 @@ function checkSearch(value, run) {
         run.removeEventListener("click", search);
     }
 }
+
+function enterSearch(value, run) {}
 
 function randomIntFromInterval(min,max) {
     return Math.floor(Math.random()*(max-min+1)+min);
@@ -487,6 +476,7 @@ function resetValues() {
     isClosest = false;
     seeAllShelters = false;
     sheltersData = [];
+    cards = [];
 
     const shelterRow = document.querySelector("#sheltersRow");
     shelterRow.querySelectorAll("div").forEach(div => div.remove());
@@ -498,15 +488,14 @@ function search() {
 
     document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
 
-    // clear and resets values
-    resetValues();
-
     // make search lower case
     searchValue = searchValue.toLowerCase();
 
     // create and display card for each shelter match the search
     let count = 0;
     setTimeout(function(){ // timeout for loading screen
+        // clear and resets values
+        resetValues();
         shelters.features.forEach(shelter => {
             const info = shelter.properties;
     
