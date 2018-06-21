@@ -9,6 +9,7 @@
   <li>Search for specific location or criteria</li>
   <li>See all available shelters</li>
 </ul>
+
 ## Why
 <p>Our ancient people needed something visual</p>
 
@@ -22,7 +23,7 @@
 ## Dataset
 <p>Would appreciate all contribution to the dataset, there are unreported shelters out there so please feel free to message me.</p>
 <br>
-<p>Original dataset is delivered by DSB <a href="https://data.norge.no/data/direktoratet-samfunnssikkerhet-og-beredskap/offentlige-tilfluktsrom-i-norge" Source</a>
+<p>Original dataset is delivered by DSB <a href="https://data.norge.no/data/direktoratet-samfunnssikkerhet-og-beredskap/offentlige-tilfluktsrom-i-norge" Source</a></p>
   
-  ## Copyright
-  Domain and application is copyrighted by <a href="semanta.no">semanta.no</a>
+## Copyright
+Domain and application is copyrighted by <a href="semanta.no">semanta.no</a>
