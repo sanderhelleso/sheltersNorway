@@ -9,6 +9,7 @@
   "author": "Sander Hellesø",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^6.0.0"
+    "dotenv": "^6.0.0",
+    "helmet": "^3.12.1"
   }
 }
