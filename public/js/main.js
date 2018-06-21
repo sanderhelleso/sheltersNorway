@@ -8,6 +8,7 @@ let totalPpl = 0;
 let shelterCount = 0;
 let shelters = [];
 let sheltersData = [];
+let cards = [];
 let scroll = false;
 let pagination = 0;
 let paginationCurr = 0;
@@ -225,10 +226,7 @@ function writeShelters(shelter, closest, seeAll) {
         cardFooter.appendChild(cardList);
         card.appendChild(cardFooter);
         cardCont.appendChild(card);
-
-        if (shelterCount > 10) {
-            cardCont.style.display = "none";
-        }
+        cards.push(cardCont);
 
         document.querySelector("#sheltersRow").appendChild(cardCont);
 
@@ -262,6 +260,7 @@ function writeShelters(shelter, closest, seeAll) {
         // fade out loading
         if (!scroll) {
 
+            document.querySelector("#noResults").style.display = "none";
             if (seeAll) {
                 setTimeout(function(){
                     loading();
@@ -404,6 +403,7 @@ function createMap(ele, lat, lng, expand) {
         else {
             document.querySelector("#modalImg").src = url;
         }
+        document.querySelector("#expandCard").style.filter = "blur(0px)";
     }
 }
 
@@ -548,8 +548,6 @@ function paginateNavigate() {
     this.parentElement.className = "page-item active pr-1 pl-1 paginationItem";
     const index = parseInt(this.innerHTML);
 
-    const cards = document.querySelectorAll(".shelterCard");
-
     let fromRange;
     let toRange;
     if (index === 1) {
@@ -562,15 +560,16 @@ function paginateNavigate() {
         toRange = fromRange + 10;
     }
 
+    const cardsCont = document.querySelector("#shelters").querySelectorAll(".shelterCard");
+    cardsCont.forEach(card => {
+        card.remove();
+    });
+
     cards.forEach(card => {
-        // hide card
-        card.style.display = "none";
-
-        // display if within index range
         const cardId = parseInt(card.id.split("-")[1]);
+        // display if within index range
         if (cardId > fromRange && cardId < toRange) {
-            card.style.display = "block";
-
+            document.querySelector("#sheltersRow").appendChild(cards[cardId - 1]);
         }
     });
 }
@@ -658,15 +657,14 @@ function expandCard(card) {
     document.querySelector("#modalRomstype").innerHTML = shelterData.romtype;
     document.querySelector("#modalImg").setAttribute("alt", "Streetview av " + shelterData.adresse);
 
-    // hide body scrollbar
-    document.body.style.overflow = "hidden";
-
     // init close modal event
     document.querySelector("#closeModal").addEventListener("click", () => document.body.style.overflow = "auto");
 
     // create map and display
+    // hide body scrollbar
+    document.body.style.overflow = "hidden";
     $('#expandCard').modal('show');
-
+    document.querySelector("#expandCard").style.filter = "blur(10px)";
     setTimeout(function(){
         createMap(mapEle, lat, lng, true);
     }, 300);
