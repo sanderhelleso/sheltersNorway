@@ -8,6 +8,7 @@
   <li>Find your closest shelter</li>
   <li>Search for specific location or criteria</li>
   <li>See all available shelters</li>
+  <li>Report new shelters</li>
 </ul>
 
 ## Why
