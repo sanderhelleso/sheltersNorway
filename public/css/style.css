@@ -392,11 +392,20 @@ footer a img {
     }
 
     #headerCont h1 {
-        font-size: 30px;
+        font-size: 20px;
+    }
+
+    #norway {
+        font-size: 40px;
     }
 
     #runSearch:hover {
         padding-left: 0;
+    }
+
+    .introBtn {
+        margin-top: 0 !important;
+        margin-bottom: 30px;
     }
 }
 
@@ -429,6 +438,29 @@ footer a img {
     }
 }
 
+@media only screen and (max-width: 350px) {
+    #headerCont h1 {
+        font-size: 16px;
+    }
+
+    #norway {
+        font-size: 30px;
+    }
+
+    .introBtn {
+        margin-top: 0 !important;
+        margin-bottom: 10px;
+    }
+
+    #searchCont {
+        margin-top: 0 !important;
+    }
+
+    #seeAll {
+        margin-bottom: 0 !important;
+    }
+}
+
 @media only screen and (max-height: 480px) {
 
     #headerCont h1 {
@@ -437,11 +469,6 @@ footer a img {
 
     #norway {
         font-size: 45px;
-    }
-
-    #headerCont {
-        margin-top: 200vh;
-        min-height: 300vh;
     }
 
     .introBtn {

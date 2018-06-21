@@ -19,14 +19,8 @@ let speed = 3500;
 // start app on load
 window.onload = start;
 
-// initalize search on load
+// initalize app
 function start() {
-
-    // scroll top on page load if not IE
-    $('html,body').scrollTop(0);
-
-    // get rect of page
-    getRect(document.querySelector(".view"));
 
     // initalize form keyup
     formInit();
@@ -43,8 +37,14 @@ function start() {
     }
 
     else {
+        // scroll top on page load if not IE
+        $('html,body').scrollTop(0);
+
         document.querySelector("#nearestLocation").addEventListener("click", () => getUserLocation());
 
+        // get rect of page
+        getRect(document.querySelector(".view"));
+        
         // run animations on page if not mobile
         if (!checkIfMobile()) {
 
