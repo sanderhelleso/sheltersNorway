@@ -26,4 +26,4 @@
 <p>Original dataset is delivered by DSB <a href="https://data.norge.no/data/direktoratet-samfunnssikkerhet-og-beredskap/offentlige-tilfluktsrom-i-norge" Source</a></p>
   
 ## Copyright
-<p>Domain and application is copyrighted by <a href="semanta.no">semanta.no</a></p>
+<p>Domain and application is copyrighted by</p> <a href="semanta.no">semanta.no</a>
