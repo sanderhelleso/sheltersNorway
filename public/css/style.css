@@ -215,6 +215,7 @@ div.loadingScreen {
 #sendInfoShelter {
     background-color: #f50057;
     color: white;
+    border: 2px solid #f50057;
 }
 
 #modalSendShelter .lead {

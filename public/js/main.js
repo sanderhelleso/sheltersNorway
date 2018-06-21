@@ -18,11 +18,11 @@ let speed = 3500;
 // start app on load
 window.onload = start;
 
-// scroll top on page load if not IE
-$('html,body').scrollTop(0);
-
 // initalize search on load
 function start() {
+
+    // scroll top on page load if not IE
+    $('html,body').scrollTop(0);
 
     // get rect of page
     getRect(document.querySelector(".view"));
@@ -383,8 +383,12 @@ function createMap(ele, lat, lng, expand) {
 
     // map marker
     const marker = new google.maps.Marker({
-        position: {lat: lat, lng: lng},
+         position: {lat: lat, lng: lng},
         map: map
+    });
+
+    $(window).resize(function() {
+        google.maps.event.trigger(map, 'resize');
     });
 
     if (expand) {
@@ -566,6 +570,7 @@ function paginateNavigate() {
         const cardId = parseInt(card.id.split("-")[1]);
         if (cardId > fromRange && cardId < toRange) {
             card.style.display = "block";
+
         }
     });
 }
@@ -660,8 +665,11 @@ function expandCard(card) {
     document.querySelector("#closeModal").addEventListener("click", () => document.body.style.overflow = "auto");
 
     // create map and display
-    createMap(mapEle, lat, lng, true);
     $('#expandCard').modal('show');
+
+    setTimeout(function(){
+        createMap(mapEle, lat, lng, true);
+    }, 300);
 }
 
 // remove URL-hash for deep-linking
