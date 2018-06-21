@@ -4,17 +4,22 @@
 // vals
 const express = require("express");
 const http = require("http");
+const https = require("https");
 const bodyParser = require("body-parser");
 const handlebars = require("express-handlebars");
 const ejs = require("ejs");
 const fs = require("fs");
 const nodemailer = require("nodemailer");
 const dotenv = require('dotenv').load();
+const forceSsl = require('express-force-ssl');
 
 // app
+app.use(forceSsl);
 const app = express();
-const server = http.createServer(app);
-const port = process.env.PORT || 6500;
+const server = https.createServer(app);
+const server2 = http.createServer(app);
+const port =  443;
+const port2 = 80;
 
 // view engine
 app.engine("handlebars", handlebars({ defaultLayout: "main" }));
@@ -95,7 +100,12 @@ app.get("/dataset", (req, res) => {
     });
 });
 
-// start server
+// start server / HTTPS
 server.listen(port, () => {
+    console.log(`Magic is happening on ${port}`);
+});
+
+// HTTP
+server2.listen(port2, () => {
     console.log(`Magic is happening on ${port}`);
 });
