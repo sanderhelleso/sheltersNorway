@@ -482,3 +482,8 @@ footer a img {
     overflow: hidden;
     visibility: hidden; 
 }
+
+#closeModal {
+    z-index: 10000;
+    filter: blur(0px) !important;
+}

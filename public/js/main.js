@@ -415,7 +415,6 @@ function initSearch() {
     // focus search and run function on input
     search.focus();
     search.addEventListener("keyup", () => checkSearch(search.value, runSearch));
-    search.addEventListener("keypress", () => enterSearch(search.value, runSearch));
 
     // enables enter key
     $("#search").keypress(function(e) {
@@ -446,12 +445,6 @@ function checkSearch(value, run) {
         run.style.opacity = "0.5";
         run.removeEventListener("click", search);
     }
-}
-
-function enterSearch(value, run) {}
-
-function randomIntFromInterval(min,max) {
-    return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 // reset all values and start loading screen, run until content & maps are loaded
@@ -485,7 +478,7 @@ function resetValues() {
 /******** SEARCH *********/
 let searchValue;
 function search() {
-
+    document.querySelector(".loadingScreen").style.display = "block";
     document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
 
     // make search lower case
@@ -563,6 +556,7 @@ function paginateNavigate() {
     });
 }
 
+// promt user for location
 function getUserLocation() {
     if (navigator.geolocation) {
         resetValues();
@@ -570,10 +564,11 @@ function getUserLocation() {
     }
 
     else {
-        console.log("qweqweqwe");
+        toastr["error"]("Klarer ikke hente brukers posisjon!");
     }
 }
 
+// get user location and closest shelter
 function showLocation(position) {
     const lat = position.coords.latitude; 
     const lng = position.coords.longitude;
@@ -590,6 +585,7 @@ function showLocation(position) {
         }
     });
 
+    // create shelter
     writeShelters(closestShelter, true);
 
 
@@ -613,6 +609,7 @@ function showLocation(position) {
 
 // see all shelters
 function seeAll() {
+    document.querySelector(".loadingScreen").style.display = "block";
     resetValues();
     document.querySelector("#loadingMsg").innerHTML = "Henter tilfluktsrom...";
     seeAllShelters = true;
