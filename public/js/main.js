@@ -82,8 +82,6 @@ function getRect(ele) {
         else {
             mask.style.backgroundColor = "rgba(0,0,0, 0.7)";
         }
-
-        console.log(curPos);
     });
 }
 
@@ -116,7 +114,6 @@ function writeShelters(shelter, closest, seeAll) {
         const info = shelter.properties;
         sheltersData.push({id: shelterCount, data: info});
         totalPpl += parseInt(info.plasser);
-        console.log(totalPpl);
 
         // card container
         const cardCont = document.createElement("div");
@@ -581,13 +578,11 @@ function showLocation(position) {
         if (dif < mindif) {
             closestShelter = shelter;
             mindif = dif;
-            console.log(closestShelter);
         }
     });
 
     // create shelter
     writeShelters(closestShelter, true);
-
 
     // convert degress to radians
     function Deg2Rad(deg) {
