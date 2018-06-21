@@ -4,26 +4,17 @@
 // vals
 const express = require("express");
 const http = require("http");
-const https = require("https");
-const helmet = require("helmet");
+const fs = require("fs");
 const bodyParser = require("body-parser");
 const handlebars = require("express-handlebars");
-const ejs = require("ejs");
-const fs = require("fs");
 const nodemailer = require("nodemailer");
 const dotenv = require('dotenv').load();
 
-const options = {
-    key: fs.readFileSync("/etc/letsencrypt/live/offentligetilfluktsrom.no/fullchain.pem"),
-    cert: fs.readFileSync("/etc/letsencrypt/live/offentligetilfluktsrom.no/privkey.pem")
-};
-  
-
 // app
 const app = express();
-app.use(helmet());
-const server = http.createServer(options, app);
-const port = process.env.PORT || 443;
+const server = http.createServer(app);
+const port = process.env.PORT || 5000;;
+const host = process.env.HOST || 'localhost';
 
 // view engine
 app.engine("handlebars", handlebars({ defaultLayout: "main" }));
@@ -105,6 +96,5 @@ app.get("/dataset", (req, res) => {
 });
 
 // start server
-server.listen(port, () => {
-    console.log(`Magic is happening on ${port}`);
-});
+server.listen(port, host);
+console.log(`Magic is happening on ${port}`);
