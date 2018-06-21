@@ -23,7 +23,7 @@
 ## Dataset
 <p>Would appreciate all contribution to the dataset, there are unreported shelters out there so please feel free to message me.</p>
 <br>
-<p>Original dataset is delivered by DSB <a href="https://data.norge.no/data/direktoratet-samfunnssikkerhet-og-beredskap/offentlige-tilfluktsrom-i-norge" Source</a></p>
+<p>Original dataset is delivered by DSB</p> <a href="https://data.norge.no/data/direktoratet-samfunnssikkerhet-og-beredskap/offentlige-tilfluktsrom-i-norge"> Source</a>
   
 ## Copyright
 <a href="semanta.no">semanta.no</a>
