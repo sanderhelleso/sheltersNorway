@@ -412,11 +412,11 @@ function initSearch() {
     // focus search and run function on input
     search.focus();
     search.addEventListener("keyup", () => checkSearch(search.value, runSearch));
+    runSearch.addEventListener("click", search);
 
     // enables enter key
     $("#search").keypress(function(e) {
         if (e.keyCode === 13 && search.value.length > 1) {
-            runSearch.addEventListener("click", search);
             runSearch.click();
          }
      });
