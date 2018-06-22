@@ -95,6 +95,11 @@ app.get("/dataset", (req, res) => {
     });
 });
 
+// 	404
+app.get("*", function(req, res){
+  	res.render("index");
+});
+
 // start server
 server.listen(port, host);
 console.log(`Magic is happening on ${port}`);
