@@ -407,6 +407,10 @@ footer a img {
         margin-top: 0 !important;
         margin-bottom: 30px;
     }
+
+    #search::placeholder {
+        font-size: 14px;
+    }
 }
 
 @media only screen and (max-width: 515px) {
@@ -414,10 +418,9 @@ footer a img {
         font-size: 30px;
     }
 
-    #runSearch {
-        font-size: 30px;
-    }
-    
+    #search {
+        width: 60%;
+    }   
 }
 
 @media only screen and (max-width: 425px) {
@@ -434,7 +437,7 @@ footer a img {
     }
 
     #runSearch {
-        font-size: 20px;
+        font-size: 30px;
     }
 }
 
