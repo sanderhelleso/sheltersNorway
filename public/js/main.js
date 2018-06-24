@@ -431,7 +431,8 @@ function initSearch() {
 function checkSearch(value, run) {
     // add event if matching
     document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
-    if (value.length > 1) {
+    if (value.length > 1 && searchCount === 0) {
+        searchCount++;
         run.style.opacity = "1";
 
         // run event
@@ -443,6 +444,7 @@ function checkSearch(value, run) {
     else {
         run.style.opacity = "0.5";
         run.removeEventListener("click", search);
+        searchCount = 0;
     }
 }
 
@@ -461,16 +463,15 @@ function resetValues() {
     document.querySelector("#search").value = "";
     document.querySelector("#loadingMsg").innerHTML = "";
 
-    // reset globals
     totalPpl = 0;
     shelterCount = 0;
+    searchCount = 0;
     scroll = false;
     isClosest = false;
     seeAllShelters = false;
     sheltersData = [];
     cards = [];
 
-    // remove old data
     const shelterRow = document.querySelector("#sheltersRow");
     shelterRow.querySelectorAll("div").forEach(div => div.remove());
 }
@@ -484,42 +485,40 @@ function search() {
 
     // make search lower case
     searchValue = searchValue.toLowerCase();
+    resetValues();
 
     // create and display card for each shelter match the search
-    if (searchCount === 0) {
-        searchCount++;
-        let count = 0;
-        setTimeout(function(){ // timeout for loading screen
-            searchCount = 0;
-            // clear and resets values
-            shelters.features.forEach(shelter => {
-                const info = shelter.properties;
-        
-                // check for address
-                if (info.adresse.toLowerCase() === searchValue) {
-                    writeShelters(shelter);
+    let count = 0;
+    setTimeout(function(){ // timeout for loading screen
+        // clear and resets values
+
+        shelters.features.forEach(shelter => {
+            const info = shelter.properties;
+    
+            // check for address
+            if (info.adresse.toLowerCase() === searchValue) {
+                writeShelters(shelter);
+            }
+            
+            // check for municipality
+            else if (info.kommune.toLowerCase() === searchValue) {
+                writeShelters(shelter);
+            }
+    
+            // check for districtname
+            else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
+                writeShelters(shelter);
+            }
+    
+            else {
+                // stop loading if no results are found
+                count++;
+                if (count === shelters.features.length) {
+                    loading(true);
                 }
-                
-                // check for municipality
-                else if (info.kommune.toLowerCase() === searchValue) {
-                    writeShelters(shelter);
-                }
-        
-                // check for districtname
-                else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
-                    writeShelters(shelter);
-                }
-        
-                else {
-                    // stop loading if no results are found
-                    count++;
-                    if (count === shelters.features.length) {
-                        loading(true);
-                    }
-                }
-            });
-        }, 250);
-    }
+            }
+        });
+    }, 250);
 }
 
 // cancel and remove searchbar
