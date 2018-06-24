@@ -425,11 +425,14 @@ footer a img {
 
 @media only screen and (max-width: 425px) {
     #resultFor {
-        font-size: 25px;
+        font-size: 22px;
+        max-width: 95% !important;
+        margin: 0 auto;
+        word-wrap: break-word;
     }
 
     #resultFor span {
-        font-size: 30px;
+        font-size: 35px;
     }
 
     #search {

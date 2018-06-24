@@ -55,7 +55,8 @@ function start() {
 
     // EVENTS
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
-    document.querySelector("#seeAll").addEventListener("click", () => seeAll());
+    document.querySelector("#seeAll").addEventListener("click", () => $('#infoModal').modal('show'));
+    document.querySelector("#infoModalBtn").addEventListener("click", () => seeAll());
     document.querySelector("#sendInfoShelter").addEventListener("click", () => formCheck());
     document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
     document.querySelector("#toForm").addEventListener("click", () => document.querySelector("#sendShelterBtn").click());
@@ -263,9 +264,14 @@ function writeShelters(shelter, closest, seeAll) {
                 document.querySelector("#shelterTotal").innerHTML = shelterCount;
 
                 if (isClosest) {
+                    document.querySelector("#shelterInfo").style.display = "none";
                     document.querySelector("#resultFor").innerHTML = "Nærmeste tilfluktsrom fra deg er <br><span class='mt-5 h4-responsive font-weight-bold text-center'>" + info.adresse + "</span>";
                 }
-                document.querySelector("#shelterInfo").style.display = "flex";
+
+                else {
+                    document.querySelector("#shelterInfo").style.display = "flex";
+                }
+
             }, speed);
             scroll = true; // set scroll to true
         }
@@ -377,7 +383,7 @@ function createMap(ele, lat, lng, expand) {
         const url = "https://maps.googleapis.com/maps/api/streetview?size=1000x1000&location=" + lat + "," + lng + "&heading=90&pitch=-0.76&key=AIzaSyA_jiuMdTONboV9E0sHZ5U5-js9zwyd4GU";
         
         // no img found
-        if (httpGet(url) <= 8743) {
+        if (httpGet(url) <= 20000) {
             document.querySelector("#modalImg").src = "img/noImage.png";
         }
 
@@ -385,13 +391,13 @@ function createMap(ele, lat, lng, expand) {
         else {
             document.querySelector("#modalImg").src = url;
         }
-        document.querySelector("#expandCard").style.filter = "blur(0px)";
+        document.querySelector("#expandCard").querySelector(".modal-body").style.filter = "blur(0px)";
     }
 }
 
 // false for synchronous request / get streetview response
 function httpGet(url) {
-    var xmlHttp = new XMLHttpRequest();
+    const xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, false);
     xmlHttp.send(null);
     return xmlHttp.response.length;
@@ -452,8 +458,8 @@ function checkSearch(value, run) {
 function resetValues() {
 
     // disable buttons to avoid spam clicking
-    document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));
     document.body.style.overflow = "hidden";
+    document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
     document.querySelector("#shelterInfo").style.display = "none";
@@ -525,7 +531,6 @@ function search() {
 function cancelSearch(cont) {
     document.querySelector("#cancelSearch").addEventListener("click", () => cont.style.display = "none");
 }
-
 
 // initalize pagination
 function paginateNavigate() {
@@ -611,6 +616,7 @@ function showLocation(position) {
 
 // see all shelters
 function seeAll() {
+    document.querySelector("#cancelInfoModal").click();
     document.querySelector(".loadingScreen").style.display = "block";
     resetValues();
     document.querySelector("#loadingMsg").innerHTML = "Henter tilfluktsrom...";
@@ -649,8 +655,6 @@ function expandCard(card) {
     document.querySelector("#closeModal").addEventListener("click", () => document.body.style.overflow = "auto");
 
     // create map and display
-    // hide body scrollbar
-    document.body.style.overflow = "hidden";
     $('#expandCard').modal('show');
     document.querySelector("#expandCard").querySelector(".modal-body").style.filter = "blur(10px)";
     setTimeout(function(){
