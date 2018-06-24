@@ -187,7 +187,7 @@ div.loadingScreen {
     display: none;
 }
 
-#toForm, #sendShelterBtn {
+#toForm, #sendShelterBtn, #infoModal #infoModalBtn {
     color: white !important;
     background-color:  #f50057 !important;
 }
@@ -222,9 +222,18 @@ div.loadingScreen {
     font-weight: 400;
 }
 
-#cancelSendInfoShelter {
+#cancelSendInfoShelter, #infoModal #cancelInfoModal {
     color: #f50057 !important;
-    border: 2px solid #f50057;
+    border: 2px solid #f50057 !important;
+}
+
+#infoModal .modal-body i {
+    color: #f50057 !important;
+}
+
+#infoModal .modal-header {
+    background-color: #f50057 !important;
+    font-weight: 400;
 }
 
 #modalSendShelter input[type=text]:focus:not([readonly]) + label {
@@ -357,6 +366,17 @@ footer a img {
     transition: all 0.3s;
 }
 
+.hiddenCard {
+    height: 0; 
+    overflow: hidden;
+    visibility: hidden; 
+}
+
+#closeModal {
+    z-index: 10000;
+    filter: blur(0px) !important;
+}
+
 @media only screen and (max-width: 1100px) {
     #shelterInfo h3 {
         text-align: center !important;
@@ -442,6 +462,23 @@ footer a img {
     #runSearch {
         font-size: 30px;
     }
+
+    .spinner-red-only {
+        border-color: #fff !important;
+    }
+
+    div.loadingScreen {
+        background-color: #f50057;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3CradialGradient id='a' cx='800' cy='1050' r='1400' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23f50057'/%3E%3Cstop offset='0.3' stop-color='%23f50057'/%3E%3Cstop offset='0.7' stop-color='%237f004f'/%3E%3Cstop offset='1' stop-color='%2333003e'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1600' height='900'/%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+    }
+
+    #loadingMsg {
+        color: #fff;
+        opacity: 0.9;
+    }
 }
 
 @media only screen and (max-width: 350px) {
@@ -481,19 +518,4 @@ footer a img {
         margin-top: 0 !important;
         margin-bottom: 30px;
     }
-}
-
-.hiddenCard {
-    height: 0; 
-    overflow: hidden;
-    visibility: hidden; 
-}
-
-#closeModal {
-    z-index: 10000;
-    filter: blur(0px) !important;
-}
-
-#modalLoader {
-    z-index: 1000000;
 }

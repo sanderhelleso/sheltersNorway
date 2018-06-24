@@ -342,7 +342,7 @@ function loading(noFound) {
         }
 
         if (!isClosest) {
-            document.querySelector("#resultFor").innerHTML = "Søketreff for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + searchValue.toUpperCase();
+            document.querySelector("#resultFor").innerHTML = "Søketreff for <span class='mt-5 h4-responsive font-weight-bold text-center'>" + searchWord.toUpperCase();
         }
 
         if (noFound) {
@@ -395,6 +395,36 @@ function createMap(ele, lat, lng, expand) {
     }
 }
 
+
+// reset all values and start loading screen, run until content & maps are loaded
+function resetValues() {
+
+    // disable buttons to avoid spam clicking
+    document.body.style.overflow = "hidden";
+    document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));
+    document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
+    document.querySelector(".loadingScreen").style.display = "block";
+    document.querySelector("#shelterInfo").style.display = "none";
+    document.querySelector("#resultFor").innerHTML = "";
+    document.querySelector("#shelterSpots").innerHTML = "";
+    document.querySelector("#shelterTotal").innerHTML = "";
+    document.querySelector("#search").value = "";
+    document.querySelector("#loadingMsg").innerHTML = "";
+
+    totalPpl = 0;
+    shelterCount = 0;
+    searchCount = 0;
+    scroll = false;
+    isClosest = false;
+    seeAllShelters = false;
+    sheltersData = [];
+    cards = [];
+
+    const shelterRow = document.querySelector("#sheltersRow");
+    shelterRow.querySelectorAll("div").forEach(div => div.remove());
+}
+
+
 // false for synchronous request / get streetview response
 function httpGet(url) {
     const xmlHttp = new XMLHttpRequest();
@@ -443,54 +473,24 @@ function checkSearch(value, run) {
 
         // run event
         run.addEventListener("click", search);
-        searchValue = value;
     }
 
-    // else remove event
-    else {
+    if (value.length < 2) {
         run.style.opacity = "0.5";
-        run.removeEventListener("click", search);
-        searchCount = 0;
     }
-}
-
-// reset all values and start loading screen, run until content & maps are loaded
-function resetValues() {
-
-    // disable buttons to avoid spam clicking
-    document.body.style.overflow = "hidden";
-    document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));
-    document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
-    document.querySelector(".loadingScreen").style.display = "block";
-    document.querySelector("#shelterInfo").style.display = "none";
-    document.querySelector("#resultFor").innerHTML = "";
-    document.querySelector("#shelterSpots").innerHTML = "";
-    document.querySelector("#shelterTotal").innerHTML = "";
-    document.querySelector("#search").value = "";
-    document.querySelector("#loadingMsg").innerHTML = "";
-
-    totalPpl = 0;
-    shelterCount = 0;
-    searchCount = 0;
-    scroll = false;
-    isClosest = false;
-    seeAllShelters = false;
-    sheltersData = [];
-    cards = [];
-
-    const shelterRow = document.querySelector("#sheltersRow");
-    shelterRow.querySelectorAll("div").forEach(div => div.remove());
 }
 
 /******** SEARCH *********/
+let searchWord;
 let searchCount = 0;
-let searchValue;
 function search() {
     document.querySelector(".loadingScreen").style.display = "block";
     document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
 
     // make search lower case
-    searchValue = searchValue.toLowerCase();
+    let searchValue;
+    searchValue = document.querySelector("#search").value.toLowerCase();
+    searchWord = searchValue;
     resetValues();
 
     // create and display card for each shelter match the search
