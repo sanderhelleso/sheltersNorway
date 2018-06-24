@@ -414,12 +414,14 @@ function initSearch() {
     search.addEventListener("keyup", () => checkSearch(search.value, runSearch));
     runSearch.addEventListener("click", search);
 
-    // enables enter key
-    $("#search").keypress(function(e) {
-        if (e.keyCode === 13 && search.value.length > 1) {
-            runSearch.click();
-         }
-     });
+    // enables enter key if not mobile
+    if (!checkIfMobile()) {
+        $("#search").keypress(function(e) {
+            if (e.keyCode === 13 && search.value.length > 1) {
+                runSearch.click();
+            }
+        });
+    }
 
     // init canceling of search
     cancelSearch(searchCont);
