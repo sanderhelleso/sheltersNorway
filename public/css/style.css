@@ -490,3 +490,7 @@ footer a img {
     z-index: 10000;
     filter: blur(0px) !important;
 }
+
+#modalLoader {
+    z-index: 1000000;
+}

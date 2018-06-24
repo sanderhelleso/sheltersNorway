@@ -451,7 +451,6 @@ function resetValues() {
 
     // disable buttons to avoid spam clicking
     document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));
-
     document.body.style.overflow = "hidden";
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
@@ -462,6 +461,7 @@ function resetValues() {
     document.querySelector("#search").value = "";
     document.querySelector("#loadingMsg").innerHTML = "";
 
+    // reset globals
     totalPpl = 0;
     shelterCount = 0;
     scroll = false;
@@ -470,11 +470,13 @@ function resetValues() {
     sheltersData = [];
     cards = [];
 
+    // remove old data
     const shelterRow = document.querySelector("#sheltersRow");
     shelterRow.querySelectorAll("div").forEach(div => div.remove());
 }
 
 /******** SEARCH *********/
+let searchCount = 0;
 let searchValue;
 function search() {
     document.querySelector(".loadingScreen").style.display = "block";
@@ -484,37 +486,40 @@ function search() {
     searchValue = searchValue.toLowerCase();
 
     // create and display card for each shelter match the search
-    let count = 0;
-    setTimeout(function(){ // timeout for loading screen
-        // clear and resets values
-        resetValues();
-        shelters.features.forEach(shelter => {
-            const info = shelter.properties;
-    
-            // check for address
-            if (info.adresse.toLowerCase() === searchValue) {
-                writeShelters(shelter);
-            }
-            
-            // check for municipality
-            else if (info.kommune.toLowerCase() === searchValue) {
-                writeShelters(shelter);
-            }
-    
-            // check for districtname
-            else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
-                writeShelters(shelter);
-            }
-    
-            else {
-                // stop loading if no results are found
-                count++;
-                if (count === shelters.features.length) {
-                    loading(true);
+    if (searchCount === 0) {
+        searchCount++;
+        let count = 0;
+        setTimeout(function(){ // timeout for loading screen
+            searchCount = 0;
+            // clear and resets values
+            shelters.features.forEach(shelter => {
+                const info = shelter.properties;
+        
+                // check for address
+                if (info.adresse.toLowerCase() === searchValue) {
+                    writeShelters(shelter);
                 }
-            }
-        });
-    }, 250);
+                
+                // check for municipality
+                else if (info.kommune.toLowerCase() === searchValue) {
+                    writeShelters(shelter);
+                }
+        
+                // check for districtname
+                else if (info.distriktsnavn.toLowerCase().includes(searchValue)  || info.distriktsnavn.toLowerCase() === searchValue) {
+                    writeShelters(shelter);
+                }
+        
+                else {
+                    // stop loading if no results are found
+                    count++;
+                    if (count === shelters.features.length) {
+                        loading(true);
+                    }
+                }
+            });
+        }, 250);
+    }
 }
 
 // cancel and remove searchbar
@@ -590,7 +595,8 @@ function showLocation(position) {
     function Deg2Rad(deg) {
         return deg * Math.PI / 180;
     }
-  
+    
+    // calculate data
     function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
         lat1 = Deg2Rad(lat1);
         lat2 = Deg2Rad(lat2);
@@ -647,7 +653,7 @@ function expandCard(card) {
     // hide body scrollbar
     document.body.style.overflow = "hidden";
     $('#expandCard').modal('show');
-    document.querySelector("#expandCard").style.filter = "blur(10px)";
+    document.querySelector("#expandCard").querySelector(".modal-body").style.filter = "blur(10px)";
     setTimeout(function(){
         createMap(mapEle, lat, lng, true);
     }, 300);
