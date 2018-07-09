@@ -482,8 +482,6 @@ function checkSearch(value, run) {
         run.style.opacity = "0.5";
         run.removeEventListener("click", search);
     }
-
-    console.log(value, run)
 }
 
 /******** SEARCH *********/
@@ -712,7 +710,7 @@ function share() {
 // initalize keyup form check for UX
 let inputs;
 function formInit() {
-    inputs = document.querySelectorAll(".modal-body")[1].querySelectorAll("input");
+    inputs = document.querySelectorAll(".modal-body")[2].querySelectorAll("input");
     inputs.forEach(input => {
         input.addEventListener("keyup", isValid);
     });
@@ -732,9 +730,8 @@ function formInit() {
 function formCheck() {
     let count = 0;
     let userValues = [];
-    inputs = document.querySelectorAll(".modal-body")[1].querySelectorAll("input");
+    inputs = document.querySelectorAll(".modal-body")[2].querySelectorAll("input");
     inputs.forEach(input => {
-
         // display errors and prevent default behavior
         if (input.value === "") {
             input.className = "form-control invalid animated shake";
