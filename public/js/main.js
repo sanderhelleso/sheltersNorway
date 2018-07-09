@@ -401,6 +401,7 @@ function resetValues() {
 
     // disable buttons to avoid spam clicking
     document.body.style.overflow = "hidden";
+    document.querySelector("#runSearch").removeEventListener("click", search);
     document.querySelectorAll(".introBtn").forEach(btn => btn.classList.add("disabled"));
     document.querySelectorAll(".paginationItem").forEach(ele => ele.remove());
     document.querySelector(".loadingScreen").style.display = "block";
@@ -448,7 +449,6 @@ function initSearch() {
     // focus search and run function on input
     search.focus();
     search.addEventListener("keyup", () => checkSearch(search.value, runSearch));
-    runSearch.addEventListener("click", search);
 
     // enables enter key if not mobile
     if (!checkIfMobile()) {
@@ -467,17 +467,23 @@ function initSearch() {
 function checkSearch(value, run) {
     // add event if matching
     document.querySelector("#loadingMsg").innerHTML = "Søker etter treff...";
-    if (value.length > 1 && searchCount === 0) {
-        searchCount++;
-        run.style.opacity = "1";
+    if (value.length > 1) {
+        searchCount = 1;
+        if (searchCount === 1) {
+            run.style.opacity = "1";
 
-        // run event
-        run.addEventListener("click", search);
+            // run event
+            run.addEventListener("click", search);
+        }
     }
 
-    if (value.length < 2) {
+    else {
+        searchCount = 0;
         run.style.opacity = "0.5";
+        run.removeEventListener("click", search);
     }
+
+    console.log(value, run)
 }
 
 /******** SEARCH *********/
