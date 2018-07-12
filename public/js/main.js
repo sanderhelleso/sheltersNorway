@@ -197,11 +197,11 @@ function writeShelters(shelter, closest, seeAll) {
         const areal = document.createElement("li");
         areal.className = "list-inline-item pr-2 white-text";
         if (info.areal == 0) {
-            areal.innerHTML = "N/A <span class='kvm'> km2</span>";
+            areal.innerHTML = "N/A <span class='kvm'> m2</span>";
         }
 
         else {
-            areal.innerHTML = info.areal + "<span class='kvm'> km2</span>";
+            areal.innerHTML = info.areal + "<span class='kvm'> m2</span>";
         }
 
         const arealIcon = document.createElement("i");
@@ -212,7 +212,7 @@ function writeShelters(shelter, closest, seeAll) {
         // building year
         const year = document.createElement("li");
         year.className = "list-inline-item pr-2 white-text";
-        year.innerHTML = info.byggear + "<span class='year'> byggeår</span>";
+        year.innerHTML = "<span class='year'> Byggeår:" + info.byggear + "</span>";
         const yearIcon = document.createElement("i");
         yearIcon.className = "fa fa-birthday-cake pr-1";
         yearIcon.style.float = "left";
