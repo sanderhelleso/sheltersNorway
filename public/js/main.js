@@ -645,7 +645,7 @@ function expandCard(card) {
 
     // assign data to modal elements
     document.querySelector("#modalAdresse").innerHTML = shelterData.adresse;
-    document.querySelector("#modalAreal").innerHTML = shelterData.areal + " km2";
+    document.querySelector("#modalAreal").innerHTML = shelterData.areal + " m2";
     document.querySelector("#modalKommunenr").innerHTML = shelterData.kommunenr;
     document.querySelector("#modalGnrBnr").innerHTML = "gnr. " + shelterData.gnr + ", bnr. " + shelterData.bnr;
     document.querySelector("#modalKommune").innerHTML = shelterData.kommune;
