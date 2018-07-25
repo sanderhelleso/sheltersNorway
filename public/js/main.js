@@ -690,7 +690,7 @@ function expandCard(card) {
     document.querySelector("#modalKommunenr").innerHTML = shelterData.kommunenr;
     document.querySelector("#modalGnrBnr").innerHTML = "gnr. " + shelterData.gnr + ", bnr. " + shelterData.bnr;
     document.querySelector("#modalKommune").innerHTML = shelterData.kommune;
-    document.querySelector("#modalDistriktsnavn").innerHTML = shelterData.distriktsnavn.split("SFD")[0];
+    document.querySelector("#modalDistriktsnavn").innerHTML = shelterData.distriktsnavn;
     document.querySelector("#modalKategori").innerHTML = shelterData.kategori;
     document.querySelector("#modalPlasser").innerHTML = shelterData.plasser;
     document.querySelector("#modalRomstype").innerHTML = shelterData.romtype;
