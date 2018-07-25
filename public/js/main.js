@@ -56,7 +56,7 @@ function start() {
     // EVENTS
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
     document.querySelector("#seeAll").addEventListener("click", () => $('#infoModal').modal('show'));
-    document.querySelector("#openMainMapTrigger").addEventListener("click", () => $('#openMainMap').modal('show'));
+    document.querySelector("#openMainMapTrigger").addEventListener("click", openMainMap);
     document.querySelector("#infoModalBtn").addEventListener("click", () => seeAll());
     document.querySelector("#sendInfoShelter").addEventListener("click", () => formCheck());
     document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
@@ -93,11 +93,17 @@ function getShelters(dataset) {
     getJSON.onreadystatechange = function() {
         if (getJSON.readyState == 4 && getJSON.status == 200) {
             shelters = JSON.parse(getJSON.responseText);
-            fillMainMap(shelters);
         }
     }
     getJSON.open("GET", dataset, true); 
     getJSON.send(null);
+}
+
+function openMainMap() {
+    $('#openMainMap').modal('show');
+    setTimeout(() => {
+        fillMainMap(shelters);
+    }, 500);
 }
 
 function initMap() {
@@ -105,31 +111,35 @@ function initMap() {
 }
 
 function fillMainMap(shelters) {
-    shelters.features.forEach((shelter) => {
-        console.log(shelter.geometry.coordinates);
-    });
-
-    var locations = [
-        ['Bondi Beach', -33.890542, 151.274856, 4],
-        ['Coogee Beach', -33.923036, 151.259052, 5],
-        ['Cronulla Beach', -34.028249, 151.157507, 3],
-        ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-        ['Maroubra Beach', -33.950198, 151.259302, 1]
-    ];
-  
-    const coords = new google.maps.LatLng(-33.950198, 151.259302);
+    const coords = new google.maps.LatLng(63.446827, 10.421906);
     const mapProp = {
           center: coords,
-          zoom: 14,
+          zoom: 6,
     };
   
     // initialize new map
     const map = new google.maps.Map(document.querySelector("#modalMainMap"), mapProp);
   
     // map marker
-    const marker = new google.maps.Marker({
-           position: {lat: -33.950198, lng: 151.259302},
-          map: map
+    shelters.features.forEach((shelter) => {
+        const contentString = `
+        <h4>${shelter.properties.adresse.toUpperCase()}</h4>
+        <ul>
+            ${Object.keys(shelter.properties).map(key => "<li><strong>" + key + "<strong>: " + shelter.properties[key] + "</li>")}
+        </ul>
+        `
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        const marker = new google.maps.Marker({
+            position: {lat: shelter.geometry.coordinates[1], lng: shelter.geometry.coordinates[0]},
+            map: map
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(document.querySelector("#modalMainMap"), marker);
+          });
     });
 }
 
