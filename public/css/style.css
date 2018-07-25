@@ -46,13 +46,13 @@ h5 {
     position: absolute;
     z-index: 1000;
     left: 20px;
-    top: 20px;
+    top: 10px;
     transition: all 0.5s;
 }
 
 #openMap a i {
     color: #f50057;
-    font-size: 30px;
+    font-size: 27.5px;
 }
 
 #openMap a:hover {
@@ -66,6 +66,17 @@ h5 {
     right: 10px;
     top: 10px;
     transition: all 0.5s;
+}
+
+#openMainMapTrigger span {
+    font-size: 27.5px;
+    color: #f50057;
+    font-weight: bold;
+}
+
+#openMainMapTrigger {
+    padding-bottom: 10px;
+    border-bottom: 4px solid #f50057;
 }
 
 #norway {
