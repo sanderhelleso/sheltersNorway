@@ -93,19 +93,21 @@ function getShelters(dataset) {
     getJSON.onreadystatechange = function() {
         if (getJSON.readyState == 4 && getJSON.status == 200) {
             shelters = JSON.parse(getJSON.responseText);
+            fillMainMap(shelters);
         }
     }
     getJSON.open("GET", dataset, true); 
     getJSON.send(null);
-    fillMainMap();
 }
 
 function initMap() {
     const dataset = getShelters("/dataset");
 }
 
-function fillMainMap() {
-    console.log(shelters);
+function fillMainMap(shelters) {
+    shelters.features.forEach((shelter) => {
+        console.log(shelter.geometry.coordinates);
+    });
 }
 
 // write a shelter card
