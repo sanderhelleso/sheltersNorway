@@ -44,7 +44,7 @@ h5 {
 
 #openMap {
     position: absolute;
-    z-index: 10000;
+    z-index: 1000;
     right: 2%;
     top: 2%;
     transition: all 0.5s;
@@ -396,17 +396,21 @@ footer a img {
     background-color: #f50057;
 }
 
+#openMainMap #closeModal {
+    margin-right: 50px;
+}
+
 #openMainMap {
     z-index: 1000000;
 }
 
-#openMainMap .modal-dialog {
+#openMainMap .modal-dialog, #expandCard .modal-dialog {
     margin: 0 !important;
     max-width: none !important;
 }
 
 #openMainMap .modal-body {
-    height: 100vh;
+    height: 85vh;
     padding-top: 0;
 }
 

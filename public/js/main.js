@@ -101,6 +101,8 @@ function getShelters(dataset) {
 
 function openMainMap() {
     $('#openMainMap').modal('show');
+    document.querySelector("#openMainMap").querySelector("#closeModal").addEventListener("click", () => document.body.style.overflowY = "scroll");
+    document.body.style.overflowY = "hidden";
     setTimeout(() => {
         fillMainMap(shelters);
     }, 500);
