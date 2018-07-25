@@ -99,13 +99,19 @@ function getShelters(dataset) {
     getJSON.send(null);
 }
 
+// opens and display every shelter on map
+let isCreated = false;
 function openMainMap() {
     $('#openMainMap').modal('show');
     document.querySelector("#openMainMap").querySelector("#closeModal").addEventListener("click", () => document.body.style.overflowY = "scroll");
     document.body.style.overflowY = "hidden";
-    setTimeout(() => {
-        fillMainMap(shelters);
-    }, 500);
+
+    if (!isCreated) {
+        setTimeout(() => {
+            fillMainMap(shelters);
+            isCreated = true;
+        }, 500);
+    }
 }
 
 function initMap() {
@@ -679,6 +685,7 @@ function seeAll() {
 // display modal with card data
 function expandCard(card) {
 
+    document.body.style.overflowY = "hidden";
     const mapEle = document.querySelector("#modalMap");
     const lat = parseFloat(card.value.split("-")[0]);
     const lng = parseFloat(card.value.split("-")[1])
@@ -699,7 +706,7 @@ function expandCard(card) {
     document.querySelector("#modalImg").setAttribute("alt", "Streetview av " + shelterData.adresse);
 
     // init close modal event
-    document.querySelector("#closeModal").addEventListener("click", () => document.body.style.overflow = "auto");
+    document.querySelector("#expandCard").querySelector("#closeModal").addEventListener("click", () => document.body.style.overflowY = "scroll");
 
     // create map and display
     $('#expandCard').modal('show');
