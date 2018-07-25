@@ -124,10 +124,10 @@ function fillMainMap(shelters) {
     shelters.features.forEach((shelter) => {
         const contentString = `
         <h4>${shelter.properties.adresse.toUpperCase()}</h4>
-        <ul>
-            ${Object.keys(shelter.properties).map(key => "<li><strong>" + key + "<strong>: " + shelter.properties[key] + "</li>")}
+        <ul class="mapList">
+            ${Object.keys(shelter.properties).map(key => "<li><strong>" + key.toUpperCase() + "</strong>: " + shelter.properties[key] + "</li>").join(" ")}
         </ul>
-        `
+        `;
 
         var infowindow = new google.maps.InfoWindow({
           content: contentString
@@ -137,9 +137,9 @@ function fillMainMap(shelters) {
             map: map
         });
 
-        marker.addListener('click', function() {
+        marker.addListener('click', () => {
             infowindow.open(document.querySelector("#modalMainMap"), marker);
-          });
+        });
     });
 }
 
