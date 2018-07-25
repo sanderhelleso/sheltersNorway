@@ -42,6 +42,24 @@ h5 {
   width: 80px;
 }
 
+#openMap {
+    position: absolute;
+    z-index: 10000;
+    right: 2%;
+    top: 2%;
+    transition: all 0.5s;
+}
+
+#openMap a i {
+    color: #f50057;
+    font-size: 30px;
+}
+
+#openMap a:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 #norway {
     margin-top: 20px;
     font-size: 80px;
@@ -375,6 +393,20 @@ footer a img {
 #closeModal {
     z-index: 10000;
     filter: blur(0px) !important;
+    background-color: #f50057;
+}
+
+#openMainMap {
+    z-index: 1000000;
+}
+
+#openMainMap .modal-dialog {
+    margin: 0 !important;
+    max-width: none !important;
+}
+
+#openMainMap .modal-body {
+    height: 85vh;
 }
 
 @media only screen and (max-width: 1100px) {

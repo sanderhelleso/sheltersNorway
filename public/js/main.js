@@ -56,6 +56,7 @@ function start() {
     // EVENTS
     document.querySelector("#searchBtn").addEventListener("click", () => initSearch());
     document.querySelector("#seeAll").addEventListener("click", () => $('#infoModal').modal('show'));
+    document.querySelector("#openMainMapTrigger").addEventListener("click", () => $('#openMainMap').modal('show'));
     document.querySelector("#infoModalBtn").addEventListener("click", () => seeAll());
     document.querySelector("#sendInfoShelter").addEventListener("click", () => formCheck());
     document.querySelector("#sendShelterBtn").addEventListener("click", () => $('#modalSendShelter').modal('show'));
@@ -96,10 +97,15 @@ function getShelters(dataset) {
     }
     getJSON.open("GET", dataset, true); 
     getJSON.send(null);
+    fillMainMap();
 }
 
 function initMap() {
     const dataset = getShelters("/dataset");
+}
+
+function fillMainMap() {
+    console.log(shelters);
 }
 
 // write a shelter card
@@ -212,7 +218,7 @@ function writeShelters(shelter, closest, seeAll) {
         // building year
         const year = document.createElement("li");
         year.className = "list-inline-item pr-2 white-text";
-        year.innerHTML = "<span class='year'> Byggeår:" + info.byggear + "</span>";
+        year.innerHTML = "<span class='year'>Byggeår: " + info.byggear + "</span>";
         const yearIcon = document.createElement("i");
         yearIcon.className = "fa fa-birthday-cake pr-1";
         yearIcon.style.float = "left";
