@@ -45,8 +45,8 @@ h5 {
 #openMap {
     position: absolute;
     z-index: 1000;
-    right: 2%;
-    top: 2%;
+    left: 20px;
+    top: 20px;
     transition: all 0.5s;
 }
 
@@ -58,6 +58,14 @@ h5 {
 #openMap a:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+
+#faceBook {
+    position: absolute;
+    z-index: 1000;
+    right: 10px;
+    top: 10px;
+    transition: all 0.5s;
 }
 
 #norway {
