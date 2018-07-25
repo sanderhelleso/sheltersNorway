@@ -407,6 +407,12 @@ footer a img {
 
 #openMainMap .modal-body {
     height: 85vh;
+    padding-top: 0;
+}
+
+#openMainMap #modalMainMap {
+    width: 100%;
+    min-height: 85vh;
 }
 
 @media only screen and (max-width: 1100px) {

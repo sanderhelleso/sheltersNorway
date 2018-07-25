@@ -108,6 +108,29 @@ function fillMainMap(shelters) {
     shelters.features.forEach((shelter) => {
         console.log(shelter.geometry.coordinates);
     });
+
+    var locations = [
+        ['Bondi Beach', -33.890542, 151.274856, 4],
+        ['Coogee Beach', -33.923036, 151.259052, 5],
+        ['Cronulla Beach', -34.028249, 151.157507, 3],
+        ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+        ['Maroubra Beach', -33.950198, 151.259302, 1]
+    ];
+  
+    const coords = new google.maps.LatLng(-33.950198, 151.259302);
+    const mapProp = {
+          center: coords,
+          zoom: 14,
+    };
+  
+    // initialize new map
+    const map = new google.maps.Map(document.querySelector("#modalMainMap"), mapProp);
+  
+    // map marker
+    const marker = new google.maps.Marker({
+           position: {lat: -33.950198, lng: 151.259302},
+          map: map
+    });
 }
 
 // write a shelter card
@@ -130,8 +153,8 @@ function writeShelters(shelter, closest, seeAll) {
         cardCont.id = "shelter-" + shelterCount;
         cardCont.value = coordinates[1] + "-" + coordinates[0];
 
-         // check for mode
-         if (closest) {
+        // check for mode
+        if (closest) {
             isClosest = closest;
             cardCont.className = "col-12 shelterCard animated fadeIn";
         }
