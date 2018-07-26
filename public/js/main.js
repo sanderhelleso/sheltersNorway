@@ -110,7 +110,7 @@ function openMainMap() {
         setTimeout(() => {
             fillMainMap(shelters);
             isCreated = true;
-        }, 500);
+        }, 100);
     }
 }
 
@@ -131,10 +131,12 @@ function fillMainMap(shelters) {
     // map marker
     shelters.features.forEach((shelter) => {
         const contentString = `
-        <h4>${shelter.properties.adresse.toUpperCase()}</h4>
-        <ul class="mapList">
-            ${Object.keys(shelter.properties).map(key => "<li><strong>" + key.toUpperCase() + "</strong>: " + shelter.properties[key] + "</li>").join(" ")}
-        </ul>
+        <div class="mapInfoCard">
+            <h5>${shelter.properties.adresse.toUpperCase()}</h5>
+            <ul class="mapList">
+                ${Object.keys(shelter.properties).map(key => "<li><strong>" + key.toUpperCase() + "</strong>: " + shelter.properties[key] + "</li>").join(" ")}
+            </ul>
+        </div>
         `;
 
         var infowindow = new google.maps.InfoWindow({
