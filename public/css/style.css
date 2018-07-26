@@ -457,6 +457,11 @@ footer a img {
         margin-top: 0 !important;
         margin-bottom: 60px;
     }
+
+    header,
+    .view {
+        height: 110%;
+    }
 }
 
 @media (max-width: 740px) {
@@ -530,9 +535,7 @@ footer a img {
     }
 
     div.loadingScreen {
-        background-size: cover !important;
         background-repeat: no-repeat !important;
-        background-position: center center !important;
     }
 
     #loadingMsg {
