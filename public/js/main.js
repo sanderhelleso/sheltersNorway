@@ -110,7 +110,7 @@ function openMainMap() {
         setTimeout(() => {
             fillMainMap(shelters);
             isCreated = true;
-        }, 100);
+        }, 500);
     }
 }
 
