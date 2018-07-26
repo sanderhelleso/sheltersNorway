@@ -3,7 +3,7 @@ html,
 body,
 header,
 .view {
-  height: 100%;
+  height: 102%;
 }
 
 body:before {
@@ -66,17 +66,6 @@ h5 {
     right: 10px;
     top: 10px;
     transition: all 0.5s;
-}
-
-#openMainMapTrigger span {
-    font-size: 27.5px;
-    color: #f50057;
-    font-weight: bold;
-}
-
-#openMainMapTrigger {
-    padding-bottom: 10px;
-    border-bottom: 4px solid #f50057;
 }
 
 #norway {
@@ -418,7 +407,13 @@ footer a img {
 #openMainMap #closeModal {
     position: absolute;
     right: 50px;
-    bottom: -90px;
+    top: 0;
+    opacity: 0.3;
+    transition: all 0.3s;
+}
+
+#openMainMap #closeModal:hover {
+    opacity: 1;
 }
 
 #openMainMap {
@@ -476,10 +471,6 @@ footer a img {
 
     #headerCont h1 {
         font-size: 20px;
-    }
-
-    #norway {
-        font-size: 40px;
     }
 
     #runSearch:hover {
