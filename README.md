@@ -20,6 +20,8 @@
 <img src="https://github.com/sanderhelleso/sheltersNorway/blob/master/public/img/github/screenshot2.jpg">
 <br>
 <img src="https://github.com/sanderhelleso/sheltersNorway/blob/master/public/img/github/screenshot3.jpg">
+<br>
+<img src="https://github.com/sanderhelleso/sheltersNorway/blob/master/public/img/github/screenshot4.jpg">
 
 ## Dataset
 <p>Would appreciate all contribution to the dataset, there are unreported shelters out there so please feel free to message me.</p>
