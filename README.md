@@ -1,13 +1,14 @@
 # sheltersNorway
 
 <h1>https://offentligetilfluktsrom.no/</h1>
-<p>Webpage that display public bombshelters located in Norway. Each shelter contains data about location, picture, google maps chart, name, available spots, year and much more</p>
+<p>Application that displays public bombshelters located around Norway. Each shelter contains data about location, picture, google maps chart, name, available spots, year and much more</p>
 
 ## Includes
 <ul>
   <li>Find your closest shelter</li>
   <li>Search for specific location or criteria</li>
   <li>See all available shelters</li>
+  <li>Interactiv map for all shelters</li>
   <li>Report new shelters</li>
 </ul>
 
