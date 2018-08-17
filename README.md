@@ -12,6 +12,12 @@
   <li>Report new shelters</li>
 </ul>
 
+## Features to be added
+<ul>
+  <li>Sign up and "favorite" specific shelters for quick lookup"</li>
+  <li>GPS from current location to shelter</li>
+</ul>
+
 ## Why
 <p>Our ancient people needed something visual</p>
 
