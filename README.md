@@ -22,7 +22,7 @@
 <p>Our ancient people needed something visual</p>
 
 ## Screenshots
-<img src="https://github.com/sanderhelleso/sheltersNorway/blob/master/public/img/github/screenshot1.jpg">
+<img src="https://github.com/sanderhelleso/sheltersNorway/blob/master/public/img/github/screenshot1.jpg" style="box-shadow: 0px 9px 28px rgba(0, 0, 0, 0.09)">
 <br>
 <img src="https://github.com/sanderhelleso/sheltersNorway/blob/master/public/img/github/screenshot2.jpg">
 <br>
