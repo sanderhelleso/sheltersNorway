@@ -37,3 +37,6 @@
   
 ## Copyright
 <a href="http://www.semanta.no/">semanta.no</a>
+
+## Licence
+No Licence
