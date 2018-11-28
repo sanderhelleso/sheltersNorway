@@ -780,9 +780,10 @@ function formInit() {
 
 // form check
 function formCheck() {
+    console.log(123);
     let count = 0;
     let userValues = [];
-    inputs = document.querySelectorAll(".modal-body")[2].querySelectorAll("input");
+    inputs = document.querySelectorAll(".modal-body")[3].querySelectorAll("input");
     inputs.forEach(input => {
         // display errors and prevent default behavior
         if (input.value === "") {
