@@ -1,4 +1,5 @@
 # sheltersNorway
+[![HitCount](http://hits.dwyl.io/sanderhelleso/sheltersNorway.svg)](http://hits.dwyl.io/sanderhelleso/sheltersNorway)
 
 <h1>https://offentligetilfluktsrom.no/</h1>
 <p>Application that displays public bombshelters located around Norway. Each shelter contains data about location, picture, google maps chart, name, available spots, year and much more</p>
