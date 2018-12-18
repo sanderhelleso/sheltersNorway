@@ -19,7 +19,7 @@
 </ul>
 
 ## Why
-<p>Our ancient people needed something visual</p>
+<p>Our ancient people needed something visual.</p>
 
 ## Screenshots
 <img src="https://github.com/sanderhelleso/sheltersNorway/blob/master/public/img/github/screenshot1.jpg" style="box-shadow: 0px 9px 28px rgba(0, 0, 0, 0.09)">
