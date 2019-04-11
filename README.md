@@ -1,5 +1,5 @@
 # sheltersNorway
-💅 The application recently hit 30k visitors and rank at the top of related keywords on Google and Bing.
+💅 The application recently hit 40k visitors and rank at the top of related keywords on Google and Bing.
 
 <h1>https://offentligetilfluktsrom.no/</h1>
 <p>Application that displays public bombshelters located around Norway. Each shelter contains data about location, picture, google maps chart, name, available spots, year and much more</p>
