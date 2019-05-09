@@ -15,8 +15,8 @@
 
 ## Features to be added
 <ul>
-  <li>Sign up and "favorite" specific shelters for quick lookup"</li>
-  <li>GPS from current location to shelter</li>
+  <li>Sign up and "favorite" specific shelters for quick lookup</li>
+  <li>GPS - from current location to shelter</li>
 </ul>
 
 ## Why
@@ -35,6 +35,3 @@
 <p>Would appreciate all contribution to the dataset, there are unreported shelters out there so please feel free to message me.</p>
 <br>
 <p>Original dataset is delivered by DSB</p> <a href="https://data.norge.no/data/direktoratet-samfunnssikkerhet-og-beredskap/offentlige-tilfluktsrom-i-norge"> Source</a>
-  
-## Copyright
-<a href="http://www.semanta.no/">semanta.no</a>
