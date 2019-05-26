@@ -20,8 +20,13 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// set base root
 app.use(express.static(`${__dirname}/public`));
 
+// connect db
+require('./dbconn')();
+
+// connect routes
 require('./api/api')(app);
 require('./api/routes')(app);
 require('./api/email')(app);

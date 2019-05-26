@@ -9,7 +9,11 @@
   "author": "Sander Hellesø",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "dotenv": "^6.0.0",
-    "helmet": "^3.12.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.5.11",
+    "nodemailer": "^6.2.1"
   }
 }
