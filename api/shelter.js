@@ -24,19 +24,31 @@ module.exports = app => {
 
     // get all shelters
     router.get('/all', async (req, res) => {
-        const result = await sc.getShelters(req, res);
+        const result = await sc.getAllShelters(req, res);
         res.send(result);
     });
 
     // get single shelter by id
     router.get('/:id', async (req, res) => {
-        const result = await sc.getSingleShelter(req, res);
+        const result = await sc.getShelterByID(req, res);
         res.send(result);
     });
 
     // get shelters matching keywords
     router.get('/search/:keywords', async (req, res) => {
-        const result = await sc.getMatchingShelters(req, res);
+        const result = await sc.getSheltersByKeywords(req, res);
+        res.send(result);
+    });
+
+     // get shelters matching municipality'
+     router.get('/municipality/:municipality', async (req, res) => {
+        const result = await sc.getSheltersByMunicipality(req, res);
+        res.send(result);
+    });
+
+    // get shelters matching district
+    router.get('/district/:district', async (req, res) => {
+        const result = await sc.getSheltersByDistrict(req, res);
         res.send(result);
     });
 

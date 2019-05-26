@@ -8,7 +8,7 @@ const publicDatasetURL = 'https://raw.githubusercontent.com/dsb-norge/static-sha
 const fetchInterval = 8640000; // 24h
 
 // get all shelters
-exports.getShelters = async(req, res) => {
+exports.getAllShelters = async(req, res) => {
     try {
         const shelters = await Shelter.find();
         return shelters;
@@ -18,7 +18,7 @@ exports.getShelters = async(req, res) => {
 }
 
 // get single shelter by ID
-exports.getSingleShelter = async(req, res) => {
+exports.getShelterByID = async(req, res) => {
     try {
         const id = req.params.id;
         const shelter = await Shelter.findById(id);
@@ -28,8 +28,8 @@ exports.getSingleShelter = async(req, res) => {
     }
 }
 
-// get matching shelters, matching keywords
-exports.getMatchingShelters = async(req, res) => {
+// get all matching shelters, matching keywords
+exports.getSheltersByKeywords = async(req, res) => {
     try {
         const keywords = req.params.keywords.trim();
         const kwRegex = new RegExp(`${keywords}`, 'i')
@@ -40,6 +40,35 @@ exports.getMatchingShelters = async(req, res) => {
                 { 'info.distriktsnavn': kwRegex }
             ]
         });
+
+        return shelters;
+    } catch(err) {
+        throw boom.boomify(err);
+    }
+}
+
+// get all shelters, field 'kommune' is matching municipality
+exports.getSheltersByMunicipality = async(req, res) => {
+    try {
+        const municipality = req.params.municipality.trim();
+        const shelters = await Shelter.find({
+            'info.kommune': municipality }
+        );
+
+        return shelters;
+    } catch(err) {
+        throw boom.boomify(err);
+    }
+}
+
+// get all shelters, field 'distriktsnavn' is matching district
+exports.getSheltersByDistrict = async(req, res) => {
+    try {
+        const district = req.params.district.trim();
+        const districtRegex = new RegExp(`${district}`, 'i')
+        const shelters = await Shelter.find({
+            'info.distriktsnavn': districtRegex }
+        );
 
         return shelters;
     } catch(err) {
