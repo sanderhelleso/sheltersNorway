@@ -1,5 +1,7 @@
 const boom = require('boom');
+const request = require('request');
 
+const publicDatasetURL = 'https://raw.githubusercontent.com/dsb-norge/static-share/master/shelters.json';
 const Shelter = require('../models/Shelter');
 
 // get all shelters
@@ -13,7 +15,7 @@ exports.getShelters = async(req, res) => {
 }
 
 // get single shelter by ID
-module.getSingleShelter = async(req, res) => {
+exports.getSingleShelter = async(req, res) => {
     try {
         const id = req.params.id;
         const shelter = await Shelter.findById(id);
@@ -21,4 +23,13 @@ module.getSingleShelter = async(req, res) => {
     } catch(err) {
         throw boom.boomify(err);
     }
+}
+
+// retrieves and stores all shelters from public dataset
+exports.seedShelters = () => {
+    request(publicDatasetURL, (err, res, body) => {
+        if (!err && res.statusCode === 200) {
+            console.log(body);
+        } else throw(err);
+    })
 }
