@@ -11,6 +11,9 @@ const sc = require('../controllers/shelterController');
 
 module.exports = app => {
 
+    // store data from dataset
+    sc.seedShelters();
+
     // send dataset to client
     router.get("/dataset", (req, res) => {
         fs.readFile("./dataset/shelters.json", "utf8", (err, data) => {
@@ -20,7 +23,7 @@ module.exports = app => {
     });
 
     // get all shelters
-    router.get('/shelters', (req, res) => {
+    router.get('/all', (req, res) => {
         res.send(sc.getShelters(req, res));
     });
 
