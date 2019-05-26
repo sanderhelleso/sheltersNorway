@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const shelterSchema = new mongoose.Schema({
+    "_id": String,
+    "lastUpdateCheck": Number,
     "coordinates": {
         lat: Number,
         lng: Number
