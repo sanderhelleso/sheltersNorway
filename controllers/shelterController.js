@@ -90,6 +90,48 @@ exports.getSheltersByMinAreal = async(req, res) => {
     }
 }
 
+// get all shelters, field 'areal' is equal or less than maxAreal
+exports.getSheltersByMaxAreal = async(req, res) => {
+    try {
+        const maxAreal = parseInt(req.params.max);
+        const shelters = await Shelter.find({
+            'info.areal': { $lte: minAreal }
+        });
+
+        return shelters;
+    } catch(err) {
+        throw boom.boomify(err);
+    }
+}
+
+// get all shelters, field 'plasser' is greater or less than maxCapacity
+exports.getSheltersByMinAreal = async(req, res) => {
+    try {
+        const minCapacity = parseInt(req.params.min);
+        const shelters = await Shelter.find({
+            'info.plasser': { $gte: maxCapacity }
+        });
+
+        return shelters;
+    } catch(err) {
+        throw boom.boomify(err);
+    }
+}
+
+// get all shelters, field 'plasser' is equal or less than maxCapacity
+exports.getSheltersByMinAreal = async(req, res) => {
+    try {
+        const maxCapacity = parseInt(req.params.max);
+        const shelters = await Shelter.find({
+            'info.plasser': { $lte: maxCapacity }
+        });
+
+        return shelters;
+    } catch(err) {
+        throw boom.boomify(err);
+    }
+}
+
 // scan dataset at sat interval
 exports.seedShelters = () => {
 
