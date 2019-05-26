@@ -28,6 +28,25 @@ exports.getSingleShelter = async(req, res) => {
     }
 }
 
+// get matching shelters, matching keywords
+exports.getMatchingShelters = async(req, res) => {
+    try {
+        const keywords = req.params.keywords.trim();
+        const kwRegex = new RegExp(`${keywords}`, 'i')
+        const shelters = await Shelter.find({ 
+            $or: [ 
+                { 'info.adresse': kwRegex },
+                { 'info.kommune': kwRegex },
+                { 'info.distriktsnavn': kwRegex }
+            ]
+        });
+
+        return shelters;
+    } catch(err) {
+        throw boom.boomify(err);
+    }
+}
+
 // scan dataset at sat interval
 exports.seedShelters = () => {
 
@@ -81,10 +100,10 @@ function updateDataset() {
                 });
 
                 // store dataset locally for offline
-                fs.writeFile(localeDataset, body, 'utf8', (err) => {
+                /*fs.writeFile(localeDataset, body, 'utf8', (err) => {
                     if (err) throw err;
                     console.log(`Dataset updated at: ${new Date().toUTCString()}`);
-                });
+                });*/
             }
         }
     })
