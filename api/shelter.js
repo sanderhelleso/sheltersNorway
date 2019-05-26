@@ -52,5 +52,11 @@ module.exports = app => {
         res.send(result);
     });
 
+    // get shelters with greater or equal areal
+    router.get('/areal/:min', async (req, res) => {
+        const result = await sc.getSheltersByMinAreal(req, res);
+        res.send(result);
+    });
+
     app.use(base, router);
 }

@@ -76,6 +76,20 @@ exports.getSheltersByDistrict = async(req, res) => {
     }
 }
 
+// get all shelters, field 'areal' is equal or greather than minAreal
+exports.getSheltersByMinAreal = async(req, res) => {
+    try {
+        const minAreal = parseInt(req.params.min);
+        const shelters = await Shelter.find({
+            'info.areal': { $gte: minAreal }
+        });
+
+        return shelters;
+    } catch(err) {
+        throw boom.boomify(err);
+    }
+}
+
 // scan dataset at sat interval
 exports.seedShelters = () => {
 
