@@ -27,7 +27,7 @@ app.use(express.static(`${__dirname}/public`));
 require('./dbconn')();
 
 // connect routes
-require('./api/api')(app);
+require('./api/shelter')(app);
 require('./api/routes')(app);
 require('./api/email')(app);
 

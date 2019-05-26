@@ -1,12 +1,33 @@
 const fs = require("fs");
+const express = require('express');
+const router = express.Router();
+
+// api version and prefix
+const version = 1;
+const base = `/api/v${version}/shelters`;
+
+// controller
+const sc = require('../controllers/shelterController');
 
 module.exports = app => {
 
     // send dataset to client
-    app.get("/dataset", (req, res) => {
+    router.get("/dataset", (req, res) => {
         fs.readFile("./dataset/shelters.json", "utf8", (err, data) => {
             if (err) throw err;
             res.send(data);
         });
     });
+
+    // get all shelters
+    router.get('/shelters', (req, res) => {
+        res.send(sc.getShelters(req, res));
+    });
+
+    // get single shelter by id
+    router.get('/:id', (req, res) => {
+        res.send(sc.getSingleShelter(req, res));
+    });
+
+    app.use(base, router);
 }
