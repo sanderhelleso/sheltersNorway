@@ -53,8 +53,26 @@ module.exports = app => {
     });
 
     // get shelters with greater or equal areal
-    router.get('/areal/:min', async (req, res) => {
+    router.get('/areal/min/:min', async (req, res) => {
         const result = await sc.getSheltersByMinAreal(req, res);
+        res.send(result);
+    });
+
+    // get shelters with less or equal areal
+    router.get('/areal/max/:max', async (req, res) => {
+        const result = await sc.getSheltersByMaxAreal(req, res);
+        res.send(result);
+    });
+
+    // get shelters with greater or equal capacity
+    router.get('/capacity/min/:min', async (req, res) => {
+        const result = await sc.getSheltersByMinCapacity(req, res);
+        res.send(result);
+    });
+
+    // get shelters with less or equal capacity
+    router.get('/capacity/max/:max', async (req, res) => {
+        const result = await sc.getSheltersByMaxCapacity(req, res);
         res.send(result);
     });
 

@@ -95,7 +95,7 @@ exports.getSheltersByMaxAreal = async(req, res) => {
     try {
         const maxAreal = parseInt(req.params.max);
         const shelters = await Shelter.find({
-            'info.areal': { $lte: minAreal }
+            'info.areal': { $lte: maxAreal }
         });
 
         return shelters;
@@ -105,11 +105,11 @@ exports.getSheltersByMaxAreal = async(req, res) => {
 }
 
 // get all shelters, field 'plasser' is greater or less than maxCapacity
-exports.getSheltersByMinAreal = async(req, res) => {
+exports.getSheltersByMinCapacity = async(req, res) => {
     try {
         const minCapacity = parseInt(req.params.min);
         const shelters = await Shelter.find({
-            'info.plasser': { $gte: maxCapacity }
+            'info.plasser': { $gte: minCapacity }
         });
 
         return shelters;
@@ -119,7 +119,7 @@ exports.getSheltersByMinAreal = async(req, res) => {
 }
 
 // get all shelters, field 'plasser' is equal or less than maxCapacity
-exports.getSheltersByMinAreal = async(req, res) => {
+exports.getSheltersByMaxCapacity = async(req, res) => {
     try {
         const maxCapacity = parseInt(req.params.max);
         const shelters = await Shelter.find({
@@ -184,7 +184,7 @@ function updateDataset() {
                     }
                 });
 
-                // store dataset locally for offline
+                // store dataset locally for offline mode
                 /*fs.writeFile(localeDataset, body, 'utf8', (err) => {
                     if (err) throw err;
                     console.log(`Dataset updated at: ${new Date().toUTCString()}`);
