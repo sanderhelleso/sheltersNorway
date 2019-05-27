@@ -95,6 +95,7 @@ function getShelters(dataset) {
             shelters = JSON.parse(getJSON.responseText);
         }
     }
+
     getJSON.open("GET", dataset, true); 
     getJSON.send(null);
 }
@@ -115,7 +116,7 @@ function openMainMap() {
 }
 
 function initMap() {
-    const dataset = getShelters("/dataset");
+    const dataset = getShelters("/api/v1/shelters/dataset");
 }
 
 function fillMainMap(shelters) {
@@ -780,7 +781,6 @@ function formInit() {
 
 // form check
 function formCheck() {
-    console.log(123);
     let count = 0;
     let userValues = [];
     inputs = document.querySelectorAll(".modal-body")[3].querySelectorAll("input");
