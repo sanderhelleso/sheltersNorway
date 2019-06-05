@@ -1,13 +1,15 @@
+module.exports = (app) => {
+	// routes
+	app.get('/', (req, res) => {
+		res.render('index');
+	});
 
-module.exports = app => {
+	app.get('/personvern', (req, res) => {
+		res.render('privacyPolicy');
+	});
 
-    // routes
-    app.get("/", (req, res) => {
-        res.render("index");
-    });
-
-    // 	404
-    /*app.get("*", (req, res) => {
+	// 	404
+	/*app.get("*", (req, res) => {
         res.render("index");
     });*/
-}
+};
