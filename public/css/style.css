@@ -451,6 +451,8 @@ footer a img {
 
 #privacyPolicy {
 	padding: 4rem;
+	max-width: 70%;
+	margin: 0 auto;
 }
 
 #privacyPolicy a {
@@ -495,6 +497,11 @@ footer a img {
 @media only screen and (max-width: 600px) {
 	#footerLinks {
 		margin-left: 5% !important;
+	}
+
+	#privacyPolicy {
+		max-width: 100%;
+		padding: 2rem;
 	}
 
 	#loadingMsg {
