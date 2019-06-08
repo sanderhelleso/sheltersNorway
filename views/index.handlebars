@@ -49,10 +49,8 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <!-- Main navigation -->
-<header class="mb-5">
-  <!--<div id="faceBook">
-      <button id="logInBtn" type="button" class="btn btn-md btn-fb z-depth-5">Logg Inn med <i class="fa fa-facebook pl-1 pr-1"></i> Facebook</button>
-  </div>-->
+<header id="landingHeader" class="mb-5">
+
   <!-- Full Page Intro -->
   <div class="view jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('/img/cover.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <!-- Mask & flexbox options-->
@@ -63,22 +61,25 @@
         <div class="row">
           <!--Grid column-->
           <div id="headerCont" class="col-md-12 mb-4 white-text text-center animated fadeIn">
-            <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5">
+            <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0">
               <strong>Offentlige tilfluktsrom
                 <br>
                 <span id="norway">Norge</span>
               </strong>
             </h1>
             <hr class="hr-light my-4">
-            <h5 class="text-uppercase mb-4 white-text">
+            <h5 class="text-uppercase mb-1 white-text">
               <strong>Vær bevisst, vær trygg</strong>
             </h5>
+            <div id="appCont">
+                <a id="googlePlay" target="_blank" href='https://play.google.com/store/apps/details?id=com.semanta.sheltersNorway&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Tilgjengelig på Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/no_badge_web_generic.png'/></a>
+                <!--<a id="appStore" target="_blank" href=''><img alt='Tilgjengelig på App Store' src='/img/appStoreBadge.svg'/></a>-->
+
+            </div>
             <a id="nearestLocation" class="btn btn-outline-white z-depth-5 introBtn">
               <i class="fa fa-map-marker pr-1" aria-hidden="true"></i> Nærmest meg</a>
             <a id="searchBtn" class="btn btn-outline-white z-depth-5 introBtn">
               <i class="fa fa-search pr-1" aria-hidden="true"></i> Søk</a>
-            <a id="seeAll" class="btn btn-outline-white z-depth-5 introBtn">
-              <i class="fa fa-map-o pr-1" aria-hidden="true"></i> Se alle</a>
             <a id="openMainMapTrigger" class="btn btn-outline-white z-depth-5 introBtn">
               <i class="fa fa-map pr-1" aria-hidden="true"></i> Norgeskart<span id="newBadge" class="badge pink">New</span></a>
             <div id="searchCont" class="col-12 animated fadeIn">
@@ -153,13 +154,12 @@
             </div>
         </div>
     </div>
-    <!-- Section: Features v.1 -->
     <section id="info" class="text-center my-5 container wow fadeIn" data-wow-delay="0.2s">
         <hr class="py-2 pb-4">
         <!-- Section heading -->
-        <h2 class="h1-responsive font-weight-bold my-5 dark-grey-text">Få en oversikt over tilgjengelige tilfluktsrom</h2>
+        <h2 class="h1-responsive font-weight-bold my-3 dark-grey-text">Få en oversikt over tilgjengelige tilfluktsrom</h2>
         <!-- Section description -->
-        <p class="lead grey-text w-responsive mx-auto mb-5">Oversikt over 316 offentlige tilfluktsrom, spredt over hele Norge.</p>
+        <p class="lead grey-text w-responsive mx-auto mb-5 sub">Oversikt over 300+ offentlige tilfluktsrom, spredt over hele Norge.</p>
 
         <!-- Grid row -->
         <div class="row">
@@ -190,8 +190,8 @@
             <div class="col-md-4">
 
                 <i class="fa fa-check fa-3x orange-text"></i>
-                <h5 class="font-weight-bold my-4 dark-grey-text">Oppdatert</h5>
-                <p class="grey-text mb-0">Data er oppdatert og blir jevnlig oppdatert ved endring av tilfluktsrom.
+                <h5 class="font-weight-bold my-4 dark-grey-text">Troverdig</h5>
+                <p class="grey-text mb-0">Data er levert av Direktoratet for samfunnssikkerhet og beredskap 
                 </p>
 
             </div>
@@ -697,3 +697,20 @@
         <input id="shelterArr" name="shelterData">
     </form>
 </body>
+
+<!-- Scripts -->
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/popper.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_jiuMdTONboV9E0sHZ5U5-js9zwyd4GU&callback=initMap"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-96159354-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-96159354-5');
+</script>
+</html>

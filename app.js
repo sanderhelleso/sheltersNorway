@@ -1,20 +1,20 @@
-'use strict'
+'use strict';
 
 require('dotenv').load();
-const express = require("express");
-const http = require("http");
-const bodyParser = require("body-parser");
-const handlebars = require("express-handlebars");
+const express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
+const handlebars = require('express-handlebars');
 
 // app
 const app = express();
 const server = http.createServer(app);
-const port = process.env.PORT || 5000;;
+const port = process.env.PORT || 5000;
 const host = process.env.HOST || 'localhost';
 
 // view engine
-app.engine("handlebars", handlebars({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
 // body parser
 app.use(bodyParser.json());
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(`${__dirname}/public`));
 
 // connect db
-require('./dbconn')();
+//require('./dbconn')();
 
 // connect routes
 require('./api/shelters')(app);
