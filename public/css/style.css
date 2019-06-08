@@ -540,6 +540,7 @@ footer a img {
 		margin: 0 !important;
 		margin-top: 5px !important;
 		margin-right: 20px !important;
+		margin-bottom: 1rem !important;
 	}
 
 	#appStore {
@@ -564,12 +565,13 @@ footer a img {
 	}
 
 	#headerCont hr {
-		margin: 1rem auto !important;
+		margin: 1.5rem auto !important;
+		margin-top: 0.7rem !important;
 	}
 
 	#headerCont h5 {
 		font-size: 14px !important;
-		margin-bottom: 3rem;
+		margin-bottom: 1rem !important;
 	}
 
 	#openMainMapTrigger {
@@ -577,7 +579,7 @@ footer a img {
 	}
 
 	#norway {
-		font-size: 40px;
+		font-size: 50px;
 	}
 
 	#footerLinks {
