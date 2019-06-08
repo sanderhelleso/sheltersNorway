@@ -37,6 +37,14 @@ h5 {
 	letter-spacing: 3px;
 }
 
+#info h2 {
+	margin-top: 4rem !important;
+}
+
+#info .sub {
+	margin-bottom: 4rem !important;
+}
+
 .hr-light {
 	border-top: 3px solid #fff;
 	width: 80px;
